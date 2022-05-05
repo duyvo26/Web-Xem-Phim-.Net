@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WEB_PHIM" Class="DataWebPhimDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=truyen.duyvo26.xyz,1433;Initial Catalog=WEB_PHIM;User ID=webphim" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WEB_PHIMConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.DB_VOTE" Member="DB_VOTEs">
+    <Type Name="DB_VOTE">
+      <Column Name="id_vote" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="giatri" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="DB_USER_DB_VOTE" Member="DB_USER" ThisKey="id_user" OtherKey="id_user" Type="DB_USER" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="DB_PHIM_DB_VOTE" Member="DB_PHIM" ThisKey="id_phim" OtherKey="id_phim" Type="DB_PHIM" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_USER" Member="DB_USERs">
+    <Type Name="DB_USER">
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fullname" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ten_dangnhap" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" />
+      <Column Name="mail" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="matkhau_user" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="quyen_han" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
+      <Column Name="coin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ma_khoa" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="img_user" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_USER_DB_VOTE" Member="DB_VOTEs" ThisKey="id_user" OtherKey="id_user" Type="DB_VOTE" />
+      <Association Name="DB_USER_DB_THUVIEN" Member="DB_THUVIENs" ThisKey="id_user" OtherKey="id_user" Type="DB_THUVIEN" />
+      <Association Name="DB_USER_DB_THONGBAO" Member="DB_THONGBAOs" ThisKey="id_user" OtherKey="id_user" Type="DB_THONGBAO" />
+      <Association Name="DB_USER_DB_TAP_PHIM" Member="DB_TAP_PHIMs" ThisKey="id_user" OtherKey="id_user" Type="DB_TAP_PHIM" />
+      <Association Name="DB_USER_DB_LUOTXEM" Member="DB_LUOTXEMs" ThisKey="id_user" OtherKey="id_user" Type="DB_LUOTXEM" />
+      <Association Name="DB_USER_DB_PHIM" Member="DB_PHIMs" ThisKey="id_user" OtherKey="id_user" Type="DB_PHIM" />
+      <Association Name="DB_USER_DB_COMMENT" Member="DB_COMMENTs" ThisKey="id_user" OtherKey="id_user" Type="DB_COMMENT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_THUVIEN" Member="DB_THUVIENs">
+    <Type Name="DB_THUVIEN">
+      <Column Name="id_thuvien" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_tap_phim" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_USER_DB_THUVIEN" Member="DB_USER" ThisKey="id_user" OtherKey="id_user" Type="DB_USER" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="DB_PHIM_DB_THUVIEN" Member="DB_PHIM" ThisKey="id_phim" OtherKey="id_phim" Type="DB_PHIM" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_THONGBAO" Member="DB_THONGBAOs">
+    <Type Name="DB_THONGBAO">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="noi_dung" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="truy_cap" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="id_user_phanhoi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_USER_DB_THONGBAO" Member="DB_USER" ThisKey="id_user" OtherKey="id_user" Type="DB_USER" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_THELOAI" Member="DB_THELOAIs">
+    <Type Name="DB_THELOAI">
+      <Column Name="id_theloai" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_theloai" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="mota_theloai" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="status_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_THELOAI_DB_PHIM_THELOAI" Member="DB_PHIM_THELOAIs" ThisKey="id_theloai" OtherKey="id_theloai" Type="DB_PHIM_THELOAI" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_TAP_PHIM" Member="DB_TAP_PHIMs">
+    <Type Name="DB_TAP_PHIM">
+      <Column Name="id_tap_phim" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_tap_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="noidung_tap_phim" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_TAP_PHIM_DB_LUOTXEM" Member="DB_LUOTXEMs" ThisKey="id_tap_phim" OtherKey="id_tap_phim" Type="DB_LUOTXEM" />
+      <Association Name="DB_TAP_PHIM_DB_COMMENT" Member="DB_COMMENTs" ThisKey="id_tap_phim" OtherKey="id_tap_phim" Type="DB_COMMENT" />
+      <Association Name="DB_USER_DB_TAP_PHIM" Member="DB_USER" ThisKey="id_user" OtherKey="id_user" Type="DB_USER" IsForeignKey="true" />
+      <Association Name="DB_PHIM_DB_TAP_PHIM" Member="DB_PHIM" ThisKey="id_phim" OtherKey="id_phim" Type="DB_PHIM" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_PHIM_THELOAI" Member="DB_PHIM_THELOAIs">
+    <Type Name="DB_PHIM_THELOAI">
+      <Column Name="id_phim_theloai" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_theloai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_THELOAI_DB_PHIM_THELOAI" Member="DB_THELOAI" ThisKey="id_theloai" OtherKey="id_theloai" Type="DB_THELOAI" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="DB_PHIM_DB_PHIM_THELOAI" Member="DB_PHIM" ThisKey="id_phim" OtherKey="id_phim" Type="DB_PHIM" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_LUOTXEM" Member="DB_LUOTXEMs">
+    <Type Name="DB_LUOTXEM">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_tap_phim" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="DB_TAP_PHIM_DB_LUOTXEM" Member="DB_TAP_PHIM" ThisKey="id_tap_phim" OtherKey="id_tap_phim" Type="DB_TAP_PHIM" IsForeignKey="true" />
+      <Association Name="DB_USER_DB_LUOTXEM" Member="DB_USER" ThisKey="id_user" OtherKey="id_user" Type="DB_USER" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="DB_PHIM_DB_LUOTXEM" Member="DB_PHIM" ThisKey="id_phim" OtherKey="id_phim" Type="DB_PHIM" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_LOG_COIN" Member="DB_LOG_COINs">
+    <Type Name="DB_LOG_COIN">
+      <Column Name="id_log" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user_nhan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_user_chuyen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="coin" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="ghichu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_PHIM" Member="DB_PHIMs">
+    <Type Name="DB_PHIM">
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nam_sx" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="tomtat_phim" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="coin_phim" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_PHIM_DB_VOTE" Member="DB_VOTEs" ThisKey="id_phim" OtherKey="id_phim" Type="DB_VOTE" />
+      <Association Name="DB_PHIM_DB_THUVIEN" Member="DB_THUVIENs" ThisKey="id_phim" OtherKey="id_phim" Type="DB_THUVIEN" />
+      <Association Name="DB_PHIM_DB_TAP_PHIM" Member="DB_TAP_PHIMs" ThisKey="id_phim" OtherKey="id_phim" Type="DB_TAP_PHIM" />
+      <Association Name="DB_PHIM_DB_PHIM_THELOAI" Member="DB_PHIM_THELOAIs" ThisKey="id_phim" OtherKey="id_phim" Type="DB_PHIM_THELOAI" />
+      <Association Name="DB_PHIM_DB_LUOTXEM" Member="DB_LUOTXEMs" ThisKey="id_phim" OtherKey="id_phim" Type="DB_LUOTXEM" />
+      <Association Name="DB_PHIM_DB_COMMENT" Member="DB_COMMENTs" ThisKey="id_phim" OtherKey="id_phim" Type="DB_COMMENT" />
+      <Association Name="DB_USER_DB_PHIM" Member="DB_USER" ThisKey="id_user" OtherKey="id_user" Type="DB_USER" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_CAUHINH" Member="DB_CAUHINHs">
+    <Type Name="DB_CAUHINH">
+      <Column Name="id_cauhinh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ten_web" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="logo_web" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="thanhtoan_online" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="email_lh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="diachi_lh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="sdt_lh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="lh_fb" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="lh_zalo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="lh_itg" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="copyright" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="img_404" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="img_nhanvat" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="img_nen" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="img_chu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Fb_mess" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Fb_page" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Cm_FB" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="event_noel" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="event_tet" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="anh_video" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="video_quangcao" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Time_Ads" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DB_COMMENT" Member="DB_COMMENTs">
+    <Type Name="DB_COMMENT">
+      <Column Name="id_cmt" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_tap_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="noidung_cmt" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phanhoi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DB_PHIM_DB_COMMENT" Member="DB_PHIM" ThisKey="id_phim" OtherKey="id_phim" Type="DB_PHIM" IsForeignKey="true" />
+      <Association Name="DB_TAP_PHIM_DB_COMMENT" Member="DB_TAP_PHIM" ThisKey="id_tap_phim" OtherKey="id_tap_phim" Type="DB_TAP_PHIM" IsForeignKey="true" />
+      <Association Name="DB_USER_DB_COMMENT" Member="DB_USER" ThisKey="id_user" OtherKey="id_user" Type="DB_USER" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.CapNhatAllThongBao" Method="CapNhatAllThongBao">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CapNhatCauHinh" Method="CapNhatCauHinh">
+    <Parameter Name="ten_web" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="logo_web" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="thanhtoan_online" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="email_lh" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="diachi_lh" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="sdt_lh" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="lh_fb" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="lh_zalo" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="lh_itg" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="copyright" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CapNhatCoinUser" Method="CapNhatCoinUser">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="coin" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CapNhatQuyenHan" Method="CapNhatQuyenHan">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="quyen" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CapNhatPhim" Method="CapNhatPhim">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ten_phim" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="tac_gia" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="nam_sx" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="tomtat_phim" Type="System.String" DbType="NVarChar(1500)" />
+    <Parameter Name="img_phim" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="coin_phim" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="link_raw" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Capnhatnguoidung" Method="Capnhatnguoidung">
+    <Parameter Name="id_users" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fullname" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="mail" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="img_user" Type="System.String" DbType="NVarChar(1000)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CapnhatTapPhim" Method="CapnhatTapPhim">
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ten_tap_phim" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="noidung_tap_phim" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CapNhatThuVien" Method="CapNhatThuVien">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CapNhatThuVienDoc" Method="CapNhatThuVienDoc">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.DelUser" Method="DelUser">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="quyen_han" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.DangKyNguoiDung" Method="DangKyNguoiDung">
+    <Parameter Name="fullname" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="ten_dangnhap" Type="System.String" DbType="VarChar(14)" />
+    <Parameter Name="mail" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="matkhau_user" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ma_khoa" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.LayPhimRand" Method="LayPhimRand">
+    <ElementType Name="LayPhimRandResult">
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nam_sx" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="tomtat_phim" Type="System.String" DbType="NVarChar(3500) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="coin_phim" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LayThongTinBinhLuanTapPhim" Method="LayThongTinBinhLuanTapPhim">
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <ElementType Name="LayThongTinBinhLuanTapPhimResult">
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_cmt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phanhoi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_tap_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fullname" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="noidung_cmt" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="img_user" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LayThongTinBinhLuan" Method="LayThongTinBinhLuan">
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <ElementType Name="LayThongTinBinhLuanResult">
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="img_user" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="id_cmt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_tap_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fullname" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="noidung_cmt" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LayPhimTheLoai" Method="LayPhimTheLoai">
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <ElementType Name="LayPhimTheLoaiResult">
+      <Column Name="id_theloai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_theloai" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="mota_theloai" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="status_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim_theloai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_theloai1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status_1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_at1" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at1" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LayThuVienDoc" Method="LayThuVienDoc">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <ElementType Name="LayThuVienDocResult">
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_tap_phim" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_thuvien" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TimKiem" Method="TimKiem">
+    <Parameter Name="Data" Parameter="data" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="TheLoai" Parameter="theLoai" Type="System.String" DbType="VarChar(1)" />
+    <ElementType Name="TimKiemResult">
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="ten_theloai" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TimKiemTheoTen" Method="TimKiemTheoTen">
+    <Parameter Name="TenPhim" Parameter="tenPhim" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="TimKiemTheoTenResult">
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nam_sx" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="tomtat_phim" Type="System.String" DbType="NVarChar(3500) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="coin_phim" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Them_cmt" Method="Them_cmt">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="noidung_cmt" Type="System.String" DbType="NVarChar(300)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ThemPhim" Method="ThemPhim">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ten_phim" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="tac_gia" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="nam_sx" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="tomtat_phim" Type="System.String" DbType="NVarChar(1500)" />
+    <Parameter Name="img_phim" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="coin_phim" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="link_raw" Type="System.String" DbType="NVarChar(1000)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.TimKiemTheoTheLoais" Method="TimKiemTheoTheLoais">
+    <Parameter Name="data" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="TimKiemTheoTheLoaisResult">
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nam_sx" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="tomtat_phim" Type="System.String" DbType="NVarChar(3500) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="coin_phim" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TimKiemTheoTheLoai" Method="TimKiemTheoTheLoai">
+    <Parameter Name="data" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="TimKiemTheoTheLoaiResult">
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nam_sx" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="tomtat_phim" Type="System.String" DbType="NVarChar(3500) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="coin_phim" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ThemThuVien" Method="ThemThuVien">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ThemTapPhim" Method="ThemTapPhim">
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ten_tap_phim" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="noidung_tap_phim" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ThemPhimTheLoai" Method="ThemPhimTheLoai">
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_theloai" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.XoaPhim" Method="XoaPhim">
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.XoaPhimTL" Method="XoaPhimTL">
+    <Parameter Name="id_phim" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.XoaTapPhimAdmin" Method="XoaTapPhimAdmin">
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.XoaThuVien" Method="XoaThuVien">
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_thuvien" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.XoaTapPhim" Method="XoaTapPhim">
+    <Parameter Name="id_tap_phim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_user" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.TimKiemTheoTen" Method="TimKiemTheoTen1">
+    <Parameter Name="TenPhim" Parameter="tenPhim" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="TimKiemTheoTenResult1">
+      <Column Name="id_phim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_user" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ten_phim" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="quoc_gia" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nam_sx" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="tomtat_phim" Type="System.String" DbType="NVarChar(3500) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="img_phim" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="coin_phim" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="link_raw" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LayLuotXem" Method="LayLuotXem">
+    <ElementType Name="LayLuotXemResult">
+      <Column Name="sum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_phim" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
