@@ -25,6 +25,7 @@
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="ID">Id người dùng</th>
                         <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Tên của người dùng">Full Name</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Tên đăng nhập">Tài khoản</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Mail">Mail</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Số tiền của người dùng">Coin</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Cấp độ của người dùng">Quyền hạn</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Tình trạng tài khoản">Trạng thái</th>
@@ -42,6 +43,7 @@
                         <td class="dtr-control sorting_1" tabindex="0">#<%=DanhSachND[i].id_user %></td>
                         <td><%=DanhSachND[i].fullname %></td>
                         <td><%=DanhSachND[i].ten_dangnhap %></td>
+                        <td><%=DanhSachND[i].mail %></td>
                         <td><%=DanhSachND[i].coin %></td>
                         <td><%= HienQHan(Convert.ToInt32(DanhSachND[i].quyen_han)) %></td>
                         <td><% if (DanhSachND[i].status_ == 1)

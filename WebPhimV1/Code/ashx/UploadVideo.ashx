@@ -17,9 +17,16 @@ public class UploadVideo : IHttpHandler
         if (context.Request.Files.Count > 0)
         {
             HttpPostedFile postedFile = context.Request.Files[0];
+
+            int iFileSize = postedFile.ContentLength;
+
+            if (iFileSize <= 2000000000)
+            {
+                
+            
             string fileName = HeThong.LocDauTiengViet(Path.GetFileNameWithoutExtension(postedFile.FileName));
             string extension = Path.GetExtension(postedFile.FileName);
-            fileName = fileName + DateTime.Now.ToString("yyyymmssfff") + extension;
+            fileName = fileName + "_" + DateTime.Now.ToString("yyyymmssfff") + extension;
 
             string date_thumuc = HttpContext.Current.Request.Cookies["NamePhim"].Value;
 
@@ -48,6 +55,13 @@ public class UploadVideo : IHttpHandler
             context.Response.ContentType = "text/json";
             context.Response.Write(json);
             context.Response.End();
+
+            }
+            else
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.Response.End();
+            }
         }
     }
 

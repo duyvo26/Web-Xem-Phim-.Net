@@ -13,14 +13,10 @@ namespace WebPhimV1.Control_NguoiDung.Part
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
 
-        public static string a ;
+        public  string a ;
 
-        public static List<LayPhimRandResult> listGoiyDoc = new List<LayPhimRandResult>();
+        public  List<LayPhimRandResult> listGoiyDoc = new List<LayPhimRandResult>();
 
-        protected void RutGon_TieuDe(string a, int b)
-        {
-            Response.Write(Phim.RutGon(a, b));
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {

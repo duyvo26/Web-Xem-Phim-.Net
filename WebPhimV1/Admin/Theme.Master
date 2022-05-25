@@ -6,6 +6,9 @@
       <head runat="server">
          <title>CP Admin</title>
          <meta name="viewport" content="width=device-width, initial-scale=1">
+         <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
+
+
          <!-- Google Font: Source Sans Pro -->
          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
          <link rel="stylesheet" href="~/admin/plugins/fontawesome-free/css/all.min.css">
@@ -254,11 +257,26 @@
           $(function () {
               $("#example1").DataTable({
                   "responsive": false, "lengthChange": true, "autoWidth": false,
-                  "buttons": ["copy", "csv", "excel", "pdf", "print"]
+                  "buttons": ["copy", "csv", "excel", "pdf", "print"],
+                  "iDisplayLength": 25
               }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-             
+
 
           });
+
+        
+   
+          function CauHinh() {
+              // disable right click
+              $(document).bind("contextmenu", function (e) {
+                  return false;
+              });
+              // disable ctl +v and v
+              $('body').bind('cut copy', function (e) {
+                  e.preventDefault();
+              });
+
+          }
       </script>
 
       <style>
@@ -266,6 +284,10 @@
       color: white;
       font-weight: 900;
       }
+      .user-panel img {
+    height: 2.1rem;
+    width: 2.1rem;
+}
       </style>
    </body>
 </html>

@@ -11,37 +11,37 @@ namespace WebPhimV1.Control_Admin.TheLoais
 {
     public partial class UiDanhSach : System.Web.UI.UserControl
     {
-
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
-        public static DB_USER NguoiDungs = new DB_USER();
-        public static List<DB_THELOAI> DanhSachTL = new List<DB_THELOAI>();
+        public  DB_USER NguoiDungs = new DB_USER();
+        public  List<DB_THELOAI> DanhSachTL = new List<DB_THELOAI>();
         public static int CnID = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadThongTinNguoiDung();
-                    NguoiDung.CheckMod(Convert.ToInt32(NguoiDungs.quyen_han));
-                    try
-                    {
-                        ThongBao();
-                        LoadTheLoai();
-                        XoatheLoai();
-                        LoadCapNhatTL();
-                    }
-                    catch (Exception err)
-                    {
-                        string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
-                        Response.Redirect(url);
-                    }
-
-
+            try
+            {
+                LoadThongTinNguoiDung();
+                NguoiDung.CheckMod(Convert.ToInt32(NguoiDungs.quyen_han));
+                ThongBao(); 
+                LoadTheLoai();
+                XoatheLoai();
+                LoadCapNhatTL();     
+            }
+            catch (Exception err)
+            {
+                string url = "~/404?err=true&&vitri=" + this.GetType().Name +
+                             "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
+                Response.Redirect(url);
+            }
         }
 
         public void ThongBao()
         {
             if (!string.IsNullOrEmpty(Request.QueryString["noti"]))
             {
-                string Thongbao = Request.QueryString["noti"].ToString();
+                string Thongbao = Request
+                                      .QueryString["noti"]
+                                      .ToString();
                 noti.Text = Thongbao;
             }
         }
@@ -56,17 +56,19 @@ namespace WebPhimV1.Control_Admin.TheLoais
             }
         }
 
-        //load thong tin nguoi dung
+        // load thong tin nguoi dung
         public void LoadThongTinNguoiDung()
         {
-            String MaKhoa = Request.Cookies["log"].Value;
+            NguoiDungs = Admin.Theme.NguoiDungs;
 
-            var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+            // String MaKhoa = Request.Cookies["log"].Value;
 
-            if (dt != null)
-            {
-                NguoiDungs = dt.First();
-            }
+            // var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+
+            // if (dt != null)
+            // {
+            //    NguoiDungs = dt.First();
+            // }
         }
 
         public void XoatheLoai()
@@ -75,18 +77,20 @@ namespace WebPhimV1.Control_Admin.TheLoais
             {
                 try
                 {
-
                     int ID = Convert.ToInt32(Request.QueryString["Xoa"]);
-                    var dt = (from q in dl.DB_THELOAIs where q.id_theloai == ID select q).FirstOrDefault();
+                    var dt = (from q in dl.DB_THELOAIs where q.id_theloai == ID select q)
+                                 .FirstOrDefault();
                     dl.DB_THELOAIs.DeleteOnSubmit(dt);
                     dl.SubmitChanges();
-                    string scriptText = "alert('Xoá thể loại thành công !'); window.location='" + Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
+                    string scriptText =
+                        "alert('Xoá thể loại thành công !'); window.location='" +
+                        Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(),
+                                                        "alertMessage", scriptText, true);
 
                 }
                 catch
                 {
-
                 }
             }
         }
@@ -95,8 +99,11 @@ namespace WebPhimV1.Control_Admin.TheLoais
         {
             if (tentheloai.Text == "" || motatheloai.Text == "")
             {
-                string scriptText = "alert('Tên hoặc Mô tả không được để trống !'); window.location='" + Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
+                string scriptText =
+                    "alert('Tên hoặc Mô tả không được để trống !'); window.location='" +
+                    Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
+                ScriptManager.RegisterStartupScript(this, this.GetType(),
+                                                    "alertMessage", scriptText, true);
             }
             else
             {
@@ -107,17 +114,21 @@ namespace WebPhimV1.Control_Admin.TheLoais
                 saTL.updated_at = DateTime.Now;
                 dl.DB_THELOAIs.InsertOnSubmit(saTL);
                 dl.SubmitChanges();
-                string scriptText = "alert('Thêm thể loại thành công'); window.location='" + Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
+                string scriptText =
+                    "alert('Thêm thể loại thành công'); window.location='" +
+                    Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
+                ScriptManager.RegisterStartupScript(this, this.GetType(),
+                                                    "alertMessage", scriptText, true);
             }
         }
 
         public void LoadCapNhatTL()
         {
-            if (!string.IsNullOrEmpty(Request.QueryString["thongtin"]))
+            if (!string.IsNullOrEmpty(Request.QueryString["thongtin"]) && !IsPostBack)
             {
                 int ID = Convert.ToInt32(Request.QueryString["thongtin"]);
-                var dt = (from q in dl.DB_THELOAIs where q.id_theloai == ID select q).First();
+                var dt = (from q in dl.DB_THELOAIs where q.id_theloai == ID select q)
+                             .First();
                 cnTenTheLoai.Text = dt.ten_theloai;
                 cnMoTaTheLoai.Text = dt.mota_theloai;
                 CnID = dt.id_theloai;
@@ -126,14 +137,17 @@ namespace WebPhimV1.Control_Admin.TheLoais
 
         protected void btnCapNhat_Click(object sender, EventArgs e)
         {
-
-            var dt = (from q in dl.DB_THELOAIs where q.id_theloai == CnID select q).FirstOrDefault();
+            var dt = (from q in dl.DB_THELOAIs where q.id_theloai == CnID select q)
+                         .FirstOrDefault();
             dt.ten_theloai = cnTenTheLoai.Text;
             dt.mota_theloai = cnMoTaTheLoai.Text;
             dl.SubmitChanges();
-            string scriptText = "alert('Cập nhật loại thành công'); window.location='" + Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
+            string scriptText =
+                "alert('Cập nhật loại thành công'); window.location='" +
+                Request.ApplicationPath + "cp-admin/theloai/danhsach" + "'";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage",
+                                                scriptText, true);
         }
 
-    } //
+    }  //
 }

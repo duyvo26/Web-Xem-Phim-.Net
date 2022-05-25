@@ -14,27 +14,23 @@ namespace WebPhimV1.Control_NguoiDung
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
         public static List<DB_PHIM> timKiem = new List<DB_PHIM>();
-        public static List<TimKiemTheoTenResult> timKiemTheoTen = new List<TimKiemTheoTenResult>();
-        public static List<TimKiemTheoTheLoaiResult> timKiemTheLoai = new List<TimKiemTheoTheLoaiResult>();
-        public static List<TimKiemTheoTheLoaisResult> timKiemTheLoais = new List<TimKiemTheoTheLoaisResult>();
-        public static List<DB_PHIM> timKiemCoin = new List<DB_PHIM>();
-        public static List<DB_THELOAI> TheLoai = new List<DB_THELOAI>();
-        public static int page_number = 0; // trang thu n
-        public static int SumPage = 0;
-        public static int min = 0;
-        public static int max = 0;
-        public static string namePhim = "";
 
-        protected void RutGon_TieuDe(string a, int b)
-        {
-            Response.Write(Phim.RutGon(a, b));
-        }
+        public string timKiemTheoTen = null;
+        public string timKiemTheLoai = null;
+        public string timKiemTheLoais = null;
+        public string timKiemCoin = null;
+
+        public  List<DB_THELOAI> TheLoai = new List<DB_THELOAI>();
+        public  int page_number = 0;  // trang thu n
+        public static  int SumPage = 0;
+        public  int min = 0;
+        public  int max = 0;
+        public  string namePhim = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 Xemthem();
                 LoadSearch();
                 LoadTheLoai();
@@ -42,7 +38,8 @@ namespace WebPhimV1.Control_NguoiDung
             }
             catch (Exception err)
             {
-                string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
+                string url = "~/404?err=true&&vitri=" + this.GetType().Name +
+                             "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
                 Response.Redirect(url);
             }
         }
@@ -56,11 +53,14 @@ namespace WebPhimV1.Control_NguoiDung
                 {
                     page_number = Convert.ToInt32(Request.QueryString["page"]);
 
-                    int take = 16; // lay n phan tu
-                    int skip = page_number * take; // bo qua trang thu n
+                    int take = 16;                  // lay n phan tu
+                    int skip = page_number * take;  // bo qua trang thu n
                     SumPage = (from q in dl.DB_PHIMs select q).Count() / take;
 
-                    var dt = (from q in dl.DB_PHIMs select q).OrderByDescending(q => q.updated_at).Skip(skip).Take(take);
+                    var dt = (from q in dl.DB_PHIMs select q)
+                                 .OrderByDescending(q => q.updated_at)
+                                 .Skip(skip)
+                                 .Take(take);
 
                     if (dt.Count() > 0)
                     {
@@ -68,7 +68,6 @@ namespace WebPhimV1.Control_NguoiDung
                     }
                 }
             }
-
         }
         private void LoadTheLoai()
         {
@@ -82,25 +81,35 @@ namespace WebPhimV1.Control_NguoiDung
 
         private void LoadSearch()
         {
-            timKiemTheoTen = null;
-            timKiemTheLoai = null;
-            timKiemCoin = null;
-            timKiemTheLoais = null;
             if (!string.IsNullOrEmpty(Request.QueryString["TenPhim"]))
             {
                 if (!string.IsNullOrEmpty(Request.QueryString["page"]))
                 {
                     page_number = Convert.ToInt32(Request.QueryString["page"]);
-                    string data = Request.QueryString["TenPhim"].ToString();
+                    string data = Request
+                                      .QueryString["TenPhim"]
+                                      .ToString();
                     namePhim = data;
-                    int take = 16; // lay n phan tu
-                    int skip = page_number * take; // bo qua trang thu n
+                    int take = 16;                  // lay n phan tu
+                    int skip = page_number * take;  // bo qua trang thu n
                     SumPage = (from q in dl.TimKiemTheoTen(data) select q).Count() / take;
 
-                    var dt = (from q in dl.TimKiemTheoTen(data) select q).OrderByDescending(q => q.updated_at).Skip(skip).Take(take);
+                    var dt = (from q in dl.TimKiemTheoTen(data) select q)
+                                 .OrderByDescending(q => q.updated_at)
+                                 .Skip(skip)
+                                 .Take(take);
                     if (dt != null)
                     {
-                        timKiemTheoTen = dt.ToList();
+                        timKiemTheoTen = "true";
+                        timKiem =
+                            dt.Select(x => new DB_PHIM()
+                            {
+                                id_phim = x.id_phim,
+                                img_phim = x.img_phim,
+                                ten_phim = x.ten_phim,
+                                link_raw = x.link_raw
+                            })
+                                .ToList();
                     }
                 }
             }
@@ -110,35 +119,69 @@ namespace WebPhimV1.Control_NguoiDung
                 if (!string.IsNullOrEmpty(Request.QueryString["page"]))
                 {
                     // DeleData(); // xóa dât cua bang
-                    string data = Request.QueryString["TheLoai"].ToString();
-                    string datas = Request.QueryString["TheLoais"].ToString();
+                    string data = Request
+                                      .QueryString["TheLoai"]
+                                      .ToString();
+                    string datas = Request
+                                       .QueryString["TheLoais"]
+                                       .ToString();
                     page_number = Convert.ToInt32(Request.QueryString["page"]);
 
-                    int take = 16; // lay n phan tu
-                    int skip = page_number * take; // bo qua trang thu n
+                    int take = 16;                  // lay n phan tu
+                    int skip = page_number * take;  // bo qua trang thu n
 
-                    //Response.Write(data);
+                    // Response.Write(data);
                     if (datas == "false")
                     {
-                        SumPage = (from q in dl.TimKiemTheoTheLoai(data.ToString()) select q).Count() / take;
-                        var dt = (from q in dl.TimKiemTheoTheLoai(data.ToString()) select q).OrderByDescending(q => q.updated_at).Skip(skip).Take(take);
+                        SumPage =
+                            (from q in dl.TimKiemTheoTheLoai(data.ToString()) select q)
+                                .Count() /
+                            take;
+                        var dt = (from q in dl.TimKiemTheoTheLoai(data.ToString()) select q)
+                                     .OrderByDescending(q => q.updated_at)
+                                     .Skip(skip)
+                                     .Take(take);
 
                         if (dt != null)
                         {
-                            timKiemTheLoai = dt.ToList();
+                            timKiemTheLoai = "true";
+                            timKiem =
+                                dt.Select(x => new DB_PHIM()
+                                {
+                                    id_phim = x.id_phim,
+                                    img_phim = x.img_phim,
+                                    ten_phim = x.ten_phim,
+                                    link_raw = x.link_raw
+                                })
+                                    .ToList();
                         }
                     }
                     else
                     {
-                        SumPage = (from q in dl.TimKiemTheoTheLoais(data.ToString()) select q).Count() / take;
-                        var dt = (from q in dl.TimKiemTheoTheLoais(data.ToString()) select q).OrderByDescending(q => q.updated_at).Skip(skip).Take(take);
+                        SumPage =
+                            (from q in dl.TimKiemTheoTheLoais(data.ToString()) select q)
+                                .Count() /
+                            take;
+                        var dt =
+                            (from q in dl.TimKiemTheoTheLoais(data.ToString()) select q)
+                                .OrderByDescending(q => q.updated_at)
+                                .Skip(skip)
+                                .Take(take);
 
                         if (dt != null)
                         {
-                            timKiemTheLoais = dt.ToList();
+                            timKiemTheLoais = "true";
+                            timKiem =
+                                dt.Select(x => new DB_PHIM()
+                                {
+                                    id_phim = x.id_phim,
+                                    img_phim = x.img_phim,
+                                    ten_phim = x.ten_phim,
+                                    link_raw = x.link_raw
+                                })
+                                    .ToList();
                         }
                     }
-
                 }
             }
 
@@ -150,24 +193,71 @@ namespace WebPhimV1.Control_NguoiDung
                     min = Convert.ToInt32(Request.QueryString["min"]);
                     page_number = Convert.ToInt32(Request.QueryString["page"]);
 
-                    int take = 16; // lay n phan tu
-                    int skip = page_number * take; // bo qua trang thu n
-                    SumPage = (from q in dl.DB_PHIMs where Convert.ToInt64(q.coin_phim) >= min && Convert.ToInt64(q.coin_phim) <= max select q).Count() / take;
+                    int take = 16;                  // lay n phan tu
+                    int skip = page_number * take;  // bo qua trang thu n
+                    SumPage = (from q in dl.DB_PHIMs
+                               where Convert.ToInt64(q.coin_phim) >=
+                                   min &&
+                                   Convert.ToInt64(q.coin_phim) <= max
+                               select q)
+                                  .Count() /
+                              take;
 
-                    var dt = (from q in dl.DB_PHIMs where Convert.ToInt64(q.coin_phim) >= min && Convert.ToInt64(q.coin_phim) <= max select q).OrderByDescending(q => q.updated_at).Skip(skip).Take(take);
+                    var dt = (from q in dl.DB_PHIMs
+                              where Convert.ToInt64(q.coin_phim) >=
+                                  min &&
+                                  Convert.ToInt64(q.coin_phim) <= max
+                              select q)
+                                 .OrderByDescending(q => q.updated_at)
+                                 .Skip(skip)
+                                 .Take(take);
                     if (dt != null)
                     {
-                        timKiemCoin = dt.ToList();
+                        timKiemCoin = "true";
+                        timKiem = dt.ToList();
                     }
-
                 }
             }
 
             // set title
-            string scriptText = "document.title =  'Tìm kiếm - Page " + page_number + "'";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
-
+            string scriptText =
+                "document.title =  'Tìm kiếm - Page " + page_number + "'";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage",
+                                                scriptText, true);
         }
 
-    } //
+        public string GetNameTL(int idTL)
+        {
+            var dt = (from q in dl.DB_THELOAIs
+                      where q.id_theloai ==
+                          idTL
+                      select q.ten_theloai)
+                         .First();
+            if (dt != null)
+            {
+                return dt.ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public string GetMotaTL(int idTL)
+        {
+            var dt = (from q in dl.DB_THELOAIs
+                      where q.id_theloai ==
+                          idTL
+                      select q.mota_theloai)
+                         .First();
+            if (dt != null)
+            {
+                return dt.ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+    }  //
 }

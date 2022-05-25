@@ -14,11 +14,11 @@ namespace WebPhimV1.Code.ashx
     public class CheckFileAnh : IHttpHandler
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
-        public static List<DB_PHIM> danhsachimg = new List<DB_PHIM>(); //DS Tap_Phim
+        public static List<DB_PHIM> danhsachimg =
+            new List<DB_PHIM>();  // DS Tap_Phim
 
         public void ProcessRequest(HttpContext context)
         {
-            
             context.Response.ContentType = "text/plain";
             String noidungimg = "";
             double sizeFile = 0;
@@ -32,13 +32,11 @@ namespace WebPhimV1.Code.ashx
             List<string> ListImg = new List<string>();
             List<string> nameIMG_KhongTonTai = new List<string>();
 
-
             for (int i = 0; i < danhsachimg.Count(); i++)
             {
-               ListImg.Add(danhsachimg[i].img_phim);
-              // noidungimg += danhsachimg[i].img_phim.ToString() + "</br>";
+                ListImg.Add(danhsachimg[i].img_phim);
+                // noidungimg += danhsachimg[i].img_phim.ToString() + "</br>";
             }
-
 
             string[] NameTap = noidungimg.Split(',');
             string path = HttpContext.Current.Server.MapPath("~/Public/img/phim/");
@@ -47,14 +45,14 @@ namespace WebPhimV1.Code.ashx
                 DirectoryInfo di = new DirectoryInfo(path);
                 foreach (FileInfo fi in di.GetFiles())
                 {
-
                     Boolean CheckFile = false;
                     foreach (string nameFile in ListImg)
                     {
                         if (nameFile.Equals(fi.Name))
                         {
                             nameIMG_TonTai.Add(fi.Name);
-                          //  noidungimg += "</br>File Name: " + fi.Name + "| Size: " + (Double.Parse(fi.Length.ToString()) * 0.000001) + " MB";
+                            //  noidungimg += "</br>File Name: " + fi.Name + "| Size: " +
+                            //  (Double.Parse(fi.Length.ToString()) * 0.000001) + " MB";
                             CheckFile = true;
                         }
                     }
@@ -69,23 +67,21 @@ namespace WebPhimV1.Code.ashx
                         sizeFile += Double.Parse(fi.Length.ToString()) * 0.000001;
                         nameIMG_KhongTonTai.Add(fi.Name);
                     }
-                    
                 }
 
-                foreach(String XoaFile in nameIMG_KhongTonTai){
-                    
-                    noidungimg += "</br> Xoá File: " + XoaFile ;
+                foreach (String XoaFile in nameIMG_KhongTonTai)
+                {
+                    noidungimg += "</br> Xoá File: " + XoaFile;
                     DeleteFile(path + XoaFile);
                 }
             }
 
-            //Send File details in a JSON Response.
-            string json = new JavaScriptSerializer().Serialize(
-                new
-                {
-                    noidungIMG = noidungimg,
-                    sizefile = sizeFile,
-                });
+            // Send File details in a JSON Response.
+            string json = new JavaScriptSerializer().Serialize(new
+            {
+                noidungIMG = noidungimg,
+                sizefile = sizeFile,
+            });
 
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "text/json";
@@ -95,17 +91,10 @@ namespace WebPhimV1.Code.ashx
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        //xoa file
-        protected void DeleteFile(string filePath)
-        {
-            File.Delete(filePath);
-        }
-
+        // xoa file
+        protected void DeleteFile(string filePath) { File.Delete(filePath); }
     }
 }

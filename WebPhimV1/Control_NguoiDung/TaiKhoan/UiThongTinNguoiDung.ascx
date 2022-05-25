@@ -1,12 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UiThongTinNguoiDung.ascx.cs" Inherits="WebPhimV1.Control_NguoiDung.TaiKhoan.UiThongTinNguoiDung" %>
 <%@ Register Src="~/Control_NguoiDung/TaiKhoan/UiThuVienDoc.ascx" TagPrefix="uc1" TagName="UiThuVienDoc" %>
-
-
-
 <script>
     document.title = " Thông Tin Người Dùng";
 </script>
-
 <!-- noi dung -->
 <div class="main-content ">
    <section  style="margin-top: 60px">
@@ -93,8 +89,8 @@
                         <% } %>    
                      </div>
                   </div>
-                  <div class="alert alert-danger" role="alert">
-                     Thu:&nbsp;<%=string.Format("{0:#,##0}", Convert.ToDecimal(Thu())) %>|
+                  <div class="alert alert-danger" role="alert" style="background: var(--iq-primary) !important; color:white">
+                     Thu:&nbsp;<%=string.Format("{0:#,##0}", Convert.ToDecimal(Thu())) %>&nbsp;
                      Chi:&nbsp;<%=string.Format("{0:#,##0}", Convert.ToDecimal(Chi())) %>
                   </div>
                </div>

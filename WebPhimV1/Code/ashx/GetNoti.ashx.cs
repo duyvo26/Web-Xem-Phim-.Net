@@ -12,9 +12,7 @@ namespace WebPhimV1.Code
     /// </summary>
     public class GetNoti : IHttpHandler
     {
-
         public static List<DB_THONGBAO> ThongBaos = new List<DB_THONGBAO>();
-
 
         public void ProcessRequest(HttpContext context)
         {
@@ -33,24 +31,27 @@ namespace WebPhimV1.Code
                 {
                     try
                     {
-                         var dt = (from q in dl.DB_THONGBAOs where q.id_user == int.Parse(data_id) && q.truy_cap == null select q).OrderByDescending(q => q.created_at).First();
-                         noti_txt = dt.noi_dung.ToString();
+                        var dt = (from q in dl.DB_THONGBAOs
+                                  where q.id_user ==
+                                      int.Parse(data_id) &&
+                                      q.truy_cap == null
+                                  select q)
+                                     .OrderByDescending(q => q.created_at)
+                                     .First();
+                        noti_txt = dt.noi_dung.ToString();
                     }
-                    catch (Exception ex) { }
+                    catch (Exception ex)
+                    {
+                    }
                 }
-              
             }
 
-
-
-
-            //Send File details in a JSON Response.
-            string json = new JavaScriptSerializer().Serialize(
-                new
-                {
-                    sum_noti = data_,
-                    noti = noti_txt,
-                });
+            // Send File details in a JSON Response.
+            string json = new JavaScriptSerializer().Serialize(new
+            {
+                sum_noti = data_,
+                noti = noti_txt,
+            });
 
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "text/json";
@@ -60,10 +61,7 @@ namespace WebPhimV1.Code
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

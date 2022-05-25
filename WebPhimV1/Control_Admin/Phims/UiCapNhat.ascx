@@ -60,20 +60,22 @@
          </select>
       </div>
       <div class="form-group">
-         <div id="list1" class="dropdown-check-list" tabindex="100">
-            <label><strong>Thể loại phim:</strong>
+        
+            <label>
+                <strong>Thể loại phim:</strong>
+                </label>
                   <input onkeyup="TimTL()" id="tim_tl"  class="form-control"  placeholder="Tìm thể loại"  type="text"/>
                  <% for (int i = 0; i < PhimTL.Count; i ++ ){ %> <%= PhimTL[i].ten_theloai + "," %> <% } %></label><br>
             <div class="form-group" style="overflow: scroll; max-height: 300px">
                <!-- Button trigger modal -->
                <% for(int a = 0; a < DanhSachTheLoai.Count; a ++){ %>
-               <label class="container_checkbox" data-value="<%=DanhSachTheLoai[a].ten_theloai %>"  style=" background: #454d55; margin-left: 10px;font-size: 25px; display: block">
+               <label class="container_checkbox" data-value="<%=DanhSachTheLoai[a].ten_theloai %>"  style=" background: #454d55; margin-left: 10px;font-size: 25px; display: inline-block">
                <input onclick="dele_c()" type="checkbox" name="the-loai" value="<%=DanhSachTheLoai[a].id_theloai %>">&nbsp;&nbsp;<%=DanhSachTheLoai[a].ten_theloai %>
                <span class="checkmark"></span>
                </label>
                <% } %>
             </div>
-         </div>
+     
        
          <script>
              function dele_c() {
@@ -90,7 +92,7 @@
                      for (let i = 0; i < TL.length; i++) {
                          if (timtl != "" && TL[i].getAttribute("data-value").toLowerCase().includes(timtl.toLowerCase())) {
                              TL[i].style.color = '#ff5f5f';
-                             TL[i].style.display = 'block';
+                             TL[i].style.display = 'inline-block';
                              TL[i].style.fontSize = '30px';
                              TL_input[i].style.transform = 'scale(2)';
                          } else {
@@ -103,7 +105,7 @@
                  } else {
                      for (let i = 0; i < TL.length; i++) {
                          TL[i].style.color = 'white';
-                         TL[i].style.display = 'block';
+                         TL[i].style.display = 'inline-block';
                          TL[i].style.fontSize = '25px';
                          TL_input[i].style.transform = 'scale(1)';
                      }
@@ -148,7 +150,7 @@
          <br>
          <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" width="200" class="img-Phim" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/Phim/<%= infoPhim.img_phim %>" onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" />
          <br>
-         <asp:FileUpload ID="FileUpload1" runat="server" />
+         <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg, .png" />
       </div>
       <div class="d-flex justify-content-end">
          <input type="submit" class="btn btn-dark" name="btn-capnhat" value="Chỉnh Sửa phim">

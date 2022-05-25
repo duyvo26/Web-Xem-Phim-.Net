@@ -53,11 +53,12 @@
          <label for="exampleFormControlInput1">Coin</label>
          <input type="number" class="form-control" value="0" name="coin" min="0" max="9999999999" >
       </div>
-      <div class="form-group" style="overflow: scroll; max-height: 300px;    ">
-         <label>Thể loại phim: </label> <br>        <!-- Button trigger modal -->
+
+       <label>Thể loại phim: </label> <br>        <!-- Button trigger modal -->
              <input onkeyup="TimTL()" id="tim_tl" class="form-control"  placeholder="Tìm thể loại" type="text"/>
+      <div class="form-group" style="overflow: scroll; max-height: 300px;    ">
          <% for(int a = 0; a < DanhSachTheLoai.Count; a ++){ %>
-         <label class="container_checkbox" data-value="<%=DanhSachTheLoai[a].ten_theloai %>" style=" background: #454d55; margin-left: 10px;font-size: 25px; padding: 5px; display: block">
+         <label class="container_checkbox" data-value="<%=DanhSachTheLoai[a].ten_theloai %>" style=" background: #454d55; margin-left: 10px;font-size: 25px; padding: 5px; display: inline-block">
          <input  onclick="dele_c()" type="checkbox" name="the-loai" value="<%=DanhSachTheLoai[a].id_theloai %>">&nbsp;&nbsp;<%=DanhSachTheLoai[a].ten_theloai %>
          <span class="checkmark"></span>
          </label>
@@ -80,7 +81,7 @@
                             for (let i = 0; i < TL.length; i++) {
                                 if (timtl != "" && TL[i].getAttribute("data-value").toLowerCase().includes(timtl.toLowerCase())) {
                                     TL[i].style.color = '#ff5f5f'
-                                    TL[i].style.display = 'block';
+                                    TL[i].style.display = 'inline-block';
                                     TL[i].style.fontSize = '30px';
                                     TL_input[i].style.transform = 'scale(2)';
                                 } else {
@@ -94,7 +95,7 @@
                             for (let i = 0; i < TL.length; i++) {
                                 TL[i].style.color = 'white';
                                 
-                                TL[i].style.display = 'block';
+                                TL[i].style.display = 'inline-block';
                                 TL[i].style.fontSize = '25px';
                                 TL_input[i].style.transform = 'scale(1)';
                             }
@@ -115,7 +116,7 @@
       </script>
       <div class="form-group">
          <label >Ảnh Bìa phim</label>
-          <asp:FileUpload ID="FileUpload1" runat="server" />
+          <asp:FileUpload ID="FileUpload1" runat="server" accept=".jpg, .png" />
       </div>
       <div class="d-flex justify-content-end">
          <button type="submit" class="btn btn-dark"  name="btn-them" value="true">Thêm phim</button>

@@ -105,7 +105,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="bi bi-file-earmark-ppt"></i></span>
                             </div>
-                            <asp:TextBox ID="matkhau" runat="server"  class="form-control"></asp:TextBox>
+                    <asp:TextBox ID="matkhau" onKeyUp="ktpass()" ClientMode="Static" runat="server" class="form-control"></asp:TextBox>
+                     <script>
+                         function ktpass() {
+                             var tk = document.getElementById("<%=matkhau.ClientID%>");
+                            var ltk = tk.value.replace(/\s/g, '');
+                            tk.value = ltk;
+                        }
+                     </script>
                             <!-- <input type="text" name="matkhau"  class="form-control" /> -->
                         </div>
                         <!-- /.input group -->
@@ -118,7 +125,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="bi bi-file-earmark-ppt"></i></span>
                                 <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" width="100px" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/avatar/<%=IMG %>"  />
-                                <asp:FileUpload ID="UpAvatar" runat="server" />
+                                <asp:FileUpload ID="UpAvatar" runat="server" accept=".jpg, .png" />
                             </div>
                             <!-- <input type="text" name="matkhau"  class="form-control" /> -->
                         </div>

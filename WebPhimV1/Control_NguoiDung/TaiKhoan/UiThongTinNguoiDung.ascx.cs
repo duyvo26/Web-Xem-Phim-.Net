@@ -13,12 +13,12 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
 
-        public static DB_USER NguoiDungs = new DB_USER();
-        public static List<DB_PHIM> PhimDaDang = new List<DB_PHIM>();
-        public static List<DB_COMMENT> BinhLuanNguoiDung = new List<DB_COMMENT>();
-        public static List<DB_LOG_COIN> LogPhim = new List<DB_LOG_COIN>();
-        public static int page_number = 0; // trang thu n
-        public static int SumPage = 0;
+        public  DB_USER NguoiDungs = new DB_USER();
+        public  List<DB_PHIM> PhimDaDang = new List<DB_PHIM>();
+        public  List<DB_COMMENT> BinhLuanNguoiDung = new List<DB_COMMENT>();
+        public  List<DB_LOG_COIN> LogPhim = new List<DB_LOG_COIN>();
+        public  int page_number = 0; // trang thu n
+        public static  int SumPage = 0;
 
         protected void RutGon_TieuDe(string a, int b)
         {
@@ -48,7 +48,7 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
                 }
                 catch (Exception err)
                 {
-                    string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
+                    string url = "~/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
                     Response.Redirect(url);
                 }
 
@@ -66,19 +66,21 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
         //load thong tin nguoi dung
         private void LoadThongTinNguoiDung()
         {
-            String MaKhoa = "";
-            MaKhoa = Request.Cookies["Log"].Value;
-            NguoiDungs = null;
-            var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+            NguoiDungs = Theme.NguoiDung.NguoiDungs;
 
-            if (dt != null)
-            {
-                NguoiDungs = dt.FirstOrDefault();
-            }
-            else
-            {
-                NguoiDungs = null;
-            }
+            //String MaKhoa = "";
+           // MaKhoa = Request.Cookies["Log"].Value;
+           // NguoiDungs = null;
+            //var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+
+           // if (dt != null)
+           // {
+            //    NguoiDungs = dt.FirstOrDefault();
+           // }
+           // else
+           // {
+            //    NguoiDungs = null;
+           // }
         }
 
         //dang xuat

@@ -13,20 +13,16 @@ namespace WebPhimV1.Control_NguoiDung
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
 
-        public static List<DB_PHIM> PhimMoiCN = new List<DB_PHIM>();
-        public static List<DB_PHIM> DanhSachPhim = new List<DB_PHIM>();
+        public  List<DB_PHIM> PhimMoiCN = new List<DB_PHIM>();
+        public  List<DB_PHIM> DanhSachPhim = new List<DB_PHIM>();
         // code comment
-        public static List<LayThongTinBinhLuanResult> BinhLuan = new List<LayThongTinBinhLuanResult>();
-        public static List<LayLuotXemResult> LuotXem = new List<LayLuotXemResult>();
+        public  List<LayThongTinBinhLuanResult> BinhLuan = new List<LayThongTinBinhLuanResult>();
+        public  List<LayLuotXemResult> LuotXem = new List<LayLuotXemResult>();
 
-        public static List<LayPhimRandResult> listGoiyDoc = new List<LayPhimRandResult>();
+        public  List<LayPhimRandResult> listGoiyDoc = new List<LayPhimRandResult>();
 
-        public static DB_CAUHINH HeThongs = new DB_CAUHINH();
+        public  DB_CAUHINH HeThongs = new DB_CAUHINH();
 
-        protected void RutGon_TieuDe(string a, int b)
-        {
-            Response.Write(Phim.RutGon(a, b));
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,7 +39,7 @@ namespace WebPhimV1.Control_NguoiDung
             }
             catch (Exception err)
             {
-                string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
+                string url = "~/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
                 Response.Redirect(url);
             }
         }
@@ -52,7 +48,7 @@ namespace WebPhimV1.Control_NguoiDung
         private void LoadlistGoiyDoc()
         {
             listGoiyDoc = null;
-            var dt = from q in dl.LayPhimRand() select q;
+            var dt = (from q in dl.LayPhimRand() select q).Take(5);
             if (dt != null)
             {
                 listGoiyDoc = dt.ToList();
@@ -63,13 +59,13 @@ namespace WebPhimV1.Control_NguoiDung
         // load cau hinh
         public void LoadHeThong()
         {
+            HeThongs = Theme.NguoiDung.listCauHinh;
+            //var dt = (from q in dl.DB_CAUHINHs select q);
 
-            var dt = (from q in dl.DB_CAUHINHs select q);
-
-            if (dt != null)
-            {
-                HeThongs = dt.First();
-            }
+            //if (dt != null)
+            //{
+            //    HeThongs = dt.First();
+           // }
 
         }
 
@@ -163,15 +159,17 @@ namespace WebPhimV1.Control_NguoiDung
         //get name nguoi dung
         public int GetQuyenHan(int id)
         {
-            var dt = (from q in dl.DB_USERs where q.id_user == id select q.quyen_han);
-            if (dt != null)
-            {
-                return Convert.ToInt32(dt.First());
-            }
-            else
-            {
-                return 0;
-            }
+            return Theme.NguoiDung.quyen_han;
+
+           // var dt = (from q in dl.DB_USERs where q.id_user == id select q.quyen_han);
+          //  if (dt != null)
+          //  {
+          //      return Convert.ToInt32(dt.First());
+           // }
+          //  else
+          //  {
+           //     return 0;
+            //}
         }
 
     } //

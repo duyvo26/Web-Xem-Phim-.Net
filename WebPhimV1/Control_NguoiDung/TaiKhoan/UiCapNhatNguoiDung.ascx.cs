@@ -12,29 +12,30 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
     public partial class UiCapNhatNguoiDung : System.Web.UI.UserControl
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
-        public static DB_USER NguoiDungs = new DB_USER();
+        public  DB_USER NguoiDungs = new DB_USER();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (NguoiDung.CheckLogin() != true) // kiem tra dang nhap cua nguoi dung
+            try
             {
-                Response.Redirect("/dangnhap");
-                NguoiDung.DelCookie();
 
-            }
-            else
-            {
-                try
+                if (NguoiDung.CheckLogin() != true) // kiem tra dang nhap cua nguoi dung
                 {
-
+                    Response.Redirect("/dangnhap");
+                    NguoiDung.DelCookie();
+                }
+                else
+                {
                     LoadThongTinNguoiDung();
                     CapNhatNguoiDung();
-                }
-                catch (Exception err)
-                {
-                    string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
-                    Response.Redirect(url);
-                }
+
+                } //
+
+            }
+            catch (Exception err)
+            {
+                string url = "~/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
+                Response.Redirect(url);
             }
 
         }
@@ -42,19 +43,21 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
         //load thong tin người dùng
         private void LoadThongTinNguoiDung()
         {
-            String MaKhoa = "";
-            MaKhoa = Request.Cookies["Log"].Value;
-            NguoiDungs = null;
-            var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+            NguoiDungs = Theme.NguoiDung.NguoiDungs;
 
-            if (dt != null)
-            {
-                NguoiDungs = dt.FirstOrDefault();
-            }
-            else
-            {
-                NguoiDungs = null;
-            }
+           // String MaKhoa = "";
+           // MaKhoa = Request.Cookies["Log"].Value;
+            //NguoiDungs = null;
+           // var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+
+           // if (dt != null)
+           // {
+            //    NguoiDungs = dt.FirstOrDefault();
+           // }
+           // else
+           // {
+           //     NguoiDungs = null;
+           // }
         }
         private void CapNhatNguoiDung()
         {
@@ -78,15 +81,22 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
                         string filePath = MapPath("/public/img/www/avatar/" + Img_Url);
                         FileUpload1.SaveAs(filePath);
                         // up vao csdl
-                        dl.Capnhatnguoidung(NguoiDungs.id_user, fullname, email, Img_Url);
+                        //dl.Capnhatnguoidung(NguoiDungs.id_user, fullname, email, Img_Url);
 
                     }
                     else
                     {
                         // up vao csdl
-                        string IMG = NguoiDungs.img_user;
-                        dl.Capnhatnguoidung(NguoiDungs.id_user, fullname, email, IMG);
+                        Img_Url = NguoiDungs.img_user;
+                        //dl.Capnhatnguoidung(NguoiDungs.id_user, fullname, email, IMG);
                     }
+                    // cap nhat nguoi dung vao csdl
+                    var dtUser = (from q in dl.DB_USERs where q.id_user == NguoiDungs.id_user select q);
+                    DB_USER db = dtUser.First();
+                    db.fullname = fullname;
+                    db.mail = email;
+                    db.img_user = Img_Url;
+                    dl.SubmitChanges();
 
                     string scriptText = "alert('Cập nhật thông tin thành công !'); window.location='" + Request.ApplicationPath + "taikhoan/capnhat'";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);

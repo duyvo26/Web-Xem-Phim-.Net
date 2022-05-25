@@ -4,12 +4,13 @@
       <asp:Label ID="noti" runat="server"></asp:Label>
       <div class="card card-danger">
          <div class="card-header">
-            <h3 class="card-title">Danh sách tập phim của phim: &ensp; <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%=infoPhim.link_raw + "-" + infoPhim.id_phim %>"><%=infoPhim.ten_phim %></a></h3>
+            <h3 class="card-title">Danh sách tập phim của phim: &ensp; <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/capnhat-<%= infoPhim.id_phim %>"><%=infoPhim.ten_phim %></a></h3>
          </div>
       </div>
+       <!--
      <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/capnhat-<%=infoPhim.id_phim %>">
       <button type="button" class="btn btn-primary btn-lg btn-block">Thông tin phim</button>
-      </a><br>
+      </a><br>-->
       <a href="them-tap-phim-<%=infoPhim.id_phim %>">
       <button type="button" class="btn btn-primary btn-lg btn-block">Thêm tập phim</button>
       </a>
@@ -22,6 +23,7 @@
          <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
             <thead>
                <tr>
+                  <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="So TT">STT</th>
                   <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Tên tập phim">Tên tập phim</th>
                   <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Lượt xem">Lượt xem</th>
                   <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Ngày cập nhật">Ngày đăng</th>
@@ -33,11 +35,13 @@
                <% for (int i = 0; i < DSC.Count; i++)
                   { %>
                <tr class="odd">
+                   <td><%=Fotmat_Tap(DSC[i].ten_tap_phim) %></td>
                   <td>
                      <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%=infoPhim.link_raw + "-" + DSC[i].id_phim +"/"+ DSC[i].id_tap_phim %>" target="_blank">
                      <%=DSC[i].ten_tap_phim %>
                      </a>
                   </td>
+                  
                   <td><%=LuotXemTap_Phim(DSC[i].id_tap_phim) %></td>
                   <td><%=DSC[i].created_at.ToString("dd-MM-yyyy | HH:mm:ss") %></td>
                   <td><%=DSC[i].updated_at.ToString("dd-MM-yyyy | HH:mm:ss") %></td>

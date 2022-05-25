@@ -105,7 +105,15 @@
                      <div class="input-group-prepend">
                         <span class="input-group-text"><i class="bi bi-file-earmark-ppt"></i></span>
                      </div>
-                     <asp:TextBox ID="matkhau" runat="server" class="form-control"></asp:TextBox>
+                     <asp:TextBox ID="matkhau" onKeyUp="ktpass()" ClientMode="Static" runat="server" class="form-control"></asp:TextBox>
+                     <script>
+                        function ktpass() {
+                             var tk = document.getElementById("<%=matkhau.ClientID%>");
+                             var ltk = tk.value.replace(/\s/g, '');
+                             tk.value = ltk;
+                         }
+                     </script>
+
                      <!--    <input type="text" name="matkhau"  class="form-control" /> -->
                   </div>
                   <!-- /.input group -->

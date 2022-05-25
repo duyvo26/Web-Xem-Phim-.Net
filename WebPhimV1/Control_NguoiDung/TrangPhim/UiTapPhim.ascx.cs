@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using WebPhimV1.Code;
 
 namespace WebPhimV1.Control_NguoiDung.TrangPhim
@@ -13,95 +13,100 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
 
-        public static DB_TAP_PHIM infoTap_Phim = new DB_TAP_PHIM(); // thong tin Tap_Phim
-        public static DB_PHIM infoPhim = new DB_PHIM(); // thong tin Phim
-        public static DB_USER NguoiDungs = new DB_USER();
-        public static List<DB_COMMENT> BinhLuan = new List<DB_COMMENT>();
-        public static DB_THUVIEN CheckThuVien = new DB_THUVIEN();
-        public static List<DB_COMMENT> LoadPhanHoi = new List<DB_COMMENT>();
-        public static DB_CAUHINH cauhinh = new DB_CAUHINH();
-        public static DB_TAP_PHIM Next = new DB_TAP_PHIM();
-        public static DB_TAP_PHIM Back = new DB_TAP_PHIM();
-        public static DB_TAP_PHIM Tap_PhimDau = new DB_TAP_PHIM(); // danh sach Tap_Phim cua Phim
-        public static List<DB_TAP_PHIM> DsTap_Phim = new List<DB_TAP_PHIM>();
-        public static int page_number = 0; // trang thu n
-        public static int SumPage = 0;
-        public static string checkthuvien;
+        public  DB_TAP_PHIM infoTap_Phim = new DB_TAP_PHIM(); // thong tin Tap_Phim
+        public  DB_PHIM infoPhim = new DB_PHIM(); // thong tin Phim
+        public  DB_USER NguoiDungs = new DB_USER();
+        public  List<DB_COMMENT> BinhLuan = new List<DB_COMMENT>();
+        public  DB_THUVIEN CheckThuVien = new DB_THUVIEN();
+        public  List<DB_COMMENT> LoadPhanHoi = new List<DB_COMMENT>();
+        public  DB_CAUHINH cauhinh = new DB_CAUHINH();
+        public  DB_TAP_PHIM Next = new DB_TAP_PHIM();
+        public  DB_TAP_PHIM Back = new DB_TAP_PHIM();
+        public  DB_TAP_PHIM Tap_PhimDau = new DB_TAP_PHIM(); // danh sach Tap_Phim cua Phim
+        public  List<DB_TAP_PHIM> DsTap_Phim = new List<DB_TAP_PHIM>();
+        public  int page_number = 0; // trang thu n
+        public static  int SumPage = 0;
+        public  string checkthuvien = null;
 
 
-        protected void RutGon_TieuDe(string a, int b)
-        {
-            Response.Write(Phim.RutGon(a, b));
-        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadCauHinh();
 
-            if (NguoiDung.CheckLogin() != true) // kiem tra dang nhap cua nguoi dung
-            {
-                LoadThongTinPhim(); // load thong tin Phim len
-                if (infoPhim.status_ == 0)
+         try{
+
+                LoadCauHinh();
+                if (NguoiDung.CheckLogin() != true) // kiem tra dang nhap cua nguoi dung
                 {
-                    string scriptText = "alert('Bộ phim này tạm khoá vui lòng liên hệ admin để biết thêm chi tiết !'); window.location='" + Request.ApplicationPath + "'";
-                    ScriptManager.RegisterStartupScript(this, typeof(string), "Phimkhoa", scriptText, true);
+                     LoadNotLogin();
                 }
-                
-                LoadThongTinTap_Phim(); // laod thong tin Tap_Phim len
-                ThemLuotXem(); // them luot xem
-                LoadDanhSachTap_Phim();
-                LayTap_PhimDau();
-                LoadDSBinhLuan();
-                NextPage(); // Tap_Phim tiep theo
-                BackPage();
-
-                //
-            }
-            else
-            {
-                try
+                else
                 {
-                    LoadThongTinNguoiDung();
-                    LoadThongTinPhim(); // load thong tin Phim len
-                    ThemLuotXem(); // them luot xem
-                    if (infoPhim.status_ == 0)
-                    {
-                        string scriptText = "alert('Bộ phim này tạm khoá vui lòng liên hệ admin để biết thêm chi tiết !'); window.location='" + Request.ApplicationPath + "'";
-                        ScriptManager.RegisterStartupScript(this, typeof(string), "Phimkhoa", scriptText, true);
-                    }
-                    CheckDoc();
-                    LayTap_PhimDau();
-                    AddPhimCoinFree();
-                    LoadThongTinTap_Phim(); // laod thong tin Tap_Phim len
-                    LoadDanhSachTap_Phim();
-                    LoadDSBinhLuan();
-                    XoaBinhLuan();
-                    NextPage(); // Tap_Phim tiep theo
-                    BackPage();
-                    LuuLichSu();
-                    themBL(); // them binh luan
-                    NhapPhanHoi(); // them phan hoi
-
-                    
-
+                    LoadLogin();
                 }
-                catch (Exception err)
-                {
-                   string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
+             }catch (Exception err)
+             {
+                   string url = "~/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
                    Response.Redirect(url);
-                }
+              }
 
-            }
-
+         
         }
+
+
+        private void LoadNotLogin(){
+            LoadThongTinPhim(); // load thong tin Phim len
+            if (infoPhim.status_ == 0)
+            {
+                string scriptText = "alert('Bộ phim này tạm khoá vui lòng liên hệ admin để biết thêm chi tiết !'); window.location='" + Request.ApplicationPath + "'";
+                ScriptManager.RegisterStartupScript(this, typeof(string), "Phimkhoa", scriptText, true);
+            }
+            LoadThongTinTap_Phim(); // laod thong tin Tap_Phim len
+            ThemLuotXem(); // them luot xem
+            LoadDanhSachTap_Phim();
+            LayTap_PhimDau();
+            LoadDSBinhLuan();
+            NextPage(); // Tap_Phim tiep theo
+            BackPage();
+            //
+        }
+
+        private void LoadLogin() {
+            LoadThongTinNguoiDung();
+            LoadThongTinPhim(); // load thong tin Phim len
+            if (infoPhim.status_ == 0)
+            {
+                string scriptText = "alert('Bộ phim này tạm khoá vui lòng liên hệ admin để biết thêm chi tiết !'); window.location='" + Request.ApplicationPath + "'";
+                ScriptManager.RegisterStartupScript(this, typeof(string), "Phimkhoa", scriptText, true);
+            }
+            LoadThongTinTap_Phim(); // laod thong tin Tap_Phim len
+            CheckDoc();
+            AddPhimCoinFree();
+            ThemLuotXem(); // them luot xem
+            LuuLichSu();
+
+            LayTap_PhimDau();
+            LoadDanhSachTap_Phim();
+            LoadDSBinhLuan();
+
+            XoaBinhLuan();
+            NextPage(); // Tap_Phim tiep theo
+            BackPage();
+            themBL(); // them binh luan
+            NhapPhanHoi(); // them phan hoi
+        }
+
 
         private void LoadCauHinh()
         {
-            var dt = (from q in dl.DB_CAUHINHs select q);
-            if (dt.Count() > 0)
-            {
-                cauhinh = dt.First();
-            }
+            cauhinh = Theme.NguoiDung.listCauHinh;
+
+            ///var dt = (from q in dl.DB_CAUHINHs select q);
+            ///if (dt.Count() > 0)
+            //{
+            //    cauhinh = dt.First();
+            //}
 
         }
 
@@ -117,19 +122,21 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
         //load thong tin người dùng
         private void LoadThongTinNguoiDung()
         {
-            String MaKhoa = "";
-            MaKhoa = Request.Cookies["Log"].Value;
-            NguoiDungs = null;
-            var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+            NguoiDungs = Theme.NguoiDung.NguoiDungs;
 
-            if (dt != null)
-            {
-                NguoiDungs = dt.FirstOrDefault();
-            }
-            else
-            {
-                NguoiDungs = null;
-            }
+           // String MaKhoa = "";
+           // MaKhoa = Request.Cookies["Log"].Value;
+           // NguoiDungs = null;
+           // var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+
+          //  if (dt != null)
+            //{
+            //    NguoiDungs = dt.FirstOrDefault();
+           // }
+           // else
+           // {
+            //    NguoiDungs = null;
+            //}
         }
 
         //ttu dong them phim vao thu vien neu phim  = 0
@@ -140,17 +147,18 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
             {
                 // them Phim vao thu vien
                 dl.ThemThuVien(NguoiDungs.id_user, infoPhim.id_phim, Tap_PhimDau.id_tap_phim); // them vao thu vien
-            }
-            if (NguoiDungs.id_user != infoPhim.id_user && int.Parse(infoPhim.coin_phim) == 0)
-            {
-                //thong bao cap nhat Tap_Phim
-                //id_user - id nhận
-                //id_phanhoi - id gui thong bao
-                string noidung = NguoiDungs.fullname + " đã thêm phim " + infoPhim.ten_phim + " của bạn vào thư viện";
-                string urls = "/taikhoan/info";
-                NguoiDung.ThemThongBao(Convert.ToInt32(infoPhim.id_user), NguoiDungs.id_user, noidung, urls);
+                if (NguoiDungs.id_user != infoPhim.id_user && int.Parse(infoPhim.coin_phim) == 0)
+                {
+                    //thong bao cap nhat Tap_Phim
+                    //id_user - id nhận
+                    //id_phanhoi - id gui thong bao
+                    string noidung = NguoiDungs.fullname + " đã thêm phim " + infoPhim.ten_phim + " của bạn vào thư viện";
+                    string urls = "/taikhoan/info";
+                    NguoiDung.ThemThongBao(Convert.ToInt32(infoPhim.id_user), NguoiDungs.id_user, noidung, urls);
 
+                }
             }
+
 
         }
 
@@ -185,9 +193,15 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
             }
         } //
 
+        public string getLuotXemTap(int IdTap)
+        {
+            var dt = (from q in dl.DB_LUOTXEMs where q.id_tap_phim == IdTap select q).Count();
+            return dt.ToString();
+        }
+
         private void ThemLuotXem()
         {
-            if (HttpContext.Current.Request.Cookies["Log"] != null)
+            if (WebPhimV1.Code.NguoiDung.CheckLogin() == true)
             {
 
                 if (checkthuvien != null)
@@ -259,7 +273,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
             int skip = page_number * take; // bo qua trang thu n
             SumPage = (from q in dl.DB_COMMENTs where q.id_tap_phim == infoTap_Phim.id_tap_phim && q.id_phanhoi == null select q).Count() / take;
 
-            var dt = (from q in dl.DB_COMMENTs where q.id_tap_phim == infoTap_Phim.id_tap_phim && q.id_phanhoi == null select q).OrderBy(q => q.created_at).Skip(skip).Take(take);
+            var dt = (from q in dl.DB_COMMENTs where q.id_tap_phim == infoTap_Phim.id_tap_phim && q.id_phanhoi == null select q).OrderByDescending(q => q.created_at).Skip(skip).Take(take);
 
             if (dt.Count() > 0)
             {
@@ -277,6 +291,10 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                 if (dt != null)
                 {
                     checkthuvien = dt.id_user.ToString();
+                }
+                else
+                {
+                    checkthuvien = null;
                 }
             }
             catch
@@ -309,7 +327,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                     dbcom.id_user = NguoiDungs.id_user;
                     dbcom.id_phim = infoPhim.id_phim;
                     dbcom.id_tap_phim = infoTap_Phim.id_tap_phim;
-                    dbcom.noidung_cmt = noidung_cmt;
+                    dbcom.noidung_cmt = HeThong.XoaKhoanTrangThua(noidung_cmt);
                     dbcom.created_at = DateTime.Now;
                     dbcom.updated_at = DateTime.Now;
                     dl.DB_COMMENTs.InsertOnSubmit(dbcom);
@@ -325,7 +343,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                         NguoiDung.ThemThongBao(infoPhim.id_user, NguoiDungs.id_user, noidung, urls);
                     }
                     Random r = new Random();
-                    string scriptText = "alert('Bình luận thành công'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?p=" + r.Next(1, 100) + "#binhluan_trang';";
+                    string scriptText = "alert('Bình luận thành công'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?page=" + page_number + "&p=" + r.Next(1, 100) + "#binhluan_trang';";
                     ScriptManager.RegisterStartupScript(this, typeof(string), "binhluan", scriptText, true);
 
                 }
@@ -348,38 +366,80 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                     dl.SubmitChanges();
                     Random r = new Random();
                     //r.Next(1, 100)
-                    string scriptText = "alert('Xóa bình luận thành công'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?p=" + r.Next(1, 100) + "#binhluan_trang';";
+                    string scriptText = "alert('Xóa bình luận thành công'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?page=" + page_number + "&p=" + r.Next(1, 100) + "#binhluan_trang';";
                     ScriptManager.RegisterStartupScript(this, typeof(string), "binhluan", scriptText, true);
                 }
                 else
                 {
-                    string scriptText = "alert('Có lỗi xảy ra '); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?#binhluan_trang'";
+                    string scriptText = "alert('Có lỗi xảy ra '); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?page=" + page_number + "#binhluan_trang'";
                     ScriptManager.RegisterStartupScript(this, typeof(string), "err", scriptText, true);
                 }
             }
         }
 
+        //chuyen tap thanh so sap xep theo so tap
+        private int Fotmat_Tap(string nameTap)
+        {
+            try
+            {
+                string NumberTap = Regex.Replace(nameTap, @"[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\-]", string.Empty);
+                double tap = double.Parse(NumberTap, System.Globalization.CultureInfo.InvariantCulture);
+                return Convert.ToInt32(tap * 10);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        private string GetNumberTap(string tentap)
+        {
+            string[] arr = tentap.Split(' ');
+            return arr[0] + arr[1];
+        }
+
         private void LoadDanhSachTap_Phim()
         {
             DsTap_Phim = null;
-            var dt = (from q in dl.DB_TAP_PHIMs where q.id_phim == infoTap_Phim.id_phim select q);
-            if (dt != null && dt.Count() > 0)
+
+            // xap sep lai list theo ten tap phim
+            var dt = (from q in dl.DB_TAP_PHIMs where q.id_phim == infoPhim.id_phim select q);
+            DsTap_Phim = dt.ToList();
+
+            for (int i = 0; i < DsTap_Phim.Count(); i++)
             {
-                DsTap_Phim = dt.ToList();
+                for (int a = 0; a < DsTap_Phim.Count() - 1; a++)
+                {
+                    if (Fotmat_Tap(GetNumberTap(DsTap_Phim[a].ten_tap_phim)) > Fotmat_Tap(GetNumberTap(DsTap_Phim[a + 1].ten_tap_phim)))
+                    {
+                        var p = DsTap_Phim[a];
+                        DsTap_Phim[a] = DsTap_Phim[a + 1];
+                        DsTap_Phim[a + 1] = p;
+                    }
+                }
             }
+
 
         }
 
         private void NextPage()
         {
-            Next = null;
 
             int IdTap_Phim = Convert.ToInt32(Page.RouteData.Values["IdTap_Phim"]);
-
-            var dt = (from q in dl.DB_TAP_PHIMs where q.id_phim == infoTap_Phim.id_phim && q.id_tap_phim > IdTap_Phim select q).Take(1);
-            if (dt.Count() > 0)
+            for (int i = 0; i < DsTap_Phim.Count; i++)
             {
-                Next = dt.First();
+                if (DsTap_Phim[i].id_tap_phim == IdTap_Phim)
+                {
+                    try
+                    {
+                        Next = DsTap_Phim[i + 1];
+                    }
+                    catch (Exception ex)
+                    {
+                        Next = null;
+                    }
+                    break;
+                }
             }
         }
 
@@ -450,6 +510,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                 if (noidung_bl == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this, typeof(string), "blthieuchu", "alert('Nội dung phản hồi không được để trống');", true);
+                    return;
                 }
                 else
                 {
@@ -460,7 +521,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                     dbcom.id_user = NguoiDungs.id_user;
                     dbcom.id_phim = infoPhim.id_phim;
                     dbcom.id_tap_phim = infoTap_Phim.id_tap_phim;
-                    dbcom.noidung_cmt = noidung_cmt;
+                    dbcom.noidung_cmt = HeThong.XoaKhoanTrangThua(noidung_cmt);
                     dbcom.id_phanhoi = id_phanhoi;
                     dbcom.created_at = DateTime.Now;
                     dbcom.updated_at = DateTime.Now;
@@ -471,7 +532,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                     string urls = "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?page=" + page_number + "#binhluan";
                     NguoiDung.ThemThongBao(Convert.ToInt32(user_binhluan), NguoiDungs.id_user, noidung, urls);
                     Random r = new Random();
-                    string scriptText = "alert('Phản hồi thành công'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?p=" + r.Next(1, 100) + "#binhluan';";
+                    string scriptText = "alert('Phản hồi thành công'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + infoTap_Phim.id_tap_phim + "?p=" + r.Next(1, 100) + "#binhluan_trang';";
                     ScriptManager.RegisterStartupScript(this, typeof(string), "binhluans", scriptText, true);
 
                 }

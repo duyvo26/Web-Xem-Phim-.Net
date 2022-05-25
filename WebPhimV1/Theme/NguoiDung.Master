@@ -1,461 +1,567 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="NguoiDung.master.cs" Inherits="WebPhimV1.Theme.NguoiDung" %>
-<%@ Register Src="~/Control_NguoiDung/UiMeta.ascx" TagPrefix="uc1" TagName="UiMeta" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="NguoiDung.master.cs" Inherits="WebPhimV1.Theme.NguoiDung" %> <%@ Register Src="~/Control_NguoiDung/UiMeta.ascx" TagPrefix="uc1" TagName="UiMeta" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-   <head runat="server">
-      <!-- Required meta tags -->
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
+    <head runat="server">
+        <!-- Required meta tags -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
 
-      <uc1:UiMeta runat="server" ID="UiMeta" />
-      <!-- CSS -->
-      <!-- Fontawesome 5-->
-      <!--thong bao-->
-      <link href="~/Public/css/notify.min.css" rel="stylesheet" />
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="~/public/frontend/css/bootstrap.min.css" />
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="~/public/frontend/css/typography.css" />
-      <!-- Style -->
-      <link rel="stylesheet" href="~/public/frontend/css/style.css" />
-      <!-- Responsive -->
-      <link rel="stylesheet" href="~/public/frontend/css/responsive.css" />
-      <link href="~/Public/css/style-mod.css" rel="stylesheet" />
-      <!--icon-->
-      <link rel="stylesheet" href="https://fontawesome.com/v4/assets/font-awesome/css/font-awesome.css" />
-      <link rel="stylesheet"href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
-      <!--icon-->
-      <!-- CSS -->
-      <asp:ContentPlaceHolder ID="head" runat="server"> </asp:ContentPlaceHolder>
-      <!-- js -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/Public/js/jquery/3.6.0/jquery.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/Public/js/bootstrap/4.3.1/bootstrap.min.js"></script>
-      <!--
+        <uc1:UiMeta runat="server" ID="UiMeta" />
+        <!-- CSS -->
+        <!-- Fontawesome 5-->
+        <!--thong bao-->
+        <link href="~/Public/css/notify.min.css" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="~/public/frontend/css/bootstrap.min.css" />
+        <!-- Typography CSS -->
+        <link rel="stylesheet" href="~/public/frontend/css/typography.css" />
+        <!-- Style -->
+        <link rel="stylesheet" href="~/public/frontend/css/style.css" />
+        <!-- Responsive -->
+        <link rel="stylesheet" href="~/public/frontend/css/responsive.css" />
+        <link href="~/Public/css/style-mod.css" rel="stylesheet" />
+        <!--icon-->
+        <link rel="stylesheet" href="https://fontawesome.com/v4/assets/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css" />
+        <!--icon-->
+        <!-- CSS -->
+        <asp:ContentPlaceHolder ID="head" runat="server"> </asp:ContentPlaceHolder>
+        <!-- js -->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/Public/js/jquery/3.6.0/jquery.min.js"></script>
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/Public/js/bootstrap/4.3.1/bootstrap.min.js"></script>
+        <!--
          <script src="<%=WebPhimV1.Code.HeThong.url() %>/Scripts/ckeditor/ckeditor.js"></script>
          <script src="<%=WebPhimV1.Code.HeThong.url() %>/Scripts/ckfinder/ckfinder.js"></script>
-        -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/Public/js/notify.js"></script>
-      <!-- js -->
-      <!-- tinymce -->
-      <script src="https://cdn.tiny.cloud/1/rdcg4mjs3nke28rr5kqe3dqfa0epd06n0m9rf2rjsp6y0bl0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-      <!-- tinymce -->
-   </head>
-   <script>
-       function addStylesheet(link) {
-           let linkToAdd =
-             document.createElement('link');
-           linkToAdd.href = link;
-           linkToAdd.rel = 'stylesheet';
-           $('head').append(linkToAdd);
-       }
-       function addJS(link) {
-           let scriptToAdd =
-             document.createElement('script');
-           scriptToAdd.type = 'text/javascript';
-           scriptToAdd.src = link;
-           $('head').append(scriptToAdd);
-       }
+         -->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/Public/js/notify.js"></script>
+        <!-- goi y the loai -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+            integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <!-- end goi y the loai -->
+        <!-- js -->
+        <!-- tinymce -->
+        <script src="https://cdn.tiny.cloud/1/rdcg4mjs3nke28rr5kqe3dqfa0epd06n0m9rf2rjsp6y0bl0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <!-- tinymce -->
+    </head>
+    <script>
+        function addStylesheet(link) {
+            let linkToAdd = document.createElement("link");
+            linkToAdd.href = link;
+            linkToAdd.rel = "stylesheet";
+            $("head").append(linkToAdd);
+        }
+        function addJS(link) {
+            let scriptToAdd = document.createElement("script");
+            scriptToAdd.type = "text/javascript";
+            scriptToAdd.src = link;
+            $("head").append(scriptToAdd);
+        }
 
-       function setCookie(cname, cvalue, exdays) {
-           const d = new Date();
-           d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-           let expires = "expires=" + d.toUTCString();
-           document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-       }
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
 
-       function getCookie(cname) {
-           let name = cname + "=";
-           let decodedCookie = decodeURIComponent(document.cookie);
-           let ca = decodedCookie.split(";");
-           for (let i = 0; i < ca.length; i++) {
-               let c = ca[i];
-               while (c.charAt(0) == " ") {
-                   c = c.substring(1);
-               }
-               if (c.indexOf(name) == 0) {
-                   return c.substring(name.length, c.length);
-               }
-           }
-           return "";
-       }
-   </script>
-   <% if (Request.Cookies["Log"] != null){ %>
-   <% if (quyen_han > 0) { %>
-   <div class="navbar_admin">
-      <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin">Quản trị viên</a>
-      <% if (quyen_han > 1) { %>
-      <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/cauhinh">Cấu hình hệ thống</a>
-      <% } %>
-      <div class="dropdown_admin">
-         <button class="dropbtn">Phim 
-         <i class="fa fa-caret-down"></i>
-         </button>
-         <div class="dropdown_admin-content">
-            <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/danhsach">Danh sách phim</a>
-            <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/themPhim">Thêm phim</a>
-         </div>
-      </div>
-   </div>
-   <style>.navbar_admin{overflow:hidden;background-color:#333}.navbar_admin a{float:left;font-size:16px;color:white;text-align:center;padding:14px 16px;text-decoration:none}.dropdown_admin{float:left;overflow:hidden}.dropdown_admin .dropbtn{font-size:16px;border:0;outline:0;color:white;padding:14px 16px;background-color:inherit;font-family:inherit;margin:0}.navbar_admin a:hover,.dropdown_admin:hover .dropbtn{background-color:red}.dropdown_admin-content{display:none;position:absolute;background-color:#f9f9f9;min-width:160px;box-shadow:0 8px 16px 0 rgba(0,0,0,0.2);z-index:1}.dropdown_admin-content a{float:none;color:black;padding:12px 16px;text-decoration:none;display:block;text-align:left}.dropdown_admin-content a:hover{background-color:#ddd}.dropdown_admin:hover .dropdown_admin-content{display:block}</style>
-   <% } %>
-   <% } %>
-   <body>
-      <!-- loader Start -->
-      <div id="loading">
-         <div id="loading-center">
-         </div>
-      </div>
-      <!-- loader END -->
-      <!-- Header -->
-      <header id="-main-header">
-         <div class="main-header">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-12">
-                     <nav class="navbar navbar-expand-lg navbar-light p-0">
-                        <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse"
-                           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                           aria-expanded="false" aria-label="Toggle navigation">
-                           <div>
-                              <h4><i class="fa fa-bars" aria-hidden="true"></i></h4>
-                           </div>
-                        </a>
-                        <!-- menu mobi -->
-                        <div class="mobile-more-menu">
-                           <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton"
-                              data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
-                              <h2><i class="ri-more-line"></i></h2>
-                           </a>
-                           <div class="more-menu" aria-labelledby="dropdownMenuButton">
-                              <div class="navbar-right position-relative">
-                                 <ul class="d-flex align-items-center justify-content-end list-inline m-0">
-                                    <!-- icon tim kiem mobi -->
-                                    <li>
-                                       <a href="<%=WebPhimV1.Code.HeThong.url() %>/timkiemPhim">
-                                          <h4>
-                                             <i class="fa fa-search" aria-hidden="true"></i>
-                                          </h4>
-                                       </a>
-                                    </li>
-                                    <% if (Request.Cookies["Log"] != null){ %>
-                                    <!-- icon thong bao mobi -->
-                                    <li class="nav-item nav-icon" style="margin: auto;">
-                                       <a href="<%=WebPhimV1.Code.HeThong.url() %>/taiKhoan/thongbao" >
-                                          <span class="badge badge-danger" style="position: absolute;font-weight: 500;margin-left: 5px;    ">
-                                             <% if(NguoiDungs != null){ %>
-                                             <div id="c_noti_mobi"></div>
-                                             <% } %>
-                                          </span>
-                                          <h4><i class="fa-solid fa-bell"></i></h4>
-                                       </a>
-                                    </li>
-                                    <% } %>
-                                    <!-- icon  nguoi dung mobi -->
-                                    <li style="margin: auto;">
-                                       <% if (Request.Cookies["Log"] != null){ %>
-                                       <span class="badge badge-success" style="position: absolute;font-weight: 500;margin-left: 5px;"><%=TaiKhoan %></span>
-                                       <% } %>
-                                       <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
-                                          data-toggle="search-toggle">
-                                          <h4><i class="fa fa-user" aria-hidden="true"></i></h4>
-                                       </a>
-                                       <div class="iq-sub-dropdown iq-user-dropdown">
-                                          <div class="iq-card shadow-none m-0">
-                                             <div class="iq-card-body p-0 pl-3 pr-3">
-                                                <% if (Request.Cookies["Log"] != null){ %>
-                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="ri-file-user-line text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0 ">Thông tin người dùng</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info?DangXuat=true" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="ri-logout-circle-line text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0 ">Đăng xuất</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                                <% } else { %>
-                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangnhap" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="ri-logout-circle-line text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0 ">Đăng nhập</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
-                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangky" class="iq-sub-card setting-dropdown">
-                                                   <div class="media align-items-center">
-                                                      <div class="right-icon">
-                                                         <i class="ri-logout-circle-line text-primary"></i>
-                                                      </div>
-                                                      <div class="media-body ml-3">
-                                                         <h6 class="mb-0 ">Đăng ký</h6>
-                                                      </div>
-                                                   </div>
-                                                </a>
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(";");
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == " ") {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+    </script>
+    <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true){ %> <% if (quyen_han > 0) { %>
+    <div class="navbar_admin">
+        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin">Quản trị viên</a>
+        <% if (quyen_han > 1) { %>
+        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/cauhinh">Cấu hình hệ thống</a>
+        <% } %>
+
+        <div class="dropdown_admin">
+            <button class="dropbtn">
+                Phim
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown_admin-content">
+                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/danhsach">Danh sách phim</a>
+                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/themPhim">Thêm phim</a>
+            </div>
+        </div>
+         <% if (quyen_han > 1) { %>
+                <div class="dropdown_admin">
+            <button class="dropbtn">
+                Người dùng
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown_admin-content">
+                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/nguoidung/danhsach">Danh sách người dùng</a>
+                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/nguoidung/them">Thêm người dùng</a>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <style>
+        .navbar_admin {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar_admin a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .dropdown_admin {
+            float: left;
+            overflow: hidden;
+        }
+        .dropdown_admin .dropbtn {
+            font-size: 16px;
+            border: 0;
+            outline: 0;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+        .navbar_admin a:hover,
+        .dropdown_admin:hover .dropbtn {
+            background-color: red;
+        }
+        .dropdown_admin-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        .dropdown_admin-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown_admin-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown_admin:hover .dropdown_admin-content {
+            display: block;
+        }
+    </style>
+    <% } %> <% } %>
+    <body>
+        <!-- loader Start -->
+        <div id="loading">
+            <div id="loading-center"></div>
+        </div>
+        <!-- loader END -->
+        <!-- Header -->
+        <header id="-main-header">
+            <div class="main-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                                <a href="#" class="navbar-toggler c-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <div>
+                                        <h4><i class="fa fa-bars" aria-hidden="true"></i></h4>
+                                    </div>
+                                </a>
+                                <!-- menu mobi -->
+                                <div class="mobile-more-menu">
+                                    <a href="javascript:void(0);" class="more-toggle" id="dropdownMenuButton" data-toggle="more-toggle" aria-haspopup="true" aria-expanded="false">
+                                        <h2><i class="ri-more-line"></i></h2>
+                                    </a>
+                                    <div class="more-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="navbar-right position-relative">
+                                            <ul class="d-flex align-items-center justify-content-end list-inline m-0">
+                                                <!-- icon tim kiem mobi -->
+                                                <li>
+                                                    <a href="<%=WebPhimV1.Code.HeThong.url() %>/timkiemPhim">
+                                                        <h4>
+                                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                                        </h4>
+                                                    </a>
+                                                </li>
+                                                <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true){ %>
+                                                <!-- icon thong bao mobi -->
+                                                <li class="nav-item nav-icon" style="margin: auto;">
+                                                    <a href="<%=WebPhimV1.Code.HeThong.url() %>/taiKhoan/thongbao">
+                                                        <span class="badge badge-danger" style="position: absolute; font-weight: 500; margin-left: 5px;">
+                                                            <% if(NguoiDungs != null){ %>
+                                                            <div id="c_noti_mobi"></div>
+                                                            <% } %>
+                                                        </span>
+                                                        <h4><i class="fa-solid fa-bell"></i></h4>
+                                                    </a>
+                                                </li>
                                                 <% } %>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                        <a class="navbar-brand" href="<%=WebPhimV1.Code.HeThong.url() %>">
-                           <center>
-                              <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" class="img-fluid logo" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/logo/<%=listCauHinh.logo_web %>"
-                                 alt="streamit" />
-                           </center>
-                        </a>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                           <div class="menu-main-menu-container">
-                              <ul id="top-menu" class="navbar-nav ml-auto">
-                                 <li class="menu-item">
-                                    <a style="font-size: 22px;margin-top: 5px;" href="<%=WebPhimV1.Code.HeThong.url() %>">Trang chủ</a>
-                                 </li>
-                                 <li class="menu-item dropdown">
-                                    <a style="font-size: 22px;margin-top: 5px;" href="#" onmouseover="LoadViewTheLoai()" onclick=" LoadViewTheLoai()">Thể loại</a>
-                                    <div class="dropdown-content">
-                                       <div id="loadViewTL"></div>
-                                       <script>
-                                          
-                                           function LoadViewTheLoai() {
-                                               $.ajax({
-                                                   data: { theloai: 'true' },
-                                                   url: '/Code/ashx/LoadTheLoaiClick.ashx',
-                                                   type: 'GET',
-                                                   success: function (data) {
-                                                       document.getElementById('loadViewTL').innerHTML = data.str_theloai;
-
-                                                   }
-                                               });
-                                           }
-                                       </script>
+                                                <!-- icon  nguoi dung mobi -->
+                                                <li style="margin: auto;">
+                                                    <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true){ %>
+                                                    <span class="badge badge-success" style="position: absolute; font-weight: 500; margin-left: 5px;"><%=TaiKhoan %></span>
+                                                    <% } %>
+                                                    <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center" data-toggle="search-toggle">
+                                                        <h4><i class="fa fa-user" aria-hidden="true"></i></h4>
+                                                    </a>
+                                                    <div class="iq-sub-dropdown iq-user-dropdown">
+                                                        <div class="iq-card shadow-none m-0">
+                                                            <div class="iq-card-body p-0 pl-3 pr-3">
+                                                                <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true){ %>
+                                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info" class="iq-sub-card setting-dropdown">
+                                                                    <div class="media align-items-center">
+                                                                        <div class="right-icon">
+                                                                            <i class="ri-file-user-line text-primary"></i>
+                                                                        </div>
+                                                                        <div class="media-body ml-3">
+                                                                            <h6 class="mb-0">Thông tin người dùng</h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info?DangXuat=true" class="iq-sub-card setting-dropdown">
+                                                                    <div class="media align-items-center">
+                                                                        <div class="right-icon">
+                                                                            <i class="ri-logout-circle-line text-primary"></i>
+                                                                        </div>
+                                                                        <div class="media-body ml-3">
+                                                                            <h6 class="mb-0">Đăng xuất</h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <% } else { %>
+                                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangnhap" class="iq-sub-card setting-dropdown">
+                                                                    <div class="media align-items-center">
+                                                                        <div class="right-icon">
+                                                                            <i class="ri-logout-circle-line text-primary"></i>
+                                                                        </div>
+                                                                        <div class="media-body ml-3">
+                                                                            <h6 class="mb-0">Đăng nhập</h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangky" class="iq-sub-card setting-dropdown">
+                                                                    <div class="media align-items-center">
+                                                                        <div class="right-icon">
+                                                                            <i class="ri-logout-circle-line text-primary"></i>
+                                                                        </div>
+                                                                        <div class="media-body ml-3">
+                                                                            <h6 class="mb-0">Đăng ký</h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <% } %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                 </li>
-                                 <li class="menu-item dropdown">
-                                    <a style="font-size: 22px;margin-top: 5px;" href="#">Năm</a>
-                                    <div class="dropdown-content">
-                                       <% for(int i = 1980 ; i <= DateTime.Now.Year; i++){ %>
-                                       <p><a style="line-height: 0px;" href="<%=WebPhimV1.Code.HeThong.url() %>/timkiemPhim?page=0&TenPhim=<%= i %>">Năm <%= i%></a></p>
-                                       <% } %>
+                                </div>
+                                <a class="navbar-brand" href="<%=WebPhimV1.Code.HeThong.url() %>">
+                                    <center>
+                                        <img
+                                            onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';"
+                                            class="img-fluid logo"
+                                            src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/logo/<%=listCauHinh.logo_web %>"
+                                            alt="streamit"
+                                        />
+                                    </center>
+                                </a>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <div class="menu-main-menu-container">
+                                        <ul id="top-menu" class="navbar-nav ml-auto">
+                                            <li class="menu-item">
+                                                <a style="font-size: 22px; margin-top: 5px;" href="<%=WebPhimV1.Code.HeThong.url() %>">Trang chủ</a>
+                                            </li>
+                                            <li class="menu-item dropdown">
+                                                <a class="dropdown-toggle" style="font-size: 22px; margin-top: 5px;" href="#" onmouseover="LoadViewTheLoai()" onclick=" LoadViewTheLoai()">Thể loại</a>
+                                                <div class="dropdown-content">
+                                                    <div id="loadViewTL"></div>
+                                                    <script>
+                                                        function LoadViewTheLoai() {
+                                                            $.ajax({
+                                                                data: { theloai: "true" },
+                                                                url: "/Code/ashx/LoadTheLoaiClick.ashx",
+                                                                type: "GET",
+                                                                success: function (data) {
+                                                                    document.getElementById("loadViewTL").innerHTML = data.str_theloai;
+                                                                },
+                                                            });
+                                                        }
+                                                    </script>
+                                                </div>
+                                            </li>
+                                            <li class="menu-item dropdown">
+                                                <a class="dropdown-toggle" style="font-size: 22px; margin-top: 5px;" href="#">Năm</a>
+                                                <div class="dropdown-content">
+                                                    <% for (int i = DateTime.Now.Year; i >= 1990; i--) { %>
+                                                    <p><a style="line-height: 0px;" href="<%=WebPhimV1.Code.HeThong.url() %>/timkiemPhim?page=0&TenPhim=<%= i %>">Năm <%= i%></a></p>
+                                                    <% } %>
+                                                </div>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a style="font-size: 22px; margin-top: 5px;" href="<%=WebPhimV1.Code.HeThong.url() %>/napcoin">Liên hệ - Nạp tiền</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                 </li>
-                                 <li class="menu-item">
-                                    <a style="font-size: 22px;margin-top: 5px;" href="<%=WebPhimV1.Code.HeThong.url() %>/napcoin">Liên hệ</a>
-                                 </li>
-                              </ul>
-                           </div>
+                                </div>
+                                <!-- menu pc -->
+                                <div class="navbar-right menu-right">
+                                    <ul class="d-flex align-items-center list-inline m-0">
+                                        <!-- icon tim kiem pc -->
+                                        <li class="nav-item nav-icon" style="margin-left: 20px; margin-right: 20px;">
+                                            <a href="<%=WebPhimV1.Code.HeThong.url() %>/timkiemPhim">
+                                                <h4>
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                </h4>
+                                            </a>
+                                        </li>
+                                        <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true){ %>
+                                        <!-- thong bao pc -->
+                                        <li class="nav-item nav-icon" style="margin-left: 20px; margin-right: 20px;">
+                                            <a href="<%=WebPhimV1.Code.HeThong.url() %>/taiKhoan/thongbao">
+                                                <span class="badge badge-danger" style="position: absolute; font-weight: 500; margin-left: 5px;">
+                                                    <% if(NguoiDungs != null){ %>
+                                                    <div id="c_noti"></div>
+                                                    <% } %>
+                                                </span>
+                                                <h4><i class="fa-solid fa-bell"></i></h4>
+                                            </a>
+                                        </li>
+                                        <% } %>
+                                        <!-- icon nguoi dung pc -->
+                                        <li class="nav-item nav-icon" style="margin-left: 20px; margin-right: 20px;">
+                                            <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true){ %>
+                                            <span class="badge badge-success" style="position: absolute; font-weight: 500; margin-left: 5px;"><%=TaiKhoan %></span>
+                                            <% } %>
+                                            <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center" data-toggle="search-toggle">
+                                                <h4><i class="fa fa-user" aria-hidden="true"></i></h4>
+                                            </a>
+                                            <div class="iq-sub-dropdown iq-user-dropdown">
+                                                <div class="iq-card shadow-none m-0">
+                                                    <div class="iq-card-body p-0 pl-3 pr-3">
+                                                        <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true){ %>
+                                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info" class="iq-sub-card setting-dropdown">
+                                                            <div class="media align-items-center">
+                                                                <div class="right-icon">
+                                                                    <i class="ri-file-user-line text-primary"></i>
+                                                                </div>
+                                                                <div class="media-body ml-3">
+                                                                    <h6 class="mb-0">Thông tin người dùng</h6>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info?DangXuat=true" class="iq-sub-card setting-dropdown">
+                                                            <div class="media align-items-center">
+                                                                <div class="right-icon">
+                                                                    <i class="ri-logout-circle-line text-primary"></i>
+                                                                </div>
+                                                                <div class="media-body ml-3">
+                                                                    <h6 class="mb-0">Đăng xuất</h6>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <% } else { %>
+                                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangnhap" class="iq-sub-card setting-dropdown">
+                                                            <div class="media align-items-center">
+                                                                <div class="right-icon">
+                                                                    <i class="ri-logout-circle-line text-primary"></i>
+                                                                </div>
+                                                                <div class="media-body ml-3">
+                                                                    <h6 class="mb-0">Đăng nhập</h6>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangky" class="iq-sub-card setting-dropdown">
+                                                            <div class="media align-items-center">
+                                                                <div class="right-icon">
+                                                                    <i class="ri-logout-circle-line text-primary"></i>
+                                                                </div>
+                                                                <div class="media-body ml-3">
+                                                                    <h6 class="mb-0">Đăng ký</h6>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="nav-overlay"></div>
                         </div>
-                        <!-- menu pc -->
-                        <div class="navbar-right menu-right">
-                           <ul class="d-flex align-items-center list-inline m-0">
-                              <!-- icon tim kiem pc -->
-                              <li class="nav-item nav-icon"  style="margin-left: 20px;margin-right: 20px;">
-                                 <a href="<%=WebPhimV1.Code.HeThong.url() %>/timkiemPhim">
-                                    <h4>
-                                       <i class="fa fa-search" aria-hidden="true"></i>
-                                    </h4>
-                                 </a>
-                              </li>
-                              <% if (Request.Cookies["Log"] != null){ %>
-                              <!-- thong bao pc -->
-                              <li class="nav-item nav-icon"  style="margin-left: 20px;margin-right: 20px;">
-                                 <a href="<%=WebPhimV1.Code.HeThong.url() %>/taiKhoan/thongbao" >
-                                    <span class="badge badge-danger" style="position: absolute;font-weight: 500;margin-left: 5px;    ">
-                                       <% if(NguoiDungs != null){ %>
-                                       <div id="c_noti"></div>
-                                       <% } %>
-                                    </span>
-                                    <h4><i class="fa-solid fa-bell"></i></h4>
-                                 </a>
-                              </li>
-                              <% } %>
-                              <!-- icon nguoi dung pc -->
-                              <li class="nav-item nav-icon"  style="margin-left: 20px;margin-right: 20px;">
-                                 <% if (Request.Cookies["Log"] != null){ %>
-                                 <span class="badge badge-success" style="position: absolute;font-weight: 500;margin-left: 5px;"><%=TaiKhoan %></span>
-                                 <% } %>
-                                 <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center"
-                                    data-toggle="search-toggle">
-                                    <h4><i class="fa fa-user" aria-hidden="true"></i></h4>
-                                 </a>
-                                 <div class="iq-sub-dropdown iq-user-dropdown">
-                                    <div class="iq-card shadow-none m-0">
-                                       <div class="iq-card-body p-0 pl-3 pr-3">
-                                          <% if (Request.Cookies["Log"] != null){ %>
-                                          <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info" class="iq-sub-card setting-dropdown">
-                                             <div class="media align-items-center">
-                                                <div class="right-icon">
-                                                   <i class="ri-file-user-line text-primary"></i>
-                                                </div>
-                                                <div class="media-body ml-3">
-                                                   <h6 class="mb-0 ">Thông tin người dùng</h6>
-                                                </div>
-                                             </div>
-                                          </a>
-                                          <a href="<%=WebPhimV1.Code.HeThong.url() %>/taikhoan/info?DangXuat=true" class="iq-sub-card setting-dropdown">
-                                             <div class="media align-items-center">
-                                                <div class="right-icon">
-                                                   <i class="ri-logout-circle-line text-primary"></i>
-                                                </div>
-                                                <div class="media-body ml-3">
-                                                   <h6 class="mb-0 ">Đăng xuất</h6>
-                                                </div>
-                                             </div>
-                                          </a>
-                                          <% } else { %>
-                                          <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangnhap" class="iq-sub-card setting-dropdown">
-                                             <div class="media align-items-center">
-                                                <div class="right-icon">
-                                                   <i class="ri-logout-circle-line text-primary"></i>
-                                                </div>
-                                                <div class="media-body ml-3">
-                                                   <h6 class="mb-0 ">Đăng nhập</h6>
-                                                </div>
-                                             </div>
-                                          </a>
-                                          <a href="<%=WebPhimV1.Code.HeThong.url() %>/dangky" class="iq-sub-card setting-dropdown">
-                                             <div class="media align-items-center">
-                                                <div class="right-icon">
-                                                   <i class="ri-logout-circle-line text-primary"></i>
-                                                </div>
-                                                <div class="media-body ml-3">
-                                                   <h6 class="mb-0 ">Đăng ký</h6>
-                                                </div>
-                                             </div>
-                                          </a>
-                                          <% } %>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                           </ul>
-                        </div>
-                     </nav>
-                     <div class="nav-overlay"></div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </header>
-      <!-- Header End -->
-      <form id="form1" runat="server">
-         <asp:ContentPlaceHolder ID="PhanNoiDung" runat="server"> </asp:ContentPlaceHolder>
-      </form>
-      <footer class="mb-0" style="margin-top: 50px" id="footer">
-         <div class="container-fluid">
-            <div class="block-space">
-               <div class="row">
-                  <div class="col-lg-3 col-md-4">
-                     <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#footer">Liên hệ</a></li>
-                        <li><a href="mailto:<%= listCauHinh.email_lh %>"><i class="fa-solid fa-envelope-open-text"></i>&nbsp;<%= listCauHinh.email_lh %></a></li>
-                        <li><a href="#"><i class="fa-solid fa-location-dot"></i>&nbsp;<%= listCauHinh.diachi_lh %></a></li>
-                        <li><a href="tel:<%= listCauHinh.sdt_lh %>"><i class="fa-solid fa-phone"></i>&nbsp;<%= listCauHinh.sdt_lh %></a></li>
-                     </ul>
-                  </div>
-                  <div class="col-lg-3 col-md-4">
-                     <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#footer">Mạng xã hỗi</a></li>
-                        <li><a href="<%= listCauHinh.lh_zalo %>"><i class="fa-solid fa-globe"></i>&nbsp;Zalo</a></li>
-                        <li><a href="<%= listCauHinh.lh_fb %>"><i class="fa-brands fa-facebook"></i>&nbsp;Facebook</a></li>
-                     </ul>
-                  </div>
-                  <div class="col-lg-3 col-md-4">
-                     <ul class="f-link list-unstyled mb-0">
-                        <li><a href="<%=WebPhimV1.Code.HeThong.url() %>/napcoin">Nạp coin</a></li>
-                        <li><a href="<%=WebPhimV1.Code.HeThong.url() %>/thongtin">Thông tin trang</a></li>
-                     </ul>
-                  </div>
-                  <div class="col-lg-3 col-md-12 r-mt-15" style="max-width: 300px;">
-                     <%=listCauHinh.Fb_page %>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="copyright py-2">
+        </header>
+        <!-- Header End -->
+        <form id="form1" runat="server">
+            <asp:ContentPlaceHolder ID="PhanNoiDung" runat="server"> </asp:ContentPlaceHolder>
+        </form>
+        <footer class="mb-0" style="margin-top: 50px;" id="footer">
             <div class="container-fluid">
-               <p class="mb-0 text-center font-size-14 text-body"> <%=listCauHinh.copyright %></p>
+                <div class="block-space">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4">
+                            <ul class="f-link list-unstyled mb-0">
+                                <li><a href="#footer">Liên hệ</a></li>
+                                <li>
+                                    <a href="mailto:<%= listCauHinh.email_lh %>"><i class="fa-solid fa-envelope-open-text"></i>&nbsp;<%= listCauHinh.email_lh %></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa-solid fa-location-dot"></i>&nbsp;<%= listCauHinh.diachi_lh %></a>
+                                </li>
+                                <li>
+                                    <a href="tel:<%= listCauHinh.sdt_lh %>"><i class="fa-solid fa-phone"></i>&nbsp;<%= listCauHinh.sdt_lh %></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                            <ul class="f-link list-unstyled mb-0">
+                                <li><a href="#footer">Mạng xã hỗi</a></li>
+                                <li>
+                                    <a href="<%= listCauHinh.lh_zalo %>"><i class="fa-solid fa-globe"></i>&nbsp;Zalo</a>
+                                </li>
+                                <li>
+                                    <a href="<%= listCauHinh.lh_fb %>"><i class="fa-brands fa-facebook"></i>&nbsp;Facebook</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                            <ul class="f-link list-unstyled mb-0">
+                                <li><a href="<%=WebPhimV1.Code.HeThong.url() %>/napcoin">Nạp coin</a></li>
+                                <li><a href="<%=WebPhimV1.Code.HeThong.url() %>/thongtin">Thông tin trang</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-12 r-mt-15" style="max-width: 300px;">
+                            <%=listCauHinh.Fb_page %>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </footer>
-      <!-- MainContent End-->
-      <!-- back-to-top -->
-      <div id="back-to-top">
-         <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
-      </div>
-      <!-- Thong bao -->
-      <!-- back-to-top End -->
-      <!-- js -->
+            <div class="copyright py-2">
+                <div class="container-fluid">
+                    <p class="mb-0 text-center font-size-14 text-body"><%=listCauHinh.copyright %></p>
+                </div>
+            </div>
+        </footer>
+        <!-- MainContent End-->
+        <!-- back-to-top -->
+        <div id="back-to-top">
+            <a class="top" href="#top" id="top"> <i class="fa fa-angle-up"></i> </a>
+        </div>
+        <!-- Thong bao -->
+        <!-- back-to-top End -->
+        <!-- js -->
+        <script>
+            <% if(NguoiDungs != null) { %>
+            var id = "<%= NguoiDungs.id_user %>";
+            <% } %>
+              <% if(NguoiDungs == null) { %>
+            var id = "";
+              <% } %>
+            var noti_sum_old = "";
 
-      <script>
-          var id = '<%= NguoiDungs.id_user %>';
-          var noti_sum_old = "";
-         
-          setInterval(function () {
-              if (id != '0') {
-                  Load_Noti_Sum();
-              }
-              }, 1000);
+            setInterval(function () {
+                if (id != "0") {
+                    Load_Noti_Sum();
+                }
+            }, 1000);
+
+            function push_noti(sum_noti, txt) {
+                if (getCookie("noti") - sum_noti != 0) {
+                    setCookie("noti", sum_noti, 30);
+                    if (txt != "") {
+                        notify("info", "Thông báo", txt);
+                    }
+                }
+            }
+
+            function Load_Noti_Sum() {
+                if (id != "") {
+                    $.ajax({
+                        data: { id_user: id },
+                        url: "/Code/ashx/GetNoti.ashx",
+                        type: "GET",
+                        success: function (data) {
+                            try {
+                                document.getElementById("c_noti").innerHTML = data.sum_noti;
+                                document.getElementById("c_noti_mobi").innerHTML = data.sum_noti;
+                                push_noti(data.sum_noti, data.noti);
+                            } catch (e) {
+                                // statements to handle any exceptions
+                            }
+                        },
+                    });
+                }
+
+            }
+            <% if(quyen_han != 2){ %>
+            CauHinh();
+            <% } %>
+            function CauHinh() {
+                // disable right click
+                $(document).bind("contextmenu", function (e) {
+                    return false;
+                });
+                // disable ctl +v and v
+                $('body').bind('cut copy', function (e) {
+                    e.preventDefault();
+                });
 
 
-          function push_noti(sum_noti, txt) {
-              if (getCookie("noti") - sum_noti != 0) {
-                  setCookie("noti", sum_noti, 30);
-                  if (txt != "") {
-                      notify('info', 'Thông báo', txt);
-                  }
-              }
-          }
-
-          function Load_Noti_Sum() {
-              $.ajax({
-                  data: { id_user: id },
-                  url: '/Code/ashx/GetNoti.ashx',
-                  type: 'GET',
-                  success: function (data) {
-                      try {
-                          document.getElementById("c_noti").innerHTML = data.sum_noti;
-                          document.getElementById("c_noti_mobi").innerHTML = data.sum_noti;
-                          push_noti(data.sum_noti, data.noti);
-                      } catch (e) {
-                          // statements to handle any exceptions
-                      }
-                  }
-              });
-          }
-
-
-      </script>
-      <!-- js -->
-      <!-- jQuery, Popper JS -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/popper.min.js"></script>
-      <!-- Bootstrap JS -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/bootstrap.min.js"></script>
-      <!-- Slick JS -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/slick.min.js"></script>
-      <!-- owl carousel Js -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/owl.carousel.min.js"></script>
-      <!-- select2 Js -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/select2.min.js"></script>
-      <!-- Magnific Popup-->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/jquery.magnific-popup.min.js"></script>
-      <!-- Slick Animation-->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/slick-animation.min.js"></script>
-      <!-- Custom JS-->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/custom.js"></script>
+            }
+        </script>
+        <
+        <!-- js -->
+        <!-- jQuery, Popper JS -->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/popper.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/bootstrap.min.js"></script>
+        <!-- Slick JS -->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/slick.min.js"></script>
+        <!-- owl carousel Js -->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/owl.carousel.min.js"></script>
+        <!-- select2 Js -->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/select2.min.js"></script>
+        <!-- Magnific Popup-->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/jquery.magnific-popup.min.js"></script>
+        <!-- Slick Animation-->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/slick-animation.min.js"></script>
+        <!-- Custom JS-->
+        <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/custom.js"></script>
+        <script src="<%= WebPhimV1.Code.HeThong.url() %>/public/js/showmoreless.js"></script>
+    </body>
+</html>

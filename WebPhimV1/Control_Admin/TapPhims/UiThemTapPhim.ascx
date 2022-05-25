@@ -176,6 +176,7 @@
                      contentType: false,
                      processData: false,
                      success: function (file) {
+                         document.getElementById("add_phim").disabled = false;
                          $("#fileProgress").hide();
                          var link_old = document.getElementById("txt_name").value;
                          if (link_old != "") {
@@ -191,14 +192,22 @@
                      },
                      xhr: function () {
                          var fileXhr = $.ajaxSettings.xhr();
+                         
                          if (fileXhr.upload) {
+                             document.getElementById("add_phim").disabled = true;
                              $("progress").show();
                              fileXhr.upload.addEventListener("progress", function (e) {
+                                 // dat goi gan upload
                                  if (e.lengthComputable) {
-                                     $("#fileProgress").attr({
-                                         value: e.loaded,
-                                         max: e.total
-                                     });
+                                     if (e.total < 2000000000) {
+                                         $("#fileProgress").attr({
+                                             value: e.loaded,
+                                             max: e.total
+                                         });
+                                     } else {
+                                         $("progress").hide();
+                                         fileXhr.abort();
+                                     }
                                  }
                              }, false);
                          }
@@ -209,7 +218,7 @@
          </script>
       </div>
       <div class="d-flex justify-content-end" style="margin-bottom:5px;margin-right:5px">
-         <input type="submit" class="btn btn-dark" onclick="TangsoTapClick()" name="btn" value="Thêm tập phim">
+         <input type="submit" id="add_phim" class="btn btn-dark" onclick="TangsoTapClick()" name="btn" value="Thêm tập phim">
       </div>
    </form>
    <!-- End nội dung -->

@@ -173,7 +173,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="bi bi-file-earmark-ppt"></i></span>
                         </div>
-                        <textarea class="form-control" name="fb_chat" rows="3">
+                        <textarea class="form-control" name="fb_chat" rows="6">
                        <%=HeThongs.Fb_mess %>
 
                         </textarea>
@@ -189,7 +189,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="bi bi-file-earmark-ppt"></i></span>
                         </div>
-                        <textarea class="form-control" name="fb_page" rows="3">
+                        <textarea class="form-control" name="fb_page" rows="6">
                        <%=HeThongs.Fb_page %>
 
                         </textarea>
@@ -203,7 +203,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="bi bi-file-earmark-ppt"></i></span>
                         </div>
-                        <textarea class="form-control" name="fb_Comment" rows="3">
+                        <textarea class="form-control" name="fb_Comment" rows="6">
                        <%=HeThongs.Cm_FB %>
 
                         </textarea>

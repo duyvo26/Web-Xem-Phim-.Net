@@ -13,15 +13,12 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
 
-        public static DB_USER NguoiDungs = new DB_USER();
-        public static int page_number = 0; // trang thu n
-        public static int SumPage = 0;
-        public static List<LayThuVienDocResult> ThuVien = new List<LayThuVienDocResult>();
+        public  DB_USER NguoiDungs = new DB_USER();
+        public  int page_number = 0; // trang thu n
+        public static  int SumPage = 0;
+        public  List<LayThuVienDocResult> ThuVien = new List<LayThuVienDocResult>();
 
-        protected void RutGon_TieuDe(string a, int b)
-        {
-            Response.Write(Phim.RutGon(a, b));
-        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,7 +39,7 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
                 }
                 catch (Exception err)
                 {
-                    string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
+                    string url = "~/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
                     Response.Redirect(url);
                 }
             }
@@ -50,19 +47,21 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
         //load thong tin người dùng
         private void LoadThongTinNguoiDung()
         {
-            String MaKhoa = "";
-            MaKhoa = Request.Cookies["Log"].Value;
-            NguoiDungs = null;
-            var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+            NguoiDungs = Theme.NguoiDung.NguoiDungs;
 
-            if (dt != null)
-            {
-                NguoiDungs = dt.FirstOrDefault();
-            }
-            else
-            {
-                NguoiDungs = null;
-            }
+           // String MaKhoa = "";
+           // MaKhoa = Request.Cookies["Log"].Value;
+           // NguoiDungs = null;
+           // var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q);
+
+           // if (dt != null)
+           // {
+           //     NguoiDungs = dt.FirstOrDefault();
+           // }
+           // else
+            //{
+            //    NguoiDungs = null;
+            //}
         }
 
         public DateTime GetDateTimeTV(int id_tap_phim)

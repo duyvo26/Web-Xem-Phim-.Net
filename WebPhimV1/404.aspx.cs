@@ -11,37 +11,25 @@ namespace WebPhimV1
 {
     public partial class _404 : System.Web.UI.Page
     {
-
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
         public static DB_CAUHINH HeThongs = new DB_CAUHINH();
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                LoadHeThong();
-                ghi_loi();
-            }
-            catch
-            {
-                
-            }
+            LoadHeThong();
+            ghi_loi();
         }
-
-
-
 
         private void LoadHeThong()
         {
+            HeThongs = WebPhimV1.Theme.NguoiDung.listCauHinh;
 
-            var dt = (from q in dl.DB_CAUHINHs select q);
+             var dt = (from q in dl.DB_CAUHINHs select q);
 
-            if (dt != null)
+             if (dt != null)
             {
-                HeThongs = dt.First();
-            }
-
+               HeThongs = dt.First();
+             }
         }
 
         private void ghi_loi()
@@ -53,10 +41,15 @@ namespace WebPhimV1
                 string err_old = SR.ReadLine();
                 SR.Close();
 
-                string err = Request.QueryString["err"].ToString();
-                string vitri = Request.QueryString["vitri"].ToString();
-                string tenloi = Request.QueryString["tenloi"].ToString();
-
+                string err = Request
+                                 .QueryString["err"]
+                                 .ToString();
+                string vitri = Request
+                                   .QueryString["vitri"]
+                                   .ToString();
+                string tenloi = Request
+                                    .QueryString["tenloi"]
+                                    .ToString();
 
                 if (tenloi == "Object reference not set to an instance of an object.")
                 {
@@ -65,17 +58,13 @@ namespace WebPhimV1
 
                 StreamWriter SW = new StreamWriter(path);
                 SW.Flush();
-                string str = "<p>" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "| Vi tri: " + vitri + "| Ten loi: " + tenloi + "<br>" + err_old + "</p>";
+                string str = "<p>" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") +
+                             "| Vi tri: " + vitri + "| Ten loi: " + tenloi + "<br>" +
+                             err_old + "</p>";
                 SW.WriteLineAsync(str);
                 SW.Close();
-
-
             }
-
-
         }
 
-
-
-    }//
+    }  //
 }

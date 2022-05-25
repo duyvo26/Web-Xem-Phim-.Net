@@ -8,7 +8,7 @@
    position: inherit;
    }
 </style>
-<section class="banner-wrapper iq-main-slider" style="background-position: center; background-image: url(<%=WebPhimV1.Code.HeThong.url() %>/public/img/Phim/<%=infoPhim.img_phim %>)">
+<section class="banner-wrapper iq-main-slider" style="background-size: cover; background-position: top; background-image: url(<%=WebPhimV1.Code.HeThong.url() %>/public/img/Phim/<%=infoPhim.img_phim %>)">
    <div class="banner-caption">
       <!--
          <ul class="list-inline p-0 m-0 share-icons music-play-lists">
@@ -56,7 +56,7 @@
                <div class="position-relative mb-4">
                   <!-- -->
                   <% if (checkthuvien != null && WebPhimV1.Code.NguoiDung.CheckLogin() == true) { %>
-                  <a href="<%= infoPhim.link_raw + "-" + infoPhim.id_phim + "/" + GetDangDoc() %>" style="color: white">
+                  <a href="<%= infoPhim.link_raw + '-' + infoPhim.id_phim + '/' + GetDangDoc() %>" style="color: white">
                      <div class="d-flex align-items-center">
                         <div class="play-button">
                            <i class="fa fa-play"></i>
@@ -122,27 +122,31 @@
                </div>
                <!-- end nut them -->
                <h4 class="trending-text text-uppercase mt-0"><%=infoPhim.ten_phim %></h4>
-                <div>
-                                   <%
-                  //DG = Math.Truncate(DG);
-                  for (int i = 0; i < 5; i++) { %>
-               <% if (ListTap_Phim != null)
+               <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true)
                   { %>
-               <a class="vote" href="?danhgia=<%=i+1 %>"  <% if (Request.Cookies["Log"] == null){ %> onclick="alert('Vui lòng đăng nhập'); return false;" <% } %> >
-               <% } %>
-               <%  if (i >= DG)
+               <% if (WebPhimV1.Theme.NguoiDung.quyen_han > 0)
                   { %>
-               <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/star-shape.png" width="25"/>  
-               <% } else if(DG > i && DG < i + 1) {%>
-               <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/rating.png" width="25"/>  
-               <% } else { %>
-               <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/astar.png" width="25" />
-               <% } %>
-               </a>
-               <%  }
-                  %>
-                &nbsp;&nbsp;<%= DanhGia %> từ <%= NguoiDanhGia %> Lượt đánh giá
-                </div>
+               <a href="<%=WebPhimV1.Code.HeThong.url()%>/cp-admin/Phim/capnhat-<%= infoPhim.id_phim%>" class="edit-icon text-primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Thông tin phim</a>
+               <% }
+                  } %>
+               <div>
+                  <% for (int i = 0; i < 5; i++) { %>
+                  <% if (ListTap_Phim != null)
+                     { %>
+                  <a class="vote" href="?danhgia=<%=i+1 %>"  <% if (Request.Cookies["Log"] == null){ %> onclick="alert('Vui lòng đăng nhập'); return false;" <% } %> >
+                  <% } %>
+                  <%  if (i >= DG)
+                     { %>
+                  <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/star-shape.png" width="25"/>  
+                  <% } else if(DG > i && DG < i + 1) {%>
+                  <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/rating.png" width="25"/>  
+                  <% } else { %>
+                  <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/astar.png" width="25" />
+                  <% } %>
+                  </a>
+                  <%  } %>
+                  &nbsp;&nbsp;<%= DanhGia %> từ <%= NguoiDanhGia %> Lượt đánh giá
+               </div>
                <ul style="margin-top: 10px" class="movie-content">
                   Thể loại:&nbsp;
                   <% for (int i = 0; i < PhimTL.Count; i++)
@@ -172,10 +176,13 @@
                      <%=infoPhim.nam_sx %>
                      </a>
                   </li>
+                  <li class="ml-3">Cập nhật lần cuối:&nbsp;
+                     <%= WebPhimV1.Code.HeThong.TinhThoiGian(infoPhim.updated_at) %>
+                  </li>
                   <li class="ml-3">Số tập:&nbsp;
                      <%= SumTap_Phim %>
                   </li>
-                  <li class="ml-3">Lượt xem:&nbsp;<i class="fa fa-eye" aria-hidden="true"> <%=LuotXem %></i>
+                  <li class="ml-3">Lượt xem:&nbsp;<%=LuotXem %>&nbsp;<i class="fa fa-eye" aria-hidden="true"></i>
                   </li>
                </div>
             </div>
@@ -195,6 +202,13 @@
          </li>
       </ul>
       <div class="tab-content">
+         <% if (WebPhimV1.Code.NguoiDung.CheckLogin() == true)
+            { %>
+         <% if (WebPhimV1.Theme.NguoiDung.quyen_han > 0)
+            { %>
+         <a href="<%=WebPhimV1.Code.HeThong.url()%>/cp-admin/tap-phim/danhsach-<%= infoPhim.id_phim%>" class="text-primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Danh sách tập phim</a>
+         <% }
+            } %>
          <!-- danh sach tap -->
          <div id="danhsachTap_Phim" class="tab-pane fade active show" role="tabpanel">
             <div class="block-space">
@@ -237,53 +251,9 @@
                   <% }  %>
                </div>
                <!-- phan trang -->
-               <div class="d-flex justify-content-center">
-                  <nav aria-label="Page navigation example">
-                     <ul class="pagination">
-                        <%if (ListTap_Phim != null)
-                           { %>
-                        <%if( page_number == 0){ %>
-                        <li class="page-item active"><a class="page-link" href="?&page=0#danhsachTap_Phim">0</a></li>
-                        <% }else{ %>
-                        <li class="page-item"><a class="page-link" href="?&page=0#danhsachTap_Phim">0</a></li>
-                        <% }  %>
-                        <%if (page_number != 0 && page_number - 4 >= 0)
-                           { %>
-                        <li class="page-item"><a class="page-link" href="?&page=<%=page_number - 1 %>#danhsachTap_Phim">...</a></li>
-                        <% }  %>
-                        <% if (ListTap_Phim.Count > 0 && SumPage > 0)
-                           {
-                               for (int i = page_number; i <= page_number + 3; i++)
-                               { %>
-                        <%if (i == 0 || i == SumPage || i > SumPage) { continue; } %>
-                        <%if (i - 3 > page_number)
-                           { %>
-                        <li class="page-item "><a class="page-link" href="?&page=<%= i - 3  %>#danhsachTap_Phim"><%= i - 3 %></a></li>
-                        <%} else{ %>
-                        <%if(i == page_number){ %>
-                        <li class="page-item active"><a class="page-link" href="?&page=<%=i %>#danhsachTap_Phim"><%= i %></a></li>
-                        <% }else{ %>
-                        <li class="page-item"><a class="page-link" href="?&page=<%=i %>#danhsachTap_Phim"><%= i %></a></li>
-                        <% }  %>
-                        <%} %>
-                        <% }  %>
-                        <%if (page_number < SumPage - 3)
-                           { %>
-                        <li class="page-item"><a class="page-link" href="?&page=<%=page_number + 4 %>#danhsachTap_Phim">...</a></li>
-                        <% }  %>
-                        <%} %>
-                        <%if (page_number != SumPage)  { %>
-                        <%if (page_number == SumPage) { %>
-                        <li class="page-item active"><a class="page-link" href="?&page=<%=SumPage %>#danhsachTap_Phim"><%=SumPage %></a></li>
-                        <% }else{ %>
-                        <li class="page-item"><a class="page-link" href="?&page=<%=SumPage %>#danhsachTap_Phim"><%=SumPage %></a></li>
-                        <% }  %>
-                        <%} %>
-                        <% } %>
-                     </ul>
-                  </nav>
-               </div>
-               <!-- phan trang -->
+               <% int CheckPT = 0; if (Request.QueryString["page"] != null) {CheckPT = 1;} %>
+               <%= WebPhimV1.Code.HeThong.PhanTrang(CheckPT, SumPage, HttpContext.Current.Request.Url.PathAndQuery, Convert.ToInt32(Request.QueryString["page"])) %>
+               <!-- phan trang end--> 
             </div>
          </div>
          <!-- end danh sach tap -->
@@ -361,6 +331,63 @@
          <!-- end tom tac -->
       </div>
    </section>
+   <section>
+      <div  class="container-fluid seasons">
+         <ul class="trending-pills d-flex nav nav-pills align-items-center text-center s-margin" role="tablist">
+            <li class="nav-item">
+               <a class="nav-link active show" data-toggle="pill" href="#" role="tab" aria-selected="false">Phim cùng thể loại</a>
+            </li>
+         </ul>
+      </div>
+      <!-- goi y the loai -->
+      <div id ="HintTLS"></div>
+      <script>
+          $(document).ready(function () {
+              $.ajax({
+                  url: '/Code/ashx/LoadHintPhims.ashx',
+                  success: function (data) {
+                      document.getElementById('HintTLS').innerHTML = data.str_html;
+                  }
+              });
+          });
+      </script>
+      <script>
+          window.addEventListener("load", function () {
+              setTimeout(function () {
+
+                  $(".owl-carousel").owlCarousel({
+                      autoplay: true,
+                      autoplayTimeout: 2000,
+                      autoplayHoverPause: true,
+                      loop: true,
+                      margin: 10,
+                      responsiveClass: true,
+                      responsive: {
+                          0: {
+                              items: 1,
+                              nav: false,
+                              dots: true,
+                              margin: 0
+                          },
+                          600: {
+                              items: 3,
+                              nav: false,
+                              dots: true,
+                              margin: 25
+                          },
+                          768: {
+                              items: 4,
+                              nav: false,
+                              dots: true,
+                              margin: 25
+                          }
+                      }
+                  });
+              }, 2000)
+          })
+      </script>
+      <!-- end goi y the loai -->
+   </section>
 </div>
 <!-- end Main -->
 <form></form>
@@ -382,14 +409,14 @@
 
     function muaPhim_noLogin() {
         const coin_ND = '<%=WebPhimV1.Code.NguoiDung.CheckLogin() %>';
-       if (coin_ND == "False") {
-           alert("Bộ phim này cần coin để có thể xem \n Vui lòng đăng nhập để tiếp tục !");
-           window.location = '../dangnhap';
-       }
-   }
+        if (coin_ND == "False") {
+            alert("Bộ phim này cần coin để có thể xem \n Vui lòng đăng nhập để tiếp tục !");
+            window.location = '../dangnhap';
+        }
+    }
 
-   function muaPhim() {
-       const coin_ND = '<%= NguoiDungs.coin %>';
+    function muaPhim() {
+        const coin_ND = '<%= NguoiDungs.coin %>';
        const coin_TR = '<%= Convert.ToInt64(infoPhim.coin_phim) %>';
        var name_TR = '<%= infoPhim.ten_phim %>';
        var mess = "";

@@ -13,9 +13,9 @@ namespace WebPhimV1.Control_Admin
     {
 
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
-        public static DB_CAUHINH HeThongs = new DB_CAUHINH();
-        public static List<DB_VOTE> DsDanhGia = new List<DB_VOTE>();
-        public static List<DB_THUVIEN> DSThuVien = new List<DB_THUVIEN>();
+        public  DB_CAUHINH HeThongs = new DB_CAUHINH();
+        public  List<DB_VOTE> DsDanhGia = new List<DB_VOTE>();
+        public  List<DB_THUVIEN> DSThuVien = new List<DB_THUVIEN>();
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -16,6 +16,7 @@
          <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
             <thead>
                <tr>
+                  <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="1">Mã giao dịch</th>
                   <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="1">Id User Chuyển</th>
                   <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="2">Id User Nhận</th>
                   <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="3">Coin</th>
@@ -28,11 +29,12 @@
                   for (int i = 0; i < logCoin.Count; i++)
                   { %>
                <tr class="odd">
+                  <td class="dtr-control sorting_1" tabindex="0">#<%= logCoin[i].id_log %></td>
                   <td class="dtr-control sorting_1" tabindex="0"><%=LoadName(Convert.ToInt32(logCoin[i].id_user_chuyen)) %></td>
                   <td class="dtr-control sorting_1" tabindex="0"><%=LoadName(Convert.ToInt32(logCoin[i].id_user_nhan)) %></td>
                   <td class="dtr-control sorting_1" tabindex="0"><%=logCoin[i].coin %></td>
                   <td class="dtr-control sorting_1" tabindex="0"><%=logCoin[i].ghichu %></td>
-                  <td class="dtr-control sorting_1" tabindex="0"><%=logCoin[i].created_at.ToString("MM/dd/yyyy HH:mm:ss") %></td>
+                  <td class="dtr-control sorting_1" tabindex="0"><%=logCoin[i].created_at.ToString("dd/MM/yyyy HH:mm:ss") %></td>
                </tr>
                <% } } %>
             </tbody>

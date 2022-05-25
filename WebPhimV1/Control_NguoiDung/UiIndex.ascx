@@ -2,11 +2,10 @@
 <%@ Register Src="~/Control_NguoiDung/Part/TopLuotXem_HanhDong.ascx" TagPrefix="uc1" TagName="TopLuotXem_HanhDong" %>
 <%@ Register Src="~/Control_NguoiDung/Part/TopLuotXem_HaiHuoc.ascx" TagPrefix="uc1" TagName="TopLuotXem_HaiHuoc" %>
 <%@ Register Src="~/Control_NguoiDung/Part/TopLuotXem_PhimDienAnh.ascx" TagPrefix="uc1" TagName="TopLuotXem_PhimDienAnh" %>
-
-
 <script>
     document.title = "Trang Chủ ";
 </script>
+
 <!-- Slider Start -->
 <section id="home" class="iq-main-slider p-0">
    <div id="home-slider" class="slider m-0 p-0">
@@ -27,7 +26,7 @@
                         </div>
                      </a>
                      <h3 class="slider-text title text-uppercase" data-animation-in="fadeInLeft"
-                        data-delay-in="0.6"><% RutGon_TieuDe(listGoiyDoc[i].ten_phim, 30); %></h3>
+                        data-delay-in="0.6"><%= WebPhimV1.Code.Phim.RutGon(listGoiyDoc[i].ten_phim, 20) %></h3>
                      <div class="d-flex align-items-center r-mb-23" data-animation-in="fadeInUp" data-delay-in="1.2">
                         <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%= listGoiyDoc[i].link_raw + "-" +listGoiyDoc[i].id_phim %>" class="btn btn-hover"><i class="fa fa-play mr-2"
                            aria-hidden="true"></i>Xem</a>
@@ -140,68 +139,54 @@
       </div>
    </section>
    <!-- end danh sach phim -->
+   <!-- goi y the loai -->
+   <div id ="HintTL"></div>
+   <script>
+       $(document).ready(function () {
+           $.ajax({
+               url: '/Code/ashx/LoadHintTL.ashx',
+               success: function (data) {
+                   document.getElementById('HintTL').innerHTML = data.str_html;
+               }
+           });
+       });
+   </script>
+   <script>
+       window.addEventListener("load", function () {
+           setTimeout(function () {
 
-
-        <!-- goi y the loai -->
-    <div id ="HintTL"></div>
-       <script>
-           $(document).ready(function () {
-               $.ajax({
-                   url: '/Code/ashx/LoadHintTL.ashx',
-                   success: function (data) {
-                       document.getElementById('HintTL').innerHTML = data.str_html;
+               $(".owl-carousel").owlCarousel({
+                   autoplay: true,
+                   autoplayTimeout: 2000,
+                   autoplayHoverPause: true,
+                   loop: true,
+                   margin: 10,
+                   responsiveClass: true,
+                   responsive: {
+                       0: {
+                           items: 1,
+                           nav: false,
+                           dots: true,
+                           margin: 0
+                       },
+                       600: {
+                           items: 3,
+                           nav: false,
+                           dots: true,
+                           margin: 25
+                       },
+                       768: {
+                           items: 4,
+                           nav: false,
+                           dots: true,
+                           margin: 25
+                       }
                    }
                });
-           });
-      </script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-
-
-    <script>
-        setTimeout(function () {
-            $(".owl-carousel").owlCarousel({
-                autoplay: true,
-                autoplayTimeout: 2000,
-                autoplayHoverPause: true,
-                loop: true,
-                margin: 10,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: false,
-                        dots: true,
-                        margin: 0
-                    },
-                    600: {
-                        items: 3,
-                        nav: false,
-                        dots: true,
-                        margin: 25
-                    },
-                    768: {
-                        items: 4,
-                        nav: false,
-                        dots: true,
-                        margin: 25
-                    }
-                }
-            });
-
-        }, 2000)
-    </script>
-
-   
-
-
-
-
+           }, 2000)
+       })
+   </script>
+   <!-- end goi y the loai -->
 </div>
 <!--END MainContent -->
 <div style="padding: 50px"></div>
-
- 

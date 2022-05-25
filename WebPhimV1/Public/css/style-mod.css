@@ -166,7 +166,9 @@ header .navbar-light .navbar-brand img.logo {
 }
 
 .pagination {
-	margin-top: 0
+    margin-top: 0;
+    max-width: 300px;
+    overflow-x: auto;
 }
 
 .container {
@@ -515,6 +517,7 @@ footer ul li a {
 }
 
 .avatar {
+    object-fit: revert;
 	vertical-align: middle;
 	width: 50px;
 	height: 50px;
@@ -739,12 +742,13 @@ footer ul li a {
 }
 
 .img-avatar {
-	border: 5px solid;
-	max-width: 250px;
-	padding: 5px;
-	border-radius: 50%;
-	width: 250px;
-	height: 250px
+    object-fit: revert;
+    border: 5px solid;
+    max-width: 250px;
+    padding: 5px;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
 }
 
 .avatar-nguoidung {

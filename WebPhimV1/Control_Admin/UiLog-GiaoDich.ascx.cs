@@ -12,40 +12,40 @@ namespace WebPhimV1.Control_Admin
     public partial class UiLog_GiaoDich : System.Web.UI.UserControl
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
-        public static DB_USER NguoiDungs = new DB_USER();
-        public static List<DB_LOG_COIN> logCoin = new List<DB_LOG_COIN>();
+        public  DB_USER NguoiDungs = new DB_USER();
+        public  List<DB_LOG_COIN> logCoin = new List<DB_LOG_COIN>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-                    LoadThongTinNguoiDung();
-                    NguoiDung.CheckAdmin(Convert.ToInt32(NguoiDungs.quyen_han));
-                    try
-                    {
-                        LoadGiaoDich();
-                    }
-                    catch (Exception err)
-                    {
-                        string url = "/404?err=true&&vitri=" + this.GetType().Name + "&&tenloi=" + err.Message;
-                        Response.Redirect(url);
-                    }
-
-
-
+            try
+            {
+                LoadThongTinNguoiDung();
+                NguoiDung.CheckAdmin(Convert.ToInt32(NguoiDungs.quyen_han));
+                LoadGiaoDich();
+            }
+            catch (Exception err)
+            {
+                string url = "~/404?err=true&&vitri=" + this.GetType().Name +
+                             "&&tenloi=" + HttpUtility.UrlEncode(err.Message);
+                Response.Redirect(url);
+            }
         }
 
-        //load thong tin nguoi dung
+        // load thong tin nguoi dung
         public void LoadThongTinNguoiDung()
         {
-            NguoiDungs = null;
-            String MaKhoa = Request.Cookies["log"].Value;
+            NguoiDungs = Admin.Theme.NguoiDungs;
 
-            var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select q).OrderByDescending(q => q.created_at);
+            //  NguoiDungs = null;
+            // String MaKhoa = Request.Cookies["log"].Value;
 
-            if (dt != null)
-            {
-                NguoiDungs = dt.First();
-            }
+            // var dt = (from q in dl.DB_USERs where q.ma_khoa == MaKhoa select
+            // q).OrderByDescending(q => q.created_at);
+
+            // if (dt != null)
+            // {
+            //     NguoiDungs = dt.First();
+            //   }
         }
 
         public void LoadGiaoDich()
@@ -57,12 +57,11 @@ namespace WebPhimV1.Control_Admin
                 logCoin = dt.ToList();
             }
         }
-        //load thong tin nguoi dung
+        // load thong tin nguoi dung
         public string LoadName(int id_user)
         {
-            var dt = (from q in dl.DB_USERs
-                      where q.id_user == id_user
-                      select q).FirstOrDefault();
+            var dt = (from q in dl.DB_USERs where q.id_user == id_user select q)
+                         .FirstOrDefault();
 
             if (dt != null)
             {
@@ -74,5 +73,5 @@ namespace WebPhimV1.Control_Admin
             }
         }
 
-    }//
+    }  //
 }

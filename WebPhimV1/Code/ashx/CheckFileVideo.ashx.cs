@@ -14,7 +14,8 @@ namespace WebPhimV1.Code.ashx
     public class CheckFileVideo : IHttpHandler
     {
         DataWebPhimDataContext dl = new DataWebPhimDataContext();
-        public static List<DB_TAP_PHIM> danhsachtap = new List<DB_TAP_PHIM>(); //DS Tap_Phim
+        public static List<DB_TAP_PHIM> danhsachtap =
+            new List<DB_TAP_PHIM>();  // DS Tap_Phim
 
         public void ProcessRequest(HttpContext context)
         {
@@ -33,21 +34,22 @@ namespace WebPhimV1.Code.ashx
             for (int i = 0; i < danhsachtap.Count(); i++)
             {
                 var server = danhsachtap[i].noidung_tap_phim.Split('|');
-                foreach(String namePhim in server){
+                foreach (String namePhim in server)
+                {
                     ListVideo.Add(namePhim);
-                  //  noidungtapphim += namePhim + "</br>";
+                    //  noidungtapphim += namePhim + "</br>";
                 }
-             
             }
 
             string path = HttpContext.Current.Server.MapPath(@"~/Public/video/mp4");
 
-            string[] folders = System.IO.Directory.GetDirectories(path, "*", System.IO.SearchOption.AllDirectories);
+            string[] folders = System.IO.Directory.GetDirectories(
+                path, "*", System.IO.SearchOption.AllDirectories);
             foreach (String file in folders)
             {
-                //noidungtapphim += file;
+                // noidungtapphim += file;
                 string[] NameTap = noidungtapphim.Split(',');
-                 path = file;
+                path = file;
                 if (Directory.Exists(path))
                 {
                     DirectoryInfo di = new DirectoryInfo(path);
@@ -59,17 +61,16 @@ namespace WebPhimV1.Code.ashx
                             string[] nameF = nameFile.Split('/');
                             string namef = "";
 
-                            foreach (String  p in nameF)
+                            foreach (String p in nameF)
                             {
                                 namef = p;
                             }
-
 
                             if (namef.Equals(fi.Name))
                             {
                                 namVideo_TonTai.Add(fi.Name);
 
-                                //noidungtapphim += "</br> File Name " + fi.Name;
+                                // noidungtapphim += "</br> File Name " + fi.Name;
                                 CheckFile = true;
                             }
                         }
@@ -84,34 +85,28 @@ namespace WebPhimV1.Code.ashx
                             CheckFile = false;
                             nameVideo_KhongTonTai.Add(fi.Name);
                         }
-
-
                     }
-
 
                     foreach (String XoaFile in nameVideo_KhongTonTai)
                     {
                         noidungtapphim += "</br> Xoá File: " + XoaFile;
                         DeleteFile(path + "//" + XoaFile);
                     }
-
                 }
-
             }
             // DirectoryInfo d = new DirectoryInfo(path);
-           // FileInfo[] Files = d.GetFiles();
-           // foreach (FileInfo file in Files)
-           // {
-           //     noidungtapphim += file.Name;
-           // }  
+            // FileInfo[] Files = d.GetFiles();
+            // foreach (FileInfo file in Files)
+            // {
+            //     noidungtapphim += file.Name;
+            // }
 
-            //Send File details in a JSON Response.
-            string json = new JavaScriptSerializer().Serialize(
-                new
-                {
-                    noidungTapPhim = noidungtapphim,
-                    sizefile = sizeFile,
-                });
+            // Send File details in a JSON Response.
+            string json = new JavaScriptSerializer().Serialize(new
+            {
+                noidungTapPhim = noidungtapphim,
+                sizefile = sizeFile,
+            });
 
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "text/json";
@@ -121,16 +116,9 @@ namespace WebPhimV1.Code.ashx
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-        //xoa file
-        protected void DeleteFile(string filePath)
-        {
-            File.Delete(filePath);
-        }
-
+        // xoa file
+        protected void DeleteFile(string filePath) { File.Delete(filePath); }
     }
 }

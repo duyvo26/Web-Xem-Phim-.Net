@@ -58,7 +58,7 @@ function notify(type, title, message){
     $('<div>',{
             'class':         'toast',
             'data-autohide': 'true',
-            'data-delay':    '60000',
+            'data-delay':    '2000',
             'data-type':     toast_type,
             'role':          'alert',
             'aria-live':     'assertive',
