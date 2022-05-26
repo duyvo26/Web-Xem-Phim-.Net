@@ -224,18 +224,32 @@
                     var id_tap = '<%=infoTap_Phim.id_tap_phim %>';
                     var send_tieude_ = document.getElementById("tieude_loi").value;
                     var send_noidung_ = document.getElementById("noidung_loi").value;
+                    if(send_noidung_ == ""){
+                        alert("Vui lòng điền chi tiết lỗi !");
+                        return;
+                    }
                     var noidung_ = "Tiêu đề:&nbsp;" + send_tieude_ + "&nbsp;&nbsp;Mô tả:&nbsp;<strong>" + send_noidung_ + "</strong>";
-                    $.ajax({
-                        data: { mail_user: send_mail_, noidung_user: noidung_, id_Phim: id_phim,id_Tap: id_tap   },
-                        url: '/Code/ashx/GuiBaoCaoLoi.ashx',
-                        type: 'GET',
-                        success: function (data) {
-                            // alert("Gửi tin thành công");
-                            document.getElementById("noidung_loi").value = "";
-                            notify('success', 'Đã gửi đến quản trị viên', 'Cảm ơn bạn đã báo cáo');
-                            $('#exampleModal').modal('toggle');
-                        }
-                    });
+                    let NumberERR = getCookie("NumberERR");
+                    if (NumberERR == null){
+                        NumberERR = 1;
+                    }
+                    if (NumberERR <= 11111){
+                        $.ajax({
+                            data: { mail_user: send_mail_, noidung_user: noidung_, id_Phim: id_phim,id_Tap: id_tap   },
+                            url: '/Code/ashx/GuiBaoCaoLoi.ashx',
+                            type: 'GET',
+                            success: function (data) {
+                                // alert("Gửi tin thành công");
+                                document.getElementById("noidung_loi").value = "";
+                                notify('success', 'Đã gửi đến quản trị viên', 'Cảm ơn bạn đã báo cáo');
+                                $('#exampleModal').modal('toggle');
+                            }
+                        });
+                        setCookie("NumberERR", (NumberERR += 1));
+                    }else{
+                        notify('error', 'Cảnh báo !', 'Thao tác quá nhanh');
+                    }
+
                 }
             </script>
             <!-- js -->
