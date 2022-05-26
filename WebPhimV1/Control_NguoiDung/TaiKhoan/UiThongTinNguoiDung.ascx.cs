@@ -20,10 +20,7 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
         public  int page_number = 0; // trang thu n
         public static  int SumPage = 0;
 
-        protected void RutGon_TieuDe(string a, int b)
-        {
-            Response.Write(Phim.RutGon(a, b));
-        }
+  
 
         protected void Page_Load(object sender, EventArgs e)
         {

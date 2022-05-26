@@ -10,7 +10,7 @@
                 <h3 class="m-b-50 heading-line">
                     Thông báo <i class="fa fa-bell text-muted"></i>
                     <a href="?all=true">
-                        <button onclick="return confirm('Xác nhận đánh đấu đã Xem với tất cả ???')" type="button" class="btn" style="background: var(--iq-primary); margin-bottom: 20px;">Xem tất cả</button>
+                        <button onclick="return confirm('Xác nhận đánh đấu đã Xem với tất cả ?')" type="button" class="btn" style="background: var(--iq-primary); margin-bottom: 20px;">Xem tất cả</button>
                     </a>
                     <!--
                   <a href="?delete=true">
