@@ -31,7 +31,7 @@ namespace WebPhimV1.Code.ashx
             {
                 mail_user =
                     context.Request.QueryString["mail_user"];  // id user bao cao loi
-                send_noidung = context.Request.QueryString["noidung_user"];
+                send_noidung = "ERROR: " + context.Request.QueryString["noidung_user"];
                 id_Phim = context.Request.QueryString["id_Phim"];
                 id_Tap = context.Request.QueryString["id_Tap"];
 

@@ -409,7 +409,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
 
                         if (NguoiDungs.id_user != infoPhim.id_user && int.Parse(infoPhim.coin_phim) != 0)
                         {
-                            //thong bao cap nhat Tap_Phim
+                            //them thong bao cho tac gia
                             //id_user - id nhận
                             //id_phanhoi - id gui thong bao
                             string noidung = NguoiDungs.fullname + " đã mua phim " + infoPhim.ten_phim + " của bạn với " + infoPhim.coin_phim + " coin";
@@ -419,7 +419,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                         }
                         if (NguoiDungs.id_user != infoPhim.id_user && int.Parse(infoPhim.coin_phim) == 0)
                         {
-                            //thong bao cap nhat Tap_Phim
+                            //cap nhat cho tac gia
                             //id_user - id nhận
                             //id_phanhoi - id gui thong bao
                             string noidung = NguoiDungs.fullname + " đã thêm phim " + infoPhim.ten_phim + " của bạn vào thư viện";
@@ -427,7 +427,17 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                             NguoiDung.ThemThongBao(Convert.ToInt32(infoPhim.id_user), NguoiDungs.id_user, noidung, urls);
                         }
 
-                        string scriptText = "alert('Mua phim thành công !'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "'";
+                        string thongbao = "";
+                        if (int.Parse(infoPhim.coin_phim) == 0)
+                        {
+                            thongbao = "Lưu phim thành công";
+                        }
+                        else
+                        {
+                            thongbao = "Mua phim thành công";
+                        }
+
+                        string scriptText = "alert(' " + thongbao + " '); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "'";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
 
                     }

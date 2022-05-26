@@ -28,7 +28,7 @@ namespace WebPhimV1.Code.ashx
                 context.Request.QueryString["noidung_user"] != null)
             {
                 mail_user = context.Request.QueryString["mail_user"];
-                send_noidung = context.Request.QueryString["noidung_user"];
+                send_noidung = "RM: " + context.Request.QueryString["noidung_user"];
 
                 if (mail_user.Equals("@all"))
                 {
