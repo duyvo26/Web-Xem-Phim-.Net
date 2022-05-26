@@ -38,6 +38,10 @@
         }
     }
 </script>
+
+ 
+
+
 <style>
     .full_m {
         position: fixed;
@@ -109,9 +113,14 @@
                 var player = this;
 
                 var coinphim = "<%=infoPhim.coin_phim.Replace(" ", "")%>" ;
-                if(coinphim=="0"){
+                if(coinphim == "0"){
                     //load quang cao
-                    player.ads(); // initialize videojs-contrib-ads
+                    try{
+                        player.ads(); // initialize videojs-contrib-ads
+                    }catch(ex){
+                        alert("Bạn vui lòng tắt chặn quảng cáo\nChân thành cảm ơn bạn");
+                    }
+                    
                     // alert("load quang cao");
 
                 }

@@ -110,8 +110,8 @@
                 <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/themPhim">Thêm phim</a>
             </div>
         </div>
-         <% if (quyen_han > 1) { %>
-                <div class="dropdown_admin">
+        <% if (quyen_han > 1) { %>
+        <div class="dropdown_admin">
             <button class="dropbtn">
                 Người dùng
                 <i class="fa fa-caret-down"></i>
@@ -540,11 +540,9 @@
                 $('body').bind('cut copy', function (e) {
                     e.preventDefault();
                 });
-
-
             }
         </script>
-        <
+
         <!-- js -->
         <!-- jQuery, Popper JS -->
         <script src="<%=WebPhimV1.Code.HeThong.url() %>/public/frontend/js/popper.min.js"></script>
