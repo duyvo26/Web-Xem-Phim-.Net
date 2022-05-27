@@ -54,3 +54,15 @@
       <!-- /.card-body -->
    </div>
 </div>
+
+
+<script>
+
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": false, "lengthChange": true, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "iDisplayLength": 10,
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>

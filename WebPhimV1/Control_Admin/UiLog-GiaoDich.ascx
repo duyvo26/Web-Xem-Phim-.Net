@@ -38,8 +38,64 @@
                </tr>
                <% } } %>
             </tbody>
+             <tfoot>
+            <tr>
+                <th colspan="4" style="text-align:right"></th>
+                <th colspan="2" style="text-align:right"></th>
+                
+            </tr>
+        </tfoot>
          </table>
       </div>
       <!-- /.card-body -->
    </div>
 </div>
+
+<script>
+
+    // Create our number formatter.
+    var formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+
+        // These options are needed to round to whole numbers if that's what you want.
+        //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+        //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+    });
+
+
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": false, "lengthChange": true, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "iDisplayLength": 10,
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api();
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column(3)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal = api
+                    .column(3, { page: 'current' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Update footer
+                $(api.column(4).footer()).html('$' + formatter.format(pageTotal) + ' ( $' + formatter.format(total) + ' toàn bộ coin)');
+            },
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>

@@ -119,7 +119,7 @@ namespace WebPhimV1.Control_Admin.NguoiDungs
                     NguoiDungs.fullname + "_Giam_Coin_" + Thongtinnapcoin.fullname;
                 log.id_user_chuyen = NguoiDungs.id_user;
                 log.id_user_nhan = Thongtinnapcoin.id_user;
-                log.coin = naptien.ToString();
+                log.coin = "-" + naptien.ToString();
                 log.created_at = DateTime.Now;
                 log.updated_at = DateTime.Now;
                 dl.DB_LOG_COINs.InsertOnSubmit(log);

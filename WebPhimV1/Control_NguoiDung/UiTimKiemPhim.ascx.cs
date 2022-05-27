@@ -52,7 +52,11 @@ namespace WebPhimV1.Control_NguoiDung
                 if (!string.IsNullOrEmpty(Request.QueryString["page"]))
                 {
                     page_number = Convert.ToInt32(Request.QueryString["page"]);
-
+                }
+                else
+                {
+                    page_number = 0;
+                }
                     int take = 16;                  // lay n phan tu
                     int skip = page_number * take;  // bo qua trang thu n
                     SumPage = (from q in dl.DB_PHIMs select q).Count() / take;
@@ -67,7 +71,7 @@ namespace WebPhimV1.Control_NguoiDung
                         timKiem = dt.ToList();
                     }
                 }
-            }
+            
         }
         private void LoadTheLoai()
         {
@@ -86,6 +90,11 @@ namespace WebPhimV1.Control_NguoiDung
                 if (!string.IsNullOrEmpty(Request.QueryString["page"]))
                 {
                     page_number = Convert.ToInt32(Request.QueryString["page"]);
+                }
+                else
+                {
+                    page_number = 0;
+                }
                     string data = Request
                                       .QueryString["TenPhim"]
                                       .ToString();
@@ -111,13 +120,19 @@ namespace WebPhimV1.Control_NguoiDung
                             })
                                 .ToList();
                     }
-                }
+                
             }
 
             if (!string.IsNullOrEmpty(Request.QueryString["TheLoai"]))
             {
                 if (!string.IsNullOrEmpty(Request.QueryString["page"]))
                 {
+                    page_number = Convert.ToInt32(Request.QueryString["page"]);
+                }
+                else
+                {
+                    page_number = 0;
+                }
                     // DeleData(); // xóa dât cua bang
                     string data = Request
                                       .QueryString["TheLoai"]
@@ -125,7 +140,7 @@ namespace WebPhimV1.Control_NguoiDung
                     string datas = Request
                                        .QueryString["TheLoais"]
                                        .ToString();
-                    page_number = Convert.ToInt32(Request.QueryString["page"]);
+                    
 
                     int take = 16;                  // lay n phan tu
                     int skip = page_number * take;  // bo qua trang thu n
@@ -182,16 +197,22 @@ namespace WebPhimV1.Control_NguoiDung
                                     .ToList();
                         }
                     }
-                }
+                
             }
 
             if (!string.IsNullOrEmpty(Request.QueryString["coin"]))
             {
                 if (!string.IsNullOrEmpty(Request.QueryString["page"]))
                 {
+                    page_number = Convert.ToInt32(Request.QueryString["page"]);
+                }
+                else
+                {
+                    page_number = 0;
+                }
                     max = Convert.ToInt32(Request.QueryString["max"]);
                     min = Convert.ToInt32(Request.QueryString["min"]);
-                    page_number = Convert.ToInt32(Request.QueryString["page"]);
+                    
 
                     int take = 16;                  // lay n phan tu
                     int skip = page_number * take;  // bo qua trang thu n
@@ -216,7 +237,7 @@ namespace WebPhimV1.Control_NguoiDung
                         timKiemCoin = "true";
                         timKiem = dt.ToList();
                     }
-                }
+                
             }
 
             // set title
