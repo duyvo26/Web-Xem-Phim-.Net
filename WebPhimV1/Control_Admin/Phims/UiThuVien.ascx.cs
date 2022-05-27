@@ -92,9 +92,9 @@ namespace WebPhimV1.Control_Admin.Phims
         }
 
         // load ten Phim
-        public string LoadCoin(int id_phim)
+        public string LoadCoin(int id_phim, int idNguoidung)
         {
-            var dt = (from q in dl.DB_PHIMs where q.id_phim == id_phim select q);
+            var dt = (from q in dl.DB_PHIMs where q.id_phim == id_phim && q.id_user != idNguoidung select q);
 
             if (dt.Count() > 0)
             {
@@ -103,7 +103,7 @@ namespace WebPhimV1.Control_Admin.Phims
             }
             else
             {
-                return "";
+                return "0";
             }
         }
 

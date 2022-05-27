@@ -195,7 +195,7 @@
             <a class="nav-link active show" data-toggle="pill" href="#danhsachTap_Phim" role="tab" aria-selected="false">Danh sách tập</a>
          </li>
          <li class="nav-item">
-            <a class="nav-link " data-toggle="pill" href="#tomtacphim" role="tab" aria-selected="true">Tóm tắc phim</a>
+            <a class="nav-link " data-toggle="pill" href="#tomtatphim" role="tab" aria-selected="true">Tóm tắt phim</a>
          </li>
          <li class="nav-item">
             <a class="nav-link" data-toggle="pill" href="#binhluan" role="tab" aria-selected="false">Bình luận</a>
@@ -314,7 +314,7 @@
          </div>
          <!-- end binh luan -->
          <!-- tom tac -->
-         <div id="tomtacphim" class="tab-pane fade " role="tabpanel">
+         <div id="tomtatphim" class="tab-pane fade " role="tabpanel">
             <div class="block-space">
                <div class="row">
                   <div class="container">

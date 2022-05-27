@@ -1,292 +1,329 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Theme.master.cs" Inherits="WebPhimV1.Admin.Theme" %>
 <!DOCTYPE html>
 <html lang="en" style="height: auto;">
-   <head>
-      <meta charset="utf-8">
-      <head runat="server">
-         <title>CP Admin</title>
-         <meta name="viewport" content="width=device-width, initial-scale=1">
-         <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
+    <head>
+        <meta charset="utf-8" />
+        <head runat="server">
+            <title>CP Admin</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
 
+            <!-- Google Font: Source Sans Pro -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback" />
+            <link rel="stylesheet" href="~/admin/plugins/fontawesome-free/css/all.min.css" />
+            <link rel="stylesheet" href="~/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
+            <link rel="stylesheet" href="~/admin/dist/css/adminlte.min.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+            <style type="text/css">
+                /* Chart.js */
+                @keyframes chartjs-render-animation {
+                    from {
+                        opacity: 0.99;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+                .chartjs-render-monitor {
+                    animation: chartjs-render-animation 1ms;
+                }
+                .chartjs-size-monitor,
+                .chartjs-size-monitor-expand,
+                .chartjs-size-monitor-shrink {
+                    position: absolute;
+                    direction: ltr;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    overflow: hidden;
+                    pointer-events: none;
+                    visibility: hidden;
+                    z-index: -1;
+                }
+                .chartjs-size-monitor-expand > div {
+                    position: absolute;
+                    width: 1000000px;
+                    height: 1000000px;
+                    left: 0;
+                    top: 0;
+                }
+                .chartjs-size-monitor-shrink > div {
+                    position: absolute;
+                    width: 200%;
+                    height: 200%;
+                    left: 0;
+                    top: 0;
+                }
+            </style>
 
-         <!-- Google Font: Source Sans Pro -->
-         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
-         <link rel="stylesheet" href="~/admin/plugins/fontawesome-free/css/all.min.css">
-         <!-- overlayScrollbars -->
-         <link rel="stylesheet" href="~/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-         <!-- Theme style -->
-         <link rel="stylesheet" href="~/admin/dist/css/adminlte.min.css">
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-          
-           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-         <style type="text/css">/* Chart.js */
-            @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
-         </style>
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/Scripts/ckeditor/ckeditor.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/Scripts/ckfinder/ckfinder.js"></script>
+            <!-- ChartJS -->
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/chart.js/Chart.min.js"></script>
 
-         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-         <script src="<%=WebPhimV1.Code.HeThong.url() %>/Scripts/ckeditor/ckeditor.js"></script>
-         <script src="<%=WebPhimV1.Code.HeThong.url() %>/Scripts/ckfinder/ckfinder.js"></script>
-                <!-- ChartJS -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/chart.js/Chart.min.js"></script>
+            <!-- REQUIRED SCRIPTS -->
+            <!-- jQuery -->
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery/jquery.min.js"></script>
+            <!-- Bootstrap -->
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- overlayScrollbars -->
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/js/adminlte.js"></script>
+            <!-- PAGE PLUGINS -->
+            <!-- jQuery Mapael -->
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/raphael/raphael.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/js/pages/dashboard2.js"></script>
+            <!-- DataTables  & Plugins -->
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jszip/jszip.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/pdfmake/pdfmake.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/pdfmake/vfs_fonts.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+            <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-
-                <!-- REQUIRED SCRIPTS -->
-      <!-- jQuery -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery/jquery.min.js"></script>
-      <!-- Bootstrap -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <!-- overlayScrollbars -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-      <!-- AdminLTE App -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/js/adminlte.js"></script>
-      <!-- PAGE PLUGINS -->
-      <!-- jQuery Mapael -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/raphael/raphael.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jquery-mapael/maps/usa_states.min.js"></script>
-
-      <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/js/pages/dashboard2.js"></script>
-      <!-- DataTables  & Plugins -->
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/jszip/jszip.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/pdfmake/pdfmake.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/pdfmake/vfs_fonts.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-      <script src="<%=WebPhimV1.Code.HeThong.url() %>/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-
-         
-         <asp:ContentPlaceHolder ID="head" runat="server"> </asp:ContentPlaceHolder>
-   </head>
-   <body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
-     
-      <!-- Preloader -->
-      <div class="preloader flex-column justify-content-center align-items-center" style="height: 0px;"> <img class="animation__wobble" src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/img/administrator.png" alt="AdminLTELogo" height="60" width="60" style="display: none;"> </div>
-      <!-- Navbar -->
-      <nav class="main-header navbar navbar-expand navbar-dark">
-         <!-- Left navbar links -->
-         <ul class="navbar-nav">
-            <li class="nav-item"> <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a> </li>
-            <li class="nav-item d-none d-sm-inline-block"> <a href="/" class="nav-link">Trang phim</a> </li>
-         </ul>
-         <!-- Right navbar links -->
-         <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            <!-- Messages Dropdown Menu -->
-            <!-- Notifications Dropdown Menu -->
-            <li class="nav-item">
-               <a class="nav-link" data-widget="fullscreen" href="/" role="button"> <i class="fas fa-expand-arrows-alt"></i> </a>
-            </li>
-            <li class="nav-item"> </li>
-         </ul>
-      </nav>
-      <!-- /.navbar -->
-      <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
-         <!-- Brand Logo -->
-         <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/" class="brand-link">
-         <img src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/img/administrator.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-         <span class="brand-text font-weight-light">WebPhim ADMIN</span>
-         </a>
-         <!-- Sidebar -->
-         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-               <div class="image">
-                  <img class="img-circle elevation-2" alt="User Image" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/avatar/<%= NguoiDungs.img_user%>" onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" />
-               </div>
-               <div class="info">
-                  <a href="#" class="d-block"><%= NguoiDungs.fullname %></a>
-               </div>
+            <asp:ContentPlaceHolder ID="head" runat="server"> </asp:ContentPlaceHolder>
+        </head>
+        <body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
+            <!-- Preloader -->
+            <div class="preloader flex-column justify-content-center align-items-center" style="height: 0px;">
+                <img class="animation__wobble" src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/img/administrator.png" alt="AdminLTELogo" height="60" width="60" style="display: none;" />
             </div>
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-               <!-- Add icons to the links using the .nav-icon class
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-dark">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block"><a href="/" class="nav-link">Trang phim</a></li>
+                </ul>
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Navbar Search -->
+                    <!-- Messages Dropdown Menu -->
+                    <!-- Notifications Dropdown Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="fullscreen" href="/" role="button"> <i class="fas fa-expand-arrows-alt"></i> </a>
+                    </li>
+                    <li class="nav-item"></li>
+                </ul>
+            </nav>
+            <!-- /.navbar -->
+            <!-- Main Sidebar Container -->
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <!-- Brand Logo -->
+                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/" class="brand-link">
+                    <img src="<%=WebPhimV1.Code.HeThong.url() %>/admin/dist/img/administrator.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8;" />
+                    <span class="brand-text font-weight-light">WebPhim ADMIN</span>
+                </a>
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Sidebar user panel (optional) -->
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img
+                                class="img-circle elevation-2"
+                                alt="User Image"
+                                src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/avatar/<%= NguoiDungs.img_user%>"
+                                onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';"
+                            />
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block"><%= NguoiDungs.fullname %></a>
+                        </div>
+                    </div>
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
                   with font-awesome or any other icon font library -->
 
-               <li class="nav-item menu-open">
-                  <a href="<%=WebPhimV1.Code.HeThong.url() %>" class="nav-link">
-        
-                      <i class="nav-icon fas bi bi-house-door"></i>
-                     <p>
-                        Trang phim 
-                     </p>
-                  </a>
-               </li>
+                            <li class="nav-item menu-open">
+                                <a href="<%=WebPhimV1.Code.HeThong.url() %>" class="nav-link">
+                                    <i class="nav-icon fas bi bi-house-door"></i>
+                                    <p>
+                                        Trang phim
+                                    </p>
+                                </a>
+                            </li>
 
+                            <li class="nav-item menu-open">
+                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/" class="nav-link active">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Bảng điều kiển
+                                    </p>
+                                </a>
+                            </li>
+                            <% if (Convert.ToInt32(NguoiDungs.quyen_han) == 2) { %>
+                            <li class="nav-item">
+                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/cauhinh" class="nav-link">
+                                    <i class="nav-icon fas bi bi-gear"></i>
+                                    <p>Cấu hình hệ thống</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/log-404" class="nav-link">
+                                    <i class="nav-icon fas bi bi-bug"></i>
+                                    <p>Lỗi hệ thống</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/log-gd" class="nav-link">
+                                    <i class="nav-icon bi fas bi-asterisk"></i>
+                                    <p>Lịch sử giao dịch</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas bi bi-people"></i>
+                                    <p>
+                                        Người dùng
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/nguoidung/them" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thêm người dùng</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/nguoidung/danhsach" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách người dùng</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <% } %>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas bi bi-journal-bookmark-fill"></i>
+                                    <p>
+                                        Phim
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/themPhim" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thêm phim</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/danhsach" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách phim</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/binhluan" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách bình luận</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/thuvien" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thư viện phim</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/danhgia" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách đánh giá</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-               <li class="nav-item menu-open">
-                  <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/" class="nav-link active">
-                     <i class="nav-icon fas fa-tachometer-alt"></i>
-                     <p>
-                        Bảng điều kiển  
-                     </p>
-                  </a>
-               </li>
-               <% if (Convert.ToInt32(NguoiDungs.quyen_han) == 2)
-                  { %>
-               <li class="nav-item">
-                  <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/cauhinh" class="nav-link">
-                     <i class="nav-icon fas  bi bi-gear"></i>
-                     <p>Cấu hình hệ thống</p>
-                  </a>
-               </li>
-                 <li class="nav-item">
-                  <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/log-404" class="nav-link">
-                    <i class="nav-icon fas bi bi-bug"></i>
-                     <p>Lỗi hệ thống</p>
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/log-gd" class="nav-link">
-                <i class="nav-icon bi fas bi-asterisk"></i>
-                     <p>Lịch sử giao dịch</p>
-                  </a>
-               </li>
-               <li class="nav-item">
-                  <a href="#" class="nav-link">
-                     <i class="nav-icon fas bi bi-people"></i>
-                     <p>
-                        Người dùng
-                        <i class="fas fa-angle-left right"></i>
-                     </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/nguoidung/them" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Thêm người dùng</p>
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/nguoidung/danhsach" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Danh sách người dùng</p>
-                        </a>
-                     </li>
-                  </ul>
-               </li>
-               <% } %>
-               <li class="nav-item">
-                  <a href="#" class="nav-link">
-                     <i class="nav-icon fas bi bi-journal-bookmark-fill"></i>
-                     <p>
-                        Phim
-                        <i class="fas fa-angle-left right"></i>
-                     </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/themPhim" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Thêm phim</p>
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/danhsach" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Danh sách phim</p>
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/binhluan" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Danh sách bình luận</p>
-                        </a>
-                     </li>
-                       <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/thuvien" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Danh sách mua phim</p>
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/danhgia" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Danh sách đánh giá</p>
-                        </a>
-                     </li>
-                  </ul>
-               <li class="nav-item">
-                  <a href="#" class="nav-link">
-                     <i class="nav-icon fas bi bi-blockquote-left"></i>
-                     <p>
-                        Thể Loại
-                        <i class="fas fa-angle-left right"></i>
-                     </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                     <li class="nav-item">
-                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/theloai/danhsach" class="nav-link">
-                           <i class="far fa-circle nav-icon"></i>
-                           <p>Danh sách thể loại</p>
-                        </a>
-                     </li>
-                  </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-         </div>
-         <!-- /.sidebar -->
-      </aside>
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" style="min-height: 422px;">
-      <!-- /.content-header -->
-      <form id="form1" runat="server">
-      <div>
-      <!-- noi dung -->
-      <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"> </asp:ContentPlaceHolder>
-      <!-- end noi dung -->
-      </div>
-      </form>
-      <!-- /.content -->
-      </div>
-      <!-- /.content-wrapper -->
-      <!-- Control Sidebar -->
-      
-      <!-- Main Footer -->
-      <footer class="main-footer"> <strong>Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-      <div class="float-right d-none d-sm-inline-block"> <b>Version</b> 3.2.0-rc </div>
-      </footer>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas bi bi-blockquote-left"></i>
+                                    <p>
+                                        Thể Loại
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/theloai/danhsach" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách thể loại</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+            </aside>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper" style="min-height: 422px;">
+                <!-- /.content-header -->
+                <form id="form1" runat="server">
+                    <div>
+                        <!-- noi dung -->
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"> </asp:ContentPlaceHolder>
+                        <!-- end noi dung -->
+                    </div>
+                </form>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <!-- Control Sidebar -->
 
-      <!-- AdminLTE for demo purposes -->
-      <!-- Page specific script -->
-      <script>
+            <!-- Main Footer -->
+            <footer class="main-footer">
+                <strong>Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+                <div class="float-right d-none d-sm-inline-block"><b>Version</b> 3.2.0-rc</div>
+            </footer>
 
+            <!-- AdminLTE for demo purposes -->
+            <!-- Page specific script -->
+            <script>
+                function CauHinh() {
+                    // disable right click
+                    $(document).bind("contextmenu", function (e) {
+                        return false;
+                    });
+                    // disable ctl +v and v
+                    $("body").bind("cut copy", function (e) {
+                        e.preventDefault();
+                    });
+                }
+            </script>
 
-        
-   
-          function CauHinh() {
-              // disable right click
-              $(document).bind("contextmenu", function (e) {
-                  return false;
-              });
-              // disable ctl +v and v
-              $('body').bind('cut copy', function (e) {
-                  e.preventDefault();
-              });
-
-          }
-      </script>
-
-      <style>
-      a{
-      color: white;
-      font-weight: 900;
-      }
-      .user-panel img {
-    height: 2.1rem;
-    width: 2.1rem;
-}
-      </style>
-   </body>
+            <style>
+                a {
+                    color: white;
+                    font-weight: 900;
+                }
+                .user-panel img {
+                    height: 2.1rem;
+                    width: 2.1rem;
+                }
+            </style>
+        </body>
+    </head>
 </html>

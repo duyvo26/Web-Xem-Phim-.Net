@@ -119,7 +119,6 @@
                 </div>
                 <!-- /.form group -->
 
-
                 <!-- /.input group -->
                 <div class="form-group" hidden>
                     <label>Event noel</label><br />
@@ -143,7 +142,7 @@
                     </div>
                 </div>
                 <!-- /.input group -->
-                                <!-- /.input group -->
+                <!-- /.input group -->
                 <div class="form-group" hidden>
                     <label>Event Tết</label><br />
 
@@ -219,7 +218,7 @@
                     <div class="input-group">
                         <div class="input-group-prepend" style="margin-top: 20px;">
                             <br />
-                            <input  accept=".jpg, .png, .gif"  type="file" name="UploadedFileLogo" value="Select File" />
+                            <input accept=".jpg, .png, .gif" type="file" name="UploadedFileLogo" value="Select File" />
                         </div>
                     </div>
                     <!-- /.input group -->
@@ -228,10 +227,14 @@
                 <!-- form -->
                 <div class="form-group">
                     <label>Mã QR Thanh Toán Trực Tuyến:</label><br />
-                    <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/thanhtoan/<%= HeThongs.thanhtoan_online %>" width="200px" />
+                    <img
+                        onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';"
+                        src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/thanhtoan/<%= HeThongs.thanhtoan_online %>"
+                        width="200px"
+                    />
                     <div class="input-group-prepend" style="margin-top: 20px;">
                         <br />
-                        <input  accept=".jpg, .png, .gif"  type="file" name="UploadedFileThanhToan" value="Select File" />
+                        <input accept=".jpg, .png, .gif" type="file" name="UploadedFileThanhToan" value="Select File" />
                     </div>
                     <!-- /.input group -->
                 </div>
@@ -242,7 +245,7 @@
                     <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/404/<%= HeThongs.img_404 %>" width="200px" />
                     <div class="input-group-prepend" style="margin-top: 20px;">
                         <br />
-                        <input  accept=".jpg, .png, .gif"  type="file" name="UploadedFile404" value="Select File" />
+                        <input accept=".jpg, .png, .gif" type="file" name="UploadedFile404" value="Select File" />
                     </div>
                 </div>
                 <!-- /.input group -->
@@ -253,7 +256,7 @@
                     <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/noti/<%= HeThongs.img_nhanvat %>" width="200px" />
                     <div class="input-group-prepend" style="margin-top: 20px;">
                         <br />
-                        <input  accept=".jpg, .png, .gif"  type="file" name="UploadedFileNhanVat" value="Select File" />
+                        <input accept=".jpg, .png, .gif" type="file" name="UploadedFileNhanVat" value="Select File" />
                     </div>
                 </div>
                 <!-- /.input group -->
@@ -264,7 +267,7 @@
                     <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/noti/<%= HeThongs.img_nen %>" width="200px" />
                     <div class="input-group-prepend" style="margin-top: 20px;">
                         <br />
-                        <input   accept=".jpg, .png, .gif"  type="file" name="UploadedFileNen" value="Select File" />
+                        <input accept=".jpg, .png, .gif" type="file" name="UploadedFileNen" value="Select File" />
                     </div>
                 </div>
                 <!-- /.input group -->
@@ -274,12 +277,11 @@
                     <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/noti/<%= HeThongs.img_chu %>" width="200px" />
                     <div class="input-group-prepend" style="margin-top: 20px;">
                         <br />
-                        <input  accept=".jpg, .png, .gif"  type="file" name="UploadedFileChu" value="Select File" />
+                        <input accept=".jpg, .png, .gif" type="file" name="UploadedFileChu" value="Select File" />
                     </div>
                 </div>
                 <!-- /.input group -->
-                
-                
+
                 <!-- /.input group -->
                 <div class="form-group">
                     <label>Img Video:</label><br />
@@ -291,7 +293,7 @@
                 </div>
                 <!-- /.input group -->
 
-                                <!-- form -->
+                <!-- form -->
                 <div class="form-group">
                     <label>Video quảng cáo: </label>
                     <div class="input-group">
@@ -302,11 +304,11 @@
                     </div>
                     <!-- /.input group -->
                 </div>
-                
-                  <input type="file" name="Upvideo" value="Select File" />
+
+                <input type="file" name="Upvideo" value="Select File" />
                 <!-- /.form group -->
 
-               <div class="form-group">
+                <div class="form-group">
                     <label>Thời gian quảng cáo (Milliseconds):</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -316,7 +318,6 @@
                     </div>
                     <!-- /.input group -->
                 </div>
-
 
                 <input value="Cập Nhật" class="btn btn-danger" name="capnhat" type="submit" />
             </form>

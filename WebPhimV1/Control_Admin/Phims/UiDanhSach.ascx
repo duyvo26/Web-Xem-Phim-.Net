@@ -19,7 +19,8 @@
          <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
             <thead>
                <tr>
-                  <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Tên của người dùng">Img</th>
+                  <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Mã phim">Mã phim</th>
+                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Tên của người dùng">Img</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Tên phim">Tên phim</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Lượt xem">Lượt xem</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Người đăng phim">Người đăng</th>
@@ -35,6 +36,9 @@
                <% for (int i = 0; i < dsPhim.Count; i++)
                   { %>
                <tr class="odd">
+                 <td>
+                     #<%=dsPhim[i].id_phim %>
+                  </td>
                   <td class="dtr-control sorting_1" tabindex="0"><img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" width="100px" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/Phim/<%=dsPhim[i].img_phim %>" /></td>
                   <td>
                      <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%=dsPhim[i].link_raw + " - " + dsPhim[i].id_phim %>" target="_blank">
@@ -111,7 +115,7 @@
 
                 // Total over all pages
                 total = api
-                    .column(4)
+                    .column(5)
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
@@ -119,7 +123,7 @@
 
                 // Total over this page
                 pageTotal = api
-                    .column(4, { page: 'current' })
+                    .column(5, { page: 'current' })
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
