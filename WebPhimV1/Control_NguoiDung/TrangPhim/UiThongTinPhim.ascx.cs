@@ -164,7 +164,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
             }
             if (SumTap_Phim == 0)
             {
-                string scriptText = "alert('phim này chưa được cập nhật tập phim !'); ";
+                string scriptText = "alert('Phim này chưa được cập nhật tập phim !'); ";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
             }
         }

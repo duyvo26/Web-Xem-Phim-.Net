@@ -337,6 +337,7 @@
     <Content Include="Control_NguoiDung\TrangPhim\UiTapPhim.ascx" />
     <Content Include="Control_NguoiDung\UiMeta.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="log-404.html" />
     <Content Include="Public\css\notify.css" />
     <Content Include="Public\css\notify.min.css" />
     <Content Include="Public\css\style-mod.css" />
