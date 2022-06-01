@@ -54,8 +54,8 @@ namespace WebPhimV1.Code.ashx
 
                         if (SumCheck < 10)
                         {
-                           
-                            string send_noidung = "RM: Bạn may mắn nhận được " + coin + " Coin khi xem phim";
+
+                            string send_noidung = "SYS: Bạn may mắn nhận được " + coin + " Coin khi xem phim";
                             string urls = "/taikhoan/info";
                             // var dt = (from q in dl.DB_USERs where q.id_user == WebPhimV1.Theme.NguoiDung.NguoiDungs.id_user select q)
                             // .First();

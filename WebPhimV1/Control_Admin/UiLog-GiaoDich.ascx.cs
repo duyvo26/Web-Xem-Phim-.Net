@@ -69,7 +69,7 @@ namespace WebPhimV1.Control_Admin
             }
             else
             {
-                return "<strong>RM</strong>";
+                return "<strong>SYS</strong>";
             }
         }
 
