@@ -57,6 +57,14 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
 
         private void LoadNotLogin(){
             LoadThongTinPhim(); // load thong tin Phim len
+            if (Int32.Parse(infoPhim.coin_phim) > 0)
+            {
+
+                    string urls = "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim;
+                    string scriptText = " window.location='" + Request.ApplicationPath + urls + "'";
+                    ScriptManager.RegisterStartupScript(this, typeof(string), "Phimkhoa", scriptText, true);
+
+            }
             if (infoPhim.status_ == 0)
             {
                 string scriptText = "alert('Bộ phim này tạm khoá vui lòng liên hệ admin để biết thêm chi tiết !'); window.location='" + Request.ApplicationPath + "'";
@@ -75,13 +83,25 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
         private void LoadLogin() {
             LoadThongTinNguoiDung();
             LoadThongTinPhim(); // load thong tin Phim len
+            LoadThongTinTap_Phim(); // laod thong tin Tap_Phim len
+            CheckDoc();
+
             if (infoPhim.status_ == 0)
             {
                 string scriptText = "alert('Bộ phim này tạm khoá vui lòng liên hệ admin để biết thêm chi tiết !'); window.location='" + Request.ApplicationPath + "'";
                 ScriptManager.RegisterStartupScript(this, typeof(string), "Phimkhoa", scriptText, true);
             }
-            LoadThongTinTap_Phim(); // laod thong tin Tap_Phim len
-            CheckDoc();
+
+            if (Int32.Parse(infoPhim.coin_phim) > 0)
+            {
+                if (checkthuvien == null)
+                {
+                    string urls = "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim;
+                    string scriptText = " window.location='" + Request.ApplicationPath + urls + "'";
+                    ScriptManager.RegisterStartupScript(this, typeof(string), "Phimkhoa", scriptText, true);
+                }
+            }
+
             AddPhimCoinFree();
             ThemLuotXem(); // them luot xem
             LuuLichSu();
@@ -175,7 +195,6 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
             if (dt != null)
             {
                 infoPhim = dt.First();
-
             }
         } //
 

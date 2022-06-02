@@ -191,8 +191,12 @@
    </section>
    <section class="container-fluid seasons">
       <ul class="trending-pills d-flex nav nav-pills align-items-center text-center s-margin" role="tablist">
-         <li class="nav-item">
-            <a class="nav-link active show" data-toggle="pill" href="#danhsachTap_Phim" role="tab" aria-selected="false">Danh sách tập</a>
+         <li class="nav-item" <% if (Int32.Parse(infoPhim.coin_phim) > 0)
+            {
+                if (checkthuvien == null)
+                { %> hidden <% }
+            } %>>
+            <a class="nav-link active show"  data-toggle="pill" href="#danhsachTap_Phim" role="tab" aria-selected="false">Danh sách tập</a>
          </li>
          <li class="nav-item">
             <a class="nav-link " data-toggle="pill" href="#tomtatphim" role="tab" aria-selected="true">Tóm tắt phim</a>
@@ -218,6 +222,7 @@
                      {
                      %>
                   <!-- item -->
+                  <% if (Int32.Parse(infoPhim.coin_phim) == 0)  { %>
                   <div class="col-1-5 col-md-6 iq-mb-30">
                      <div class="epi-box">
                         <div class="epi-img position-relative">
@@ -241,6 +246,34 @@
                         </div>
                      </div>
                   </div>
+                  <%  }  %>
+                  <!-- item end -->
+                  <!-- item -->
+                  <% if (Int32.Parse(infoPhim.coin_phim) > 0)  { if (checkthuvien != null)  { %>
+                  <div class="col-1-5 col-md-6 iq-mb-30">
+                     <div class="epi-box">
+                        <div class="epi-img position-relative">
+                           <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" style="height: 201px;max-height: 200px;width: 100%;"  src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/Phim/<%= ImgPhim(ListTap_Phim[a].id_phim) %>" class="img-fluid img-zoom" alt="">
+                           <div class="episode-play-info">
+                              <div class="episode-play">
+                                 <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%=infoPhim.link_raw +"-"+ infoPhim.id_phim +"/" + ListTap_Phim[a].id_tap_phim %>#video">
+                                 <i class="ri-play-fill"></i>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="epi-desc p-3">
+                           <div class="d-flex align-items-center justify-content-between">
+                              <span class="text-primary"><%=WebPhimV1.Code.HeThong.TinhThoiGian(ListTap_Phim[a].updated_at) %></span>
+                           </div>
+                           <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%=infoPhim.link_raw +"-"+ infoPhim.id_phim +"/" + ListTap_Phim[a].id_tap_phim %>#video">
+                              <h6 class="epi-name text-white mb-0"><%=ListTap_Phim[a].ten_tap_phim %>
+                              </h6>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+                  <%  }  } %>
                   <!-- item end -->
                   <% } }else{ %>
                   <center>
@@ -409,16 +442,16 @@
 
     function muaPhim_noLogin() {
         const coin_ND = '<%=WebPhimV1.Code.NguoiDung.CheckLogin() %>';
-        if (coin_ND == "False") {
-            alert("Bộ phim này cần coin để có thể xem \n Vui lòng đăng nhập để tiếp tục !");
-            window.location = '../dangnhap';
-        }
-    }
+       if (coin_ND == "False") {
+           alert("Bộ phim này cần coin để có thể xem \n Vui lòng đăng nhập để tiếp tục !");
+           window.location = '../dangnhap';
+       }
+   }
 
-    function muaPhim() {
-        const coin_ND = '<%= NguoiDungs.coin %>';
+   function muaPhim() {
+       const coin_ND = '<%= NguoiDungs.coin %>';
        const coin_TR = '<%= Convert.ToInt64(infoPhim.coin_phim) %>';
-       var name_TR = '<%= infoPhim.ten_phim %>';
+       var name_TR = "<%= infoPhim.ten_phim %>";
        var mess = "";
        if (coin_TR > 0) {
            if (coin_ND - coin_TR >= 0) {

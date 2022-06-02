@@ -379,11 +379,12 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                         // them Phim vao thu vien
                         dl.ThemThuVien(NguoiDungs.id_user, infoPhim.id_phim, Tap_PhimDau.id_tap_phim); // them vao thu vien
                         // neu may man -> nhan con thuog
-                        if (Convert.ToInt32(infoPhim.coin_phim) != 0 && r.Next(1, 5) == 2 || Convert.ToInt64(NguoiDungs.quyen_han) == 2)
+                        //if (Convert.ToInt32(infoPhim.coin_phim) != 0 && r.Next(1, 5) == 2 || Convert.ToInt64(NguoiDungs.quyen_han) == 2)
+                        if (Convert.ToInt32(infoPhim.coin_phim) != 0 && r.Next(1, 20) % 2 == 0)
                         {
                             // lay ngau nghien phan tram
                             int phantram = r.Next(1, 11);
-                            int hoantien = Convert.ToInt32(infoPhim.coin_phim) * phantram / 100;
+                            int hoantien = (Convert.ToInt32(infoPhim.coin_phim) * phantram) / 100;
                             coin = Convert.ToInt32(coin + hoantien);
                             dl.CapNhatCoinUser(NguoiDungs.id_user, coin); // cap nhat lai so tien
                             //cap nhat vao log                     
@@ -400,7 +401,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                             //thong bao cap nhat Tap_Phim
                             //id_user - id nhận
                             //id_phanhoi - id gui thong bao
-                            string noidung = "Bạn nhân được " + hoantien + " coin khi mua phim " + infoPhim.ten_phim;
+                            string noidung = "SYS: Bạn nhân được " + hoantien + " coin khi mua phim " + infoPhim.ten_phim;
                             string urls = "/taikhoan/info";
                             NguoiDung.ThemThongBao(NguoiDungs.id_user, 0, noidung, urls);
 
