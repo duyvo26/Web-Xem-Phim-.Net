@@ -111,7 +111,7 @@
                   <% if (Request.Cookies["Log"] == null && Convert.ToInt32(infoPhim.coin_phim) == 0)
                      { %> 
                   <div class="d-flex align-items-center">
-                     <a href="<%=WebPhimV1.Code.HeThong.url() %>/phim/<%=infoPhim.link_raw %>-<%=infoPhim.id_phim %>/<%=Tap_PhimDau.id_tap_phim  %>">
+                     <a href="<%=WebPhimV1.Code.HeThong.url() %>/phim/<%=infoPhim.link_raw %>-<%=infoPhim.id_phim %>/<%= ListTap_Phim[0].id_tap_phim %>">
                         <div class="play-button" >
                            <i class="fa fa-play"></i>
                         </div>

@@ -18,7 +18,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
 
         public  DB_PHIM infoPhim = new DB_PHIM(); // thong tin Phim
         public  List<DB_TAP_PHIM> ListTap_Phim = new List<DB_TAP_PHIM>(); // danh sach Tap_Phim cua Phim
-        public  DB_TAP_PHIM Tap_PhimDau = new DB_TAP_PHIM(); // danh sach Tap_Phim cua Phim
+
         public  List<string> DSTheLoai = new List<string>(); // danh sach luu the loai
         public  List<int> DsIdTheLoai = new List<int>();
         public  List<LayThongTinBinhLuanResult> DSComment = new List<LayThongTinBinhLuanResult>();
@@ -84,7 +84,6 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
             CheckDoc(); // kiem tra nguoi dung da mua
             LoadLuotXem(); // load luot xem
             LoadThongTinTheLoai(); // load danh sach Phim
-            LayTap_PhimDau(); // lay Tap_Phim dau tien cua Phim
             LoadSumTap_Phim(); // load tong so Tap_Phim cua Phim
             LoadTap_Phim(); // goi danh sach Tap_Phim theo id
             DanhGiaPhim(); // danh gia Phim
@@ -313,16 +312,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                 DSComment = dt.ToList();
             }
         }
-        private void LayTap_PhimDau()
-        {
-            checktontai = null;
-            var dt = (from q in dl.DB_TAP_PHIMs where q.id_phim == infoPhim.id_phim select q).OrderBy(q => q.created_at);
-            if (dt.Count() > 0)
-            {
-                Tap_PhimDau = dt.First();
-                checktontai = Tap_PhimDau.id_tap_phim.ToString();
-            }
-        }
+
 
         public string getTap_PhimMax()
         {
@@ -348,7 +338,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
             {
                 if (!string.IsNullOrEmpty(Request.Form["Nguoidung"]))
                 {
-                    dl.ThemThuVien(NguoiDungs.id_user, infoPhim.id_phim, Tap_PhimDau.id_tap_phim); // them vao thu vien
+                    dl.ThemThuVien(NguoiDungs.id_user, infoPhim.id_phim, ListTap_Phim[0].id_tap_phim); // them vao thu vien
                     string scriptText = "alert('Đã thêm phim vào thư viện của bạn !'); window.location='" + Request.ApplicationPath + "Phim/" + infoPhim.link_raw + "-" + infoPhim.id_phim + "'";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", scriptText, true);
                 }
@@ -377,7 +367,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                         dl.DB_LOG_COINs.InsertOnSubmit(log);
                         dl.SubmitChanges();
                         // them Phim vao thu vien
-                        dl.ThemThuVien(NguoiDungs.id_user, infoPhim.id_phim, Tap_PhimDau.id_tap_phim); // them vao thu vien
+                        dl.ThemThuVien(NguoiDungs.id_user, infoPhim.id_phim, ListTap_Phim[0].id_tap_phim); // them vao thu vien
                         // neu may man -> nhan con thuog
                         //if (Convert.ToInt32(infoPhim.coin_phim) != 0 && r.Next(1, 5) == 2 || Convert.ToInt64(NguoiDungs.quyen_han) == 2)
                         if (Convert.ToInt32(infoPhim.coin_phim) != 0 && r.Next(1, 20) % 2 == 0)
