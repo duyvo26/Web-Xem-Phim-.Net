@@ -10,39 +10,7 @@
 </style>
 <section class="banner-wrapper iq-main-slider" style="background-size: cover; background-position: top; background-image: url(<%=WebPhimV1.Code.HeThong.url() %>/public/img/Phim/<%=infoPhim.img_phim %>)">
    <div class="banner-caption">
-      <!--
-         <ul class="list-inline p-0 m-0 share-icons music-play-lists">
-            <li class="share">
-               <span><i class="ri-star-fill"></i></span>
-               <div class="share-box" style="width: 250px;">
-                  <div class="d-flex align-items-center">
-                     <center>
-                        <%= DanhGia %> từ <%= NguoiDanhGia %> Lượt đánh giá
-                        <br>
-                        <%
-            double DG = DanhGia;
-            //DG = Math.Truncate(DG);
-            for (int i = 0; i < 5; i++) { %>
-                        <% if (ListTap_Phim != null)
-            { %>
-                        <a class="vote" href="?danhgia=<%=i+1 %>"      <% if (Request.Cookies["Log"] == null){ %> onclick="alert('Vui lòng đăng nhập'); return false;" <% } %> >
-                        <% } %>
-                        <%  if (i >= DG)
-            { %>
-                        <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/star-shape.png" width="25"/>  
-                        <% } else if(DG > i && DG < i + 1) {%>
-                        <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/rating.png" width="25"/>  
-                        <% } else { %>
-                        <img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" src="../../Public/img/www/top-icon/astar.png" width="25" />
-                        <% } %>
-                        </a>
-                        <%  }
-            %>
-                     </center>
-                  </div>
-               </div>
-            </li>
-         </ul> -->
+<% double DG = DanhGia;  %>
    </div>
 </section>
 <!-- Banner end -->

@@ -273,7 +273,7 @@
                         var Url = '<%=WebPhimV1.Code.HeThong.url() %>/Public/video/mp4/';
 
                         for (var i = 0; i < Sum_Data_raw; i++) {
-                            document.write("<span  style='margin-top: 10px;color: #ffffff; font-size: 20px; padding: 2px;' id='sv_" + i + "'  onclick='loadsv_( " + i + ")'>#Máy chủ " + (i + 1) + "</span>")
+                            document.write("<span  style='margin: 10px; border-radius: 10px; border: 1px solid; color: #ffffff; font-size: 20px; padding: 2px;' id='sv_" + i + "'  onclick='loadsv_( " + i + ")'>#Máy chủ " + (i + 1) + "</span>")
                         }
                         var Data = '<%= noidung %>'.split("|");
 
