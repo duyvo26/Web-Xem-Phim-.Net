@@ -4,11 +4,11 @@
       <asp:Label ID="noti" runat="server"></asp:Label>
       <div class="card card-danger">
          <div class="card-header">
-            <h3 class="card-title">phim</h3>
+            <h3 class="card-title">Danh sách phim</h3>
          </div>
       </div>
       <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/themPhim">
-      <button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#themtheloai"> Thêm phim </button>
+      <button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#themtheloai">Thêm phim</button>
       </a>
    </div>
 </div>
@@ -19,7 +19,6 @@
          <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" aria-describedby="example1_info">
             <thead>
                <tr>
-                  <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Mã phim">Mã phim</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Tên của người dùng">Img</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Tên phim">Tên phim</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Lượt xem">Lượt xem</th>
@@ -36,9 +35,6 @@
                <% for (int i = 0; i < dsPhim.Count; i++)
                   { %>
                <tr class="odd">
-                 <td>
-                     #<%=dsPhim[i].id_phim %>
-                  </td>
                   <td class="dtr-control sorting_1" tabindex="0"><img onError="this.onerror=null;this.src='<%=WebPhimV1.Code.HeThong.url() %>/public/img/www/err-img.png';" width="100px" src="<%=WebPhimV1.Code.HeThong.url() %>/public/img/Phim/<%=dsPhim[i].img_phim %>" /></td>
                   <td>
                      <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%=dsPhim[i].link_raw + " - " + dsPhim[i].id_phim %>" target="_blank">
@@ -73,22 +69,18 @@
                </tr>
                <% }  %>
             </tbody>
-             <tfoot>
-            <tr>
-                <th colspan="5" style="text-align:right"></th>
-                <th colspan="5" style="text-align:right"></th>
-            </tr>
-        </tfoot>
+            <tfoot>
+               <tr>
+                  <th colspan="5" style="text-align:right"></th>
+                  <th colspan="5" style="text-align:right"></th>
+               </tr>
+            </tfoot>
          </table>
       </div>
       <!-- /.card-body -->
    </div>
 </div>
-
-
-
 <script>
-
     // Create our number formatter.
     var formatter = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
@@ -115,7 +107,7 @@
 
                 // Total over all pages
                 total = api
-                    .column(5)
+                    .column(4)
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
@@ -123,7 +115,7 @@
 
                 // Total over this page
                 pageTotal = api
-                    .column(5, { page: 'current' })
+                    .column(4, { page: 'current' })
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);

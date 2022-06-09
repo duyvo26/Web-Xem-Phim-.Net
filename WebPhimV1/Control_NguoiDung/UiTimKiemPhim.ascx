@@ -65,7 +65,7 @@
                               </div>
                            </div>
                            <div class="epi-desc p-3">
-                              <a href="<%=Request.Url.GetLeftPart(UriPartial.Authority)%>/Phim/<%= timKiem[a].link_raw + "-" + timKiem[a].id_phim%>">
+                              <a href="<%=WebPhimV1.Code.HeThong.url() %>/Phim/<%= timKiem[a].link_raw + "-" + timKiem[a].id_phim%>">
                                  <h6 class="epi-name text-white mb-0">    <%= WebPhimV1.Code.Phim.RutGon(timKiem[a].ten_phim, 30) %>
                                  </h6>
                               </a>
