@@ -7,12 +7,12 @@
                 <h3 class="card-title">Danh sách tập phim của phim: &ensp; <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/capnhat-<%= infoPhim.id_phim %>"><%=infoPhim.ten_phim %></a></h3>
             </div>
         </div>
-        <!--
-     <a href="<%=WebPhimV1.Code.HeThong.url() %>/cp-admin/Phim/capnhat-<%=infoPhim.id_phim %>">
-      <button type="button" class="btn btn-primary btn-lg btn-block">Thông tin phim</button>
-      </a><br>-->
+   
         <a href="them-tap-phim-<%=infoPhim.id_phim %>">
-            <button type="button" class="btn btn-primary btn-lg btn-block">Thêm tập phim</button>
+            <button type="button" class="btn btn-primary btn-lg ">Thêm tập phim</button>
+        </a>
+                <a href="?delete-all=<%=infoPhim.id_phim %>">
+            <button type="button" class="btn btn-primary btn-lg " onclick="return confirm('Bạn có chắc muốn xoá tất cả tập phim">Xoá tất cả tập phim</button>
         </a>
     </div>
 </div>
@@ -46,7 +46,7 @@
                         <td><%=DSC[i].updated_at.ToString("dd-MM-yyyy | HH:mm:ss") %></td>
                         <td>
                             <a target="_blank" href="/cp-admin/tap-phim/capnhat-<%=DSC[i].id_tap_phim%>" class="btn btn-info">Thông Tin</a>&ensp;
-                            <a href="?XoaTap_Phim=<%=DSC[i].id_tap_phim%>" onclick="return confirm('Bạn có chắc muốn xoá phim: <%= DSC[i].ten_tap_phim %>')" class="btn btn-danger">Xoá</a>
+                            <a href="?XoaTap_Phim=<%=DSC[i].id_tap_phim%>" onclick="return confirm('Bạn có chắc muốn xoá tập phim: <%= DSC[i].ten_tap_phim %>')" class="btn btn-danger">Xoá</a>
                         </td>
                     </tr>
                     <% } %>

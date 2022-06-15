@@ -26,7 +26,7 @@ public class UploadVideo : IHttpHandler
             
             string fileName = HeThong.LocDauTiengViet(Path.GetFileNameWithoutExtension(postedFile.FileName));
             string extension = Path.GetExtension(postedFile.FileName);
-            fileName = fileName + "_" + DateTime.Now.ToString("yyyymmssfff") + extension;
+            fileName = DateTime.Now.ToString("yyyymmssfff") + "_" + fileName + extension;
 
             string date_thumuc = HttpContext.Current.Request.Cookies["NamePhim"].Value;
 

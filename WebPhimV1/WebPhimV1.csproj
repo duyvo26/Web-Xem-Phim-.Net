@@ -434,8 +434,6 @@
     <Content Include="Public\js\notify.js" />
     <Content Include="Public\js\notify.min.js" />
     <Content Include="Public\js\showmoreless.js" />
-    <Content Include="Public\nguoidung\Images\a66abb5684c45962d887564f8346e8d\images\truyen-kieu-co-bao-nhieu-cau-tho-luc-bat-01.jpg" />
-    <Content Include="Public\nguoidung\Images\a66abb5684c45962d887564f8346e8d\_thumbs\Images\truyen-kieu-co-bao-nhieu-cau-tho-luc-bat-01.jpg" />
     <Content Include="Public\video\css\video-js.min.css" />
     <Content Include="Public\video\css\videojs-contrib-ads.css" />
     <Content Include="Public\video\js\video.min.js" />
@@ -2001,7 +1999,7 @@
     <Folder Include="Public\img\www\404\" />
     <Folder Include="Public\img\www\img-phim\" />
     <Folder Include="Public\img\www\thanhtoan\" />
-    <Folder Include="Public\nguoidung\mp4\" />
+    <Folder Include="Public\nguoidung\" />
     <Folder Include="Public\video\mp4\" />
     <Folder Include="Public\video\quang-cao\" />
   </ItemGroup>
