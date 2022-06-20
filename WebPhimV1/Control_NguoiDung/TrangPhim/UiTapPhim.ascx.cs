@@ -288,7 +288,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                 page_number = 0;
             }
 
-            int take = 10; // lay n phan tu
+            int take = 9; // lay n phan tu
             int skip = page_number * take; // bo qua trang thu n
             SumPage = (from q in dl.DB_COMMENTs where q.id_tap_phim == infoTap_Phim.id_tap_phim && q.id_phanhoi == null select q).Count() / take;
 

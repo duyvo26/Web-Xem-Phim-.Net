@@ -202,7 +202,7 @@ namespace WebPhimV1.Control_NguoiDung.TrangPhim
                 page_number = 0;
             }
 
-            int take = 10; // lay n phan tu
+            int take = 9; // lay n phan tu
             int skip = page_number * take; // bo qua trang thu n
             SumPage = (from q in dl.DB_TAP_PHIMs where q.id_phim == infoPhim.id_phim select q).Count() / take;
 

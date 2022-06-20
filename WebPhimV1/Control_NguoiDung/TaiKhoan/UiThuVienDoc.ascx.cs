@@ -96,7 +96,7 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
             {
                 page_number = Convert.ToInt32(Request.QueryString["page"]);
 
-                int take = 30; // lay n phan tu
+                int take = 29; // lay n phan tu
                 int skip = page_number * take; // bo qua trang thu n
                 SumPage = (from q in dl.LayThuVienDoc(NguoiDungs.id_user) select q).Count() / take;
 
@@ -115,7 +115,7 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
             {
                 page_number = Convert.ToInt32(Request.QueryString["page"]);
 
-                int take = 30; // lay n phan tu
+                int take = 29; // lay n phan tu
                 int skip = 0 * take; // bo qua trang thu n
                 SumPage = (from q in dl.LayThuVienDoc(NguoiDungs.id_user) select q).Count() / take;
 

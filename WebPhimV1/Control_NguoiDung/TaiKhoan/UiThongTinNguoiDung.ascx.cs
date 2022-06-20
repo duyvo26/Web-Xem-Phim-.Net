@@ -105,7 +105,7 @@ namespace WebPhimV1.Control_NguoiDung.TaiKhoan
             {
                 page_number = 0;
             }
-            int take = 12; // lay n phan tu
+            int take = 9; // lay n phan tu
             int skip = page_number * take; // bo qua trang thu n
             if (!string.IsNullOrEmpty(Request.Form["timPhim"]))
             {

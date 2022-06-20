@@ -412,6 +412,8 @@
     <Content Include="Public\frontend\fonts\remixicon.ttf" />
     <Content Include="Public\frontend\fonts\remixicon.woff" />
     <Content Include="Public\frontend\fonts\remixicon.woff2" />
+    <Content Include="Public\img\www\404\404.png" />
+    <Content Include="Public\img\www\img-phim\284054543_2213769972140247_1734253030527271963_n.jpg" />
     <Content Include="Public\img\www\quang-cao\652peakpx.jpg" />
     <Content Include="Public\img\www\logo\362910012.png" />
     <Content Include="Public\img\www\logo\614910012.png" />
@@ -421,6 +423,7 @@
     <Content Include="Public\img\www\avatar\avatar.jpg" />
     <Content Include="Public\img\www\avatar\avtt.png" />
     <Content Include="Public\img\www\err-img.png" />
+    <Content Include="Public\img\www\thanhtoan\70831660z3347097734115_eac97980ce115b8c885d664db815ec4d.jpg" />
     <Content Include="Public\img\www\top-icon\astar.png" />
     <Content Include="Public\img\www\top-icon\icon-admin.png" />
     <Content Include="Public\img\www\top-icon\momo.png" />
@@ -439,6 +442,11 @@
     <Content Include="Public\video\js\video.min.js" />
     <Content Include="Public\video\js\videojs.ads.min.js" />
     <Content Include="Public\video\js\videojs.hotkeys.min.js" />
+    <Content Include="Public\video\mp4\bao-cao-31073107\GalaxyS22UltraOfficialfilm-Theepicstandard-Samsung_20225824099.mp4" />
+    <Content Include="Public\video\mp4\bao-cao-31073107\Reno7Z5G-Batmosieutrainghiem_20225713315.mp4" />
+    <Content Include="Public\video\mp4\bao-cao-31073107\vivoY33s-YlaDze-Gia6.990.000d-HotSalegiamngay300.000dong,Tragop0%25chitu23-26_12_20220115142.mp4" />
+    <Content Include="Public\video\mp4\bao-cao-31073107\welcome_20225818714.mp4" />
+    <Content Include="Public\video\quang-cao\7083welcome.mp4" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
@@ -1996,12 +2004,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Public\img\phim\" />
-    <Folder Include="Public\img\www\404\" />
-    <Folder Include="Public\img\www\img-phim\" />
-    <Folder Include="Public\img\www\thanhtoan\" />
     <Folder Include="Public\nguoidung\" />
-    <Folder Include="Public\video\mp4\" />
-    <Folder Include="Public\video\quang-cao\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

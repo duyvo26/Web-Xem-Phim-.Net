@@ -57,7 +57,7 @@ namespace WebPhimV1.Control_NguoiDung
                 {
                     page_number = 0;
                 }
-                    int take = 16;                  // lay n phan tu
+                    int take = 15;                  // lay n phan tu
                     int skip = page_number * take;  // bo qua trang thu n
                     SumPage = (from q in dl.DB_PHIMs select q).Count() / take;
 
@@ -99,7 +99,7 @@ namespace WebPhimV1.Control_NguoiDung
                                       .QueryString["TenPhim"]
                                       .ToString();
                     namePhim = data;
-                    int take = 16;                  // lay n phan tu
+                    int take = 15;                  // lay n phan tu
                     int skip = page_number * take;  // bo qua trang thu n
                     SumPage = (from q in dl.TimKiemTheoTen(data) select q).Count() / take;
 
@@ -142,7 +142,7 @@ namespace WebPhimV1.Control_NguoiDung
                                        .ToString();
                     
 
-                    int take = 16;                  // lay n phan tu
+                    int take = 15;                  // lay n phan tu
                     int skip = page_number * take;  // bo qua trang thu n
 
                     // Response.Write(data);
@@ -214,7 +214,7 @@ namespace WebPhimV1.Control_NguoiDung
                     min = Convert.ToInt32(Request.QueryString["min"]);
                     
 
-                    int take = 16;                  // lay n phan tu
+                    int take = 15;                  // lay n phan tu
                     int skip = page_number * take;  // bo qua trang thu n
                     SumPage = (from q in dl.DB_PHIMs
                                where Convert.ToInt64(q.coin_phim) >=
